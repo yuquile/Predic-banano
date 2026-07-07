@@ -3,33 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚚 Sistema de Gestión de Exportaciones</title>
+    <title>Sistema de Gestión de Exportaciones</title>
     <link rel="stylesheet" href="../css/pages/exportaciones.css">
     <!-- SweetAlert CSS y JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🚚 Sistema de Gestión de Exportaciones</h1>
-            <p>Control completo de pedidos de exportación internacional</p>
-        </div>
-
-        <div class="main-content">
-            <nav class="sidebar">
-                <button class="nav-btn active" onclick="showSection('dashboard')">📊 Pedidos</button>
-                <button class="nav-btn" onclick="showSection('nuevo-pedido')">➕ Nuevo Pedido</button>
-                <button class="nav-btn" onclick="showSection('pedidos')">📋 Gestionar Pedidos</button>
-                <button class="nav-btn" onclick="showSection('seguimiento')">🔍 Seguimiento</button>
-                <button class="nav-btn" onclick="showSection('documentos')">📄 Documentos</button>
-                <button class="nav-btn" onclick="window.location.href = 'dashboard.html';">🔙 Volver al Dashboard</button>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar-dark">
+            <div class="sidebar-logo">
+                AgroExport
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" onclick="showSection('dashboard')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    <span>Pedidos (Dashboard)</span>
+                </button>
+                <button class="nav-btn" onclick="showSection('nuevo-pedido')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+                    <span>Nuevo Pedido</span>
+                </button>
+                <button class="nav-btn" onclick="showSection('pedidos')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+                    <span>Gestionar Pedidos</span>
+                </button>
+                <button class="nav-btn" onclick="showSection('seguimiento')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    <span>Seguimiento</span>
+                </button>
+                <button class="nav-btn" onclick="showSection('documentos')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <span>Documentos</span>
+                </button>
             </nav>
+            <div class="sidebar-footer">
+                <div class="user-avatar">JD</div>
+                <div class="user-info">
+                    <span class="user-name">Juan Díaz</span>
+                    <span class="user-role">Administrador</span>
+                </div>
+            </div>
+        </aside>
 
-            <div class="content">
+        <!-- Main Content Wrapper -->
+        <main class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-titles">
+                    <h1>Sistema de Gestión de Exportaciones</h1>
+                    <p>Control completo de pedidos de exportación internacional</p>
+                </div>
+                <button class="btn-secondary" onclick="window.location.href = 'dashboard.html';">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                    Volver al Dashboard
+                </button>
+            </header>
+
+            <!-- Scrollable Content Area -->
+            <div class="content-area">
                 <!-- Dashboard Section -->
                 <div id="dashboard" class="section active">
                     <h2>Dashboard de Exportaciones</h2>
+                    <p class="section-desc">Resumen general de pedidos de exportación.</p>
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-number" id="total-pedidos">0</div>
@@ -55,68 +92,64 @@
                 <!-- Nuevo Pedido Section -->
                 <div id="nuevo-pedido" class="section">
                     <h2>Registrar Nuevo Pedido de Exportación</h2>
-                    <form id="pedido-form">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="cliente">Cliente</label>
-                                <input type="text" id="cliente" required>
+                    <p class="section-desc">Crea un nuevo pedido de banano u otros productos para tus clientes.</p>
+                    <div class="panel-box">
+                        <form id="pedido-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="cliente">Cliente</label>
+                                    <input type="text" id="cliente" required placeholder="Nombre del cliente o empresa">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pais-destino">País de Destino</label>
+                                    <select id="pais-destino" required>
+                                        <option value="">Seleccionar país</option>
+                                        <option value="Estados Unidos">Estados Unidos</option>
+                                        <option value="México">México</option>
+                                        <option value="Colombia">Colombia</option>
+                                        <option value="España">España</option>
+                                        <option value="Japón">Japón</option>
+                                        <option value="China">China</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="variedad">Variedad del Producto</label>
+                                    <select id="variedad" required>
+                                        <option value="">Seleccionar variedad</option>
+                                        <option value="Banano Cavendish">Banano Cavendish</option>
+                                        <option value="Banano Orgánico">Banano Orgánico</option>
+                                        <option value="Plátano Verde">Plátano Verde</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cantidad">Cantidad (cajas/kg)</label>
+                                    <input type="number" id="cantidad" required min="1" placeholder="Ej: 1000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha-envio">Fecha Programada de Envío</label>
+                                    <input type="date" id="fecha-envio" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precio-unitario">Precio Unitario (USD)</label>
+                                    <input type="number" id="precio-unitario" step="0.01" required min="0" placeholder="Ej: 15.50">
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label for="pais-destino">País de Destino</label>
-                                <select id="pais-destino" required>
-                                    <option value="">Seleccionar país</option>
-                                    <option value="Estados Unidos">Estados Unidos</option>
-                                    <option value="México">México</option>
-                                    <option value="Colombia">Colombia</option>
-                                    <option value="Perú">Perú</option>
-                                    <option value="Chile">Chile</option>
-                                    <option value="Brasil">Brasil</option>
-                                    <option value="Argentina">Argentina</option>
-                                    <option value="España">España</option>
-                                    <option value="Francia">Francia</option>
-                                    <option value="Alemania">Alemania</option>
-                                    <option value="Italia">Italia</option>
-                                    <option value="Reino Unido">Reino Unido</option>
-                                    <option value="Países Bajos">Países Bajos</option>
-                                    <option value="Japón">Japón</option>
-                                    <option value="China">China</option>
-                                    <option value="Corea del Sur">Corea del Sur</option>
-                                    <option value="Rusia">Rusia</option>
-                                </select>
+                                <label for="notas">Notas Adicionales</label>
+                                <textarea id="notas" rows="3" placeholder="Información extra relevante..."></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="variedad">Variedad del Producto</label>
-                                <select id="variedad" required>
-                                    <option value="">Seleccionar variedad</option>
-                                    <option value="Banano Cavendish">Banano Cavendish</option>
-                                    <option value="Banano Orgánico">Banano Orgánico</option>
-                                    <option value="Plátano Verde">Plátano Verde</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="cantidad">Cantidad (cajas/kg)</label>
-                                <input type="number" id="cantidad" required min="1">
-                            </div>
-                            <div class="form-group">
-                                <label for="fecha-envio">Fecha Programada de Envío</label>
-                                <input type="date" id="fecha-envio" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="precio-unitario">Precio Unitario (USD)</label>
-                                <input type="number" id="precio-unitario" step="0.01" required min="0">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="notas">Notas Adicionales</label>
-                            <textarea id="notas" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary">Registrar Pedido</button>
-                    </form>
+                            <button type="submit" class="btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                                Registrar Pedido
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- Pedidos Section -->
                 <div id="pedidos" class="section">
                     <h2>Gestión de Pedidos</h2>
+                    <p class="section-desc">Administra todos los pedidos existentes, cambia sus estados y exporta la información.</p>
                     <div class="search-filter">
                         <input type="text" id="search-orders" class="search-input" placeholder="Buscar por cliente, país o ID...">
                         <select id="filter-status">
@@ -126,7 +159,10 @@
                             <option value="enviado">Enviado</option>
                             <option value="entregado">Entregado</option>
                         </select>
-                        <button class="btn-secondary" onclick="exportToCSV()">Exportar CSV</button>
+                        <button class="btn-secondary" onclick="exportToCSV()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                            Exportar CSV
+                        </button>
                     </div>
                     <div id="orders-list" class="orders-grid"></div>
                 </div>
@@ -134,10 +170,16 @@
                 <!-- Seguimiento Section -->
                 <div id="seguimiento" class="section">
                     <h2>Seguimiento de Envíos</h2>
-                    <div class="form-group">
-                        <label for="tracking-id">ID del Pedido</label>
-                        <input type="text" id="tracking-id" placeholder="Ingrese el ID del pedido">
-                        <button class="btn-primary" onclick="trackOrder()" style="margin-top: 10px;">Rastrear Pedido</button>
+                    <p class="section-desc">Rastrea la posición y el estado logístico de tus envíos internacionales.</p>
+                    <div class="panel-box">
+                        <div class="form-group" style="max-width: 500px;">
+                            <label for="tracking-id">ID del Pedido</label>
+                            <input type="text" id="tracking-id" placeholder="Ingrese el ID del pedido (ej. EXP-001)">
+                            <button class="btn-primary" onclick="trackOrder()" style="margin-top: 12px;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                Rastrear Pedido
+                            </button>
+                        </div>
                     </div>
                     <div id="tracking-result"></div>
                 </div>
@@ -145,21 +187,33 @@
                 <!-- Documentos Section -->
                 <div id="documentos" class="section">
                     <h2>Gestión de Documentos</h2>
-                    <div class="form-group">
-                        <label for="doc-order-id">Seleccionar Pedido</label>
-                        <select id="doc-order-id">
-                            <option value="">Seleccionar pedido...</option>
-                        </select>
-                    </div>
-                    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                        <button class="btn-secondary" onclick="generateDocument('guia')">📄 Generar Guía de Exportación</button>
-                        <button class="btn-secondary" onclick="generateDocument('factura')">🧾 Generar Factura Comercial</button>
-                        <button class="btn-secondary" onclick="generateDocument('packing')">📦 Generar Packing List</button>
+                    <p class="section-desc">Genera y administra la documentación aduanera y comercial de tus pedidos.</p>
+                    <div class="panel-box">
+                        <div class="form-group" style="max-width: 500px;">
+                            <label for="doc-order-id">Seleccionar Pedido de Exportación</label>
+                            <select id="doc-order-id">
+                                <option value="">-- Seleccione un pedido --</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
+                            <button class="btn-secondary" onclick="generateDocument('guia')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                Generar Guía de Exportación
+                            </button>
+                            <button class="btn-secondary" onclick="generateDocument('factura')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                                Generar Factura Comercial
+                            </button>
+                            <button class="btn-secondary" onclick="generateDocument('packing')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                                Generar Packing List
+                            </button>
+                        </div>
                     </div>
                     <div id="document-preview"></div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <!-- Modal para editar pedidos -->
@@ -179,17 +233,44 @@
                 </div>
                 <div class="form-group">
                     <label for="edit-tracking">Código de Seguimiento</label>
-                    <input type="text" id="edit-tracking">
+                    <input type="text" id="edit-tracking" placeholder="Ej: TRK-999999">
                 </div>
                 <div class="form-group">
                     <label for="edit-transport">Información de Transporte</label>
-                    <textarea id="edit-transport" rows="3"></textarea>
+                    <textarea id="edit-transport" rows="3" placeholder="Detalles del transportista o buque..."></textarea>
                 </div>
-                <button type="submit" class="btn-primary">Guardar Cambios</button>
+                <button type="submit" class="btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                    Guardar Cambios
+                </button>
             </form>
         </div>
     </div>
 
     <script src="../js/pages/exportaciones.js"></script>
+    <!-- Firebase Auth Profile Sync -->
+    <script type="module">
+        import { auth } from '../js/core/firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const userNameDisplay = document.querySelector('.user-name');
+            const userAvatar = document.querySelector('.user-avatar');
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const displayName = user.displayName || user.email.split('@')[0];
+                    userNameDisplay.textContent = displayName;
+                    
+                    if (user.photoURL) {
+                        userAvatar.innerHTML = `<img src="${user.photoURL}" alt="Perfil" style="width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;">`;
+                        userAvatar.style.padding = '0';
+                    } else {
+                        userAvatar.textContent = displayName.substring(0, 2).toUpperCase();
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

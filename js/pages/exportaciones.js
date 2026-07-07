@@ -64,7 +64,10 @@
         });
         
         document.getElementById(sectionId).classList.add('active');
-        event.target.classList.add('active');
+        const activeBtn = document.querySelector(`.nav-btn[onclick*="${sectionId}"]`);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
     }
 
     // Generar ID único

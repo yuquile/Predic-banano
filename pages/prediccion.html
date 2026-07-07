@@ -9,37 +9,119 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>🍌 Predicción de Cosecha de Banano</h1>
-
-    <form id="formPrediccion">
-      <fieldset>
-        <legend>📋 Datos del Cultivo</legend>
-
-        <label for="temperatura">🌡️ Temperatura (°C):</label>
-        <input type="number" name="temperatura" required />
-
-        <label for="humedad">💧 Humedad (%):</label>
-        <input type="number" name="humedad" required />
-
-        <label for="fase">🌱 Fase del cultivo:</label>
-        <select name="fase">
-          <option value="siembra">Siembra</option>
-          <option value="floración">Floración</option>
-          <option value="maduración">Maduración</option>
-        </select>
-
-        <button type="submit">Predecir Cosecha</button>
-      </fieldset>
-    </form>
-
-    <div id="resultado" class="resultado">Esperando datos...</div>
-
-    <div class="grafico-container">
-      <canvas id="graficoPrediccion" width="400" height="200"></canvas>
+  <div class="page-wrapper">
+    <div class="header-actions">
+      <a href="dashboard.html" class="btn-volver">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        <span>Volver al Dashboard</span>
+      </a>
     </div>
 
-    <a class="volver" href="dashboard.html">← Volver al Dashboard</a>
+    <div class="grid-container">
+      
+      <!-- Card 1: Formulario -->
+      <div class="card">
+        <h1 class="card-title">
+          <span class="card-title-emoji">🍌</span>
+          Predicción de Cosecha de Banano
+        </h1>
+
+        <form id="formPrediccion">
+          <fieldset>
+            <legend>Datos del Cultivo</legend>
+
+            <div class="form-group">
+              <label for="temperatura">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+                Temperatura (°C)
+              </label>
+              <input type="number" name="temperatura" id="temperatura" placeholder="Ej: 28" required />
+            </div>
+
+            <div class="form-group">
+              <label for="humedad">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                Humedad (%)
+              </label>
+              <input type="number" name="humedad" id="humedad" placeholder="Ej: 75" required />
+            </div>
+
+            <div class="form-group">
+              <label for="fase">Fase del cultivo</label>
+              <select name="fase" id="fase">
+                <option value="siembra">Siembra</option>
+                <option value="floración">Floración</option>
+                <option value="maduración">Maduración</option>
+              </select>
+            </div>
+
+            <button type="submit">Predecir Cosecha</button>
+          </fieldset>
+        </form>
+
+        <div id="resultado" class="resultado">Esperando datos...</div>
+      </div>
+
+      <!-- Card 2: Estadísticas -->
+      <div class="card">
+        <h2 class="stats-title">Estadísticas & Tendencias</h2>
+        <p class="stats-subtitle">Datos históricos de cosecha</p>
+
+        <div class="grafico-container">
+          <canvas id="graficoPrediccion" width="400" height="200"></canvas>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box bg-green">
+            <p class="stat-label">Promedio mensual</p>
+            <p class="stat-value text-green">505 kg</p>
+          </div>
+          <div class="stat-box bg-orange">
+            <p class="stat-label">Temp. óptima</p>
+            <p class="stat-value text-orange">28°C</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Clima de hoy -->
+      <div class="card">
+        <h2 class="stats-title">Clima de hoy</h2>
+
+        <div class="weather-hero">
+          <svg class="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg class="cloud" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
+        </div>
+
+        <div class="weather-temp-container">
+          <p class="weather-temp">28°C</p>
+          <p class="weather-desc">Parcialmente nublado</p>
+        </div>
+
+        <div class="weather-details">
+          <div class="weather-row bg-blue">
+            <div class="weather-row-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              <span class="weather-row-label">Humedad</span>
+            </div>
+            <span class="weather-row-value text-blue">72%</span>
+          </div>
+
+          <div class="weather-row bg-orange">
+            <div class="weather-row-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z"/></svg>
+              <span class="weather-row-label">Sensación térmica</span>
+            </div>
+            <span class="weather-row-value text-orange">30°C</span>
+          </div>
+
+          <div class="optimal-conditions">
+            <p class="optimal-title">Condiciones óptimas</p>
+            <p class="optimal-desc">Ideal para la fase de maduración</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <script type="module" src="../js/ia/prediccion.js"></script>
