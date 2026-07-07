@@ -1,4 +1,4 @@
-import { auth } from './firebase.js';
+import { auth } from '../core/firebase.js';
 import Swal from 'https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm';
 
 auth.onAuthStateChanged(user => {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard Banano</title>
-  <link rel="stylesheet" href="./css/dashboard.css" />
+  <link rel="stylesheet" href="../css/pages/dashboard.css" />
   <style>
     /* Estilos para el widget de clima */
     .weather-prediction-container {
@@ -288,10 +288,10 @@
         <li><a href="prediccion.html" class="menu-link">🌾 <span>Predicción</span></a></li>
         <li><a href="exportaciones.html" class="menu-link">🚚 <span>Gestión de Exportaciones</span></a></li>
         <li><a href="inventario.html" class="menu-link">🧾 <span>Inventario y Postcosecha</span></a></li>
-        <li><a href="Analisis.html" class="menu-link">📈 <span>Análisis Estadístico de Producción</span></a></li>
-        <li><a href="ControlPlagas.html" class="menu-link">🐛 <span>Control de Plagas y Calidad Pre-Exportación</span></a></li>
+        <li><a href="analisis.html" class="menu-link">📈 <span>Análisis Estadístico de Producción</span></a></li>
+        <li><a href="control-plagas.html" class="menu-link">🐛 <span>Control de Plagas y Calidad Pre-Exportación</span></a></li>
         <li><a href="calendario.html" class="menu-link">📅 <span>Calendario Agrícola</span></a></li>
-        <li><a href="RecomendacionesIA.html" class="menu-link">🧠 <span>Recomendaciones Inteligentes (IA)</span></a></li> 
+        <li><a href="recomendaciones-ia.html" class="menu-link">🧠 <span>Recomendaciones Inteligentes (IA)</span></a></li> 
         <li><a href="costo.html" class="menu-link">💵 <span>Gestión de Costos y Rentabilidad</span></a></li>
         <li><button id="logoutBtn">🔒 Cerrar sesión</button></li>
       </ul>
@@ -426,9 +426,9 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
   <!-- Firebase scripts -->
-  <script type="module" src="./firebase.js"></script>
+  <script type="module" src="../js/core/firebase.js"></script>
   <script type="module">
-    import { auth } from './firebase.js';
+    import { auth } from '../js/core/firebase.js';
     import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     document.addEventListener('DOMContentLoaded', function() {
