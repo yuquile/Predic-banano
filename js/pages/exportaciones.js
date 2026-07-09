@@ -220,6 +220,49 @@
     function updateOrdersList() {
         const ordersHtml = orders.map(order => createOrderCard(order, false)).join('');
         document.getElementById('orders-list').innerHTML = ordersHtml;
+        renderSeguimientoList();
+    }
+
+    // Renderizar lista de pedidos para seguimiento
+    function renderSeguimientoList(ordersToRender = orders) {
+        const listContainer = document.getElementById('seguimiento-orders-list');
+        if (!listContainer) return;
+        
+        const html = `
+        <div class="seguimiento-table-container">
+            <div class="seguimiento-table-header">
+                <div class="pl-2">ID Pedido</div>
+                <div>Cliente</div>
+                <div>Variedad</div>
+                <div>Tracking</div>
+                <div>Cantidad</div>
+                <div>Estado</div>
+            </div>
+            <div class="seguimiento-table-body">
+                ${ordersToRender.map(order => {
+                    let statusClass = 'st-status-amber';
+                    let statusText = 'Pendiente';
+                    if (order.estado === 'proceso') { statusClass = 'st-status-purple'; statusText = 'En Preparación'; }
+                    else if (order.estado === 'enviado') { statusClass = 'st-status-emerald'; statusText = 'En Tránsito'; }
+                    else if (order.estado === 'entregado') { statusClass = 'st-status-blue'; statusText = 'Entregado'; }
+                    
+                    return `
+                    <div class="seguimiento-table-row" onclick="trackOrderById('${order.id}')">
+                        <div class="st-id">${order.id}</div>
+                        <div class="st-client">${order.cliente}</div>
+                        <div class="st-variety">${order.variedad}</div>
+                        <div class="st-tracking">${order.tracking || 'TRK-PEND'}</div>
+                        <div class="st-quantity">${order.cantidad} unidades</div>
+                        <div>
+                            <span class="st-status-pill ${statusClass}">${statusText}</span>
+                        </div>
+                    </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+        `;
+        listContainer.innerHTML = html;
     }
 
     // Filtrar pedidos
@@ -338,18 +381,32 @@
 
     // Seguimiento de pedido
     function trackOrder() {
-        const orderId = document.getElementById('tracking-id').value.trim();
+        const orderId = document.getElementById('tracking-id').value.trim().toLowerCase();
         if (!orderId) {
-            Swal.fire({
-                title: 'Campo requerido',
-                text: 'Por favor ingrese un ID de pedido',
-                icon: 'warning',
-                confirmButtonText: 'Entendido'
-            });
+            renderSeguimientoList(orders);
             return;
         }
         
-        trackOrderById(orderId);
+        // Check if exact match to open modal
+        const exactMatch = orders.find(o => o.id.toLowerCase() === orderId || (o.tracking && o.tracking.toLowerCase() === orderId));
+        if (exactMatch) {
+            trackOrderById(exactMatch.id);
+        } else {
+            // Otherwise just filter the list
+            const filtered = orders.filter(o => 
+                o.id.toLowerCase().includes(orderId) || 
+                (o.tracking && o.tracking.toLowerCase().includes(orderId))
+            );
+            renderSeguimientoList(filtered);
+            if (filtered.length === 0) {
+                Swal.fire({
+                    title: 'No encontrado',
+                    text: 'No se encontraron pedidos con ese criterio',
+                    icon: 'info',
+                    confirmButtonText: 'Entendido'
+                });
+            }
+        }
     }
 
     function trackOrderById(orderId) {
@@ -366,49 +423,130 @@
         }
         
         const trackingSteps = [
-            { step: 'Pedido Registrado', status: 'completed', date: order.fechaCreacion },
-            { step: 'En Preparación', status: order.estado !== 'pendiente' ? 'completed' : 'pending', date: order.estado !== 'pendiente' ? order.fechaCreacion : null },
-            { step: 'Enviado', status: ['enviado', 'entregado'].includes(order.estado) ? 'completed' : 'pending', date: ['enviado', 'entregado'].includes(order.estado) ? order.fechaEnvio : null },
-            { step: 'En Tránsito', status: ['enviado', 'entregado'].includes(order.estado) ? 'completed' : 'pending', date: null },
-            { step: 'Entregado', status: order.estado === 'entregado' ? 'completed' : 'pending', date: null }
+            { step: 'Pedido Confirmado', desc: '16/05/2026', status: 'completed' },
+            { step: 'Preparación y Empaque', desc: 'Inspección de calidad aprobada', status: order.estado !== 'pendiente' ? 'completed' : 'pending' },
+            { step: 'Despacho Terrestre', desc: 'Carga en tránsito a puerto de origen', status: ['enviado', 'entregado'].includes(order.estado) ? 'completed' : 'pending' },
+            { step: 'Zarpe de Buque', desc: '16/05/2026', status: ['enviado', 'entregado'].includes(order.estado) ? 'completed' : 'pending' },
+            { step: 'En Tránsito Marítimo', desc: 'Actualizando... 16/05/2026', status: ['enviado', 'entregado'].includes(order.estado) ? (order.estado === 'enviado' ? 'active' : 'completed') : 'pending' },
+            { step: 'Llegada a Puerto', desc: 'Estado estimado', status: order.estado === 'entregado' ? 'completed' : 'pending' },
+            { step: 'Entrega Final', desc: 'Estado estimado', status: order.estado === 'entregado' ? 'completed' : 'pending' }
         ];
-        
-        const timelineHtml = trackingSteps.map(step => `
-            <div class="timeline-item ${step.status}">
-                <strong>${step.step}</strong>
-                ${step.date ? `<div style="color: #6c757d; font-size: 12px;">${new Date(step.date).toLocaleDateString()}</div>` : ''}
+
+        const timelineHtml = trackingSteps.map((step) => {
+            const isCompleted = step.status === 'completed' || step.status === 'active';
+            const iconHtml = isCompleted 
+                ? '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="12"/></svg>';
+            
+            return `
+            <div class="dark-timeline-step">
+                <div class="dark-timeline-icon ${step.status}">
+                    ${iconHtml}
+                </div>
+                <div class="dark-timeline-content ${step.status}">
+                    <h4>${step.step}</h4>
+                    <p>${step.desc}</p>
+                </div>
             </div>
-        `).join('');
-        
+            `;
+        }).join('');
+
         document.getElementById('tracking-result').innerHTML = `
-            <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 20px; border: 2px solid #e9ecef;">
-                <h3>Seguimiento del Pedido ${order.id}</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0;">
-                    <div>
-                        <strong>Cliente:</strong><br>${order.cliente}
+            <div class="tracking-dark-modal" id="tracking-dark-modal-overlay" onclick="closeTrackingModal(event)">
+                <div class="tracking-dark-content" onclick="event.stopPropagation()">
+                    <div class="tracking-dark-header">
+                        <div class="tracking-dark-title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            Seguimiento de Envío
+                        </div>
+                        <button class="tracking-dark-close" onclick="closeTrackingModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
                     </div>
-                    <div>
-                        <strong>Destino:</strong><br>${order.paisDestino}
+                    <div class="tracking-dark-body">
+                        <div class="tracking-dark-left">
+                            <div>
+                                <div class="tracking-dark-subtitle">TRACKING ACTIVO ${order.tracking || order.id}</div>
+                                <div class="tracking-dark-grid">
+                                    <div>
+                                        <div class="tracking-dark-label">Pedido Relacionado</div>
+                                        <div class="tracking-dark-value">${order.id}</div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Cliente</div>
+                                        <div class="tracking-dark-value">${order.cliente}</div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Variedad</div>
+                                        <div class="tracking-dark-value">${order.variedad}</div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Cantidad</div>
+                                        <div class="tracking-dark-value">${order.cantidad.toLocaleString()} unidades</div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Valor Total</div>
+                                        <div class="tracking-dark-value">$${(order.cantidad * order.precioUnitario).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0})}</div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Transportista</div>
+                                        <div class="tracking-dark-value" style="color: #fb923c;">${order.transporte || 'Por asignar'}</div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Origen</div>
+                                        <div class="tracking-dark-value" style="display:flex;align-items:center;gap:6px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                            Puerto Marítimo, EC
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="tracking-dark-label">Destino</div>
+                                        <div class="tracking-dark-value" style="display:flex;align-items:center;gap:6px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                            ${order.paisDestino}
+                                        </div>
+                                    </div>
+                                    <div style="grid-column: span 2;">
+                                        <div class="tracking-dark-label">Llegada Estimada (ETA)</div>
+                                        <div class="tracking-dark-value">${order.fechaEnvio ? new Date(new Date(order.fechaEnvio).getTime() + 15*24*60*60*1000).toLocaleDateString() : 'Por determinar'}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="tracking-dark-doc-title">Documentos de Transporte</div>
+                                <div style="display: flex; gap: 16px;">
+                                    <div class="tracking-dark-doc-card">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="background-color: #fee2e2; color: #dc2626; padding: 8px; border-radius: 8px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                            </div>
+                                            <span style="font-size: 14px; font-weight: 500;">Bill of Lading (BL)</span>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    </div>
+                                    <div class="tracking-dark-doc-card">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="background-color: #dbeafe; color: #2563eb; padding: 8px; border-radius: 8px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                            </div>
+                                            <span style="font-size: 14px; font-weight: 500;">Packing List</span>
+                                        </div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tracking-dark-right">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff;">Estado: ${order.estado.charAt(0).toUpperCase() + order.estado.slice(1)}</h3>
+                                <span style="background-color: rgba(16, 185, 129, 0.2); color: #34d399; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">${order.estado}</span>
+                            </div>
+                            <div style="font-size: 14px; color: #9ca3af; margin-bottom: 32px;">Última actualización: hace unos momentos</div>
+                            <div class="tracking-timeline-dark">
+                                ${timelineHtml}
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <strong>Estado Actual:</strong><br>
-                        <span class="status-badge status-${order.estado}">${order.estado.toUpperCase()}</span>
-                    </div>
-                    ${order.tracking ? `
-                    <div>
-                        <strong>Código de Seguimiento:</strong><br>${order.tracking}
-                    </div>
-                    ` : ''}
-                </div>
-                ${order.transporte ? `
-                <div style="margin: 15px 0;">
-                    <strong>Información de Transporte:</strong><br>
-                    ${order.transporte}
-                </div>
-                ` : ''}
-                <h4 style="margin-top: 25px; margin-bottom: 15px;">Estado del Envío</h4>
-                <div class="tracking-timeline">
-                    ${timelineHtml}
                 </div>
             </div>
         `;
@@ -416,6 +554,11 @@
         // Cambiar a la sección de seguimiento si no estamos ahí
         showSection('seguimiento');
         document.querySelector('[onclick="showSection(\'seguimiento\')"]').classList.add('active');
+    }
+
+    window.closeTrackingModal = function(e) {
+        if(e && e.target !== e.currentTarget) return;
+        document.getElementById('tracking-result').innerHTML = '';
     }
 
     // Poblar selector de documentos
