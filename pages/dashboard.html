@@ -14,28 +14,28 @@
   <!-- Custom Base Styles -->
   <link rel="stylesheet" href="../css/pages/dashboard.css?v=6.0" />
 </head>
-<body class="bg-[#FDF7F0]">
+<body class="bg-base">
   
-  <div class="flex flex-col md:flex-row min-h-screen w-full box-border" style="background-color: #FDF7F0; font-family: 'Inter', sans-serif;">
+  <div class="flex flex-col md:flex-row min-h-screen w-full box-border" >
     
     <!-- ===== SIDEBAR ===== -->
-    <aside style="background-color: #1B4332; font-family: 'Inter', sans-serif;" class="flex flex-col w-full md:w-64 shrink-0 md:min-h-screen transition-all duration-300">
+    <aside class="flex flex-col w-full md:w-64 shrink-0 md:min-h-screen transition-all duration-300 bg-primary">
       
       <!-- Logo -->
       <div class="flex items-center gap-2.5 px-6 py-5 border-b" style="border-color: rgba(255,255,255,0.08);">
-        <div class="flex items-center justify-center w-8 h-8 rounded" style="background-color: #D4A373;">
-          <i data-lucide="leaf" class="icon-fixed" color="#1B4332" stroke-width="2" style="width:16px; height:16px;"></i>
+        <div class="flex items-center justify-center w-8 h-8 rounded">
+          <i data-lucide="layers" class="icon-fixed" color="var(--accent)" stroke-width="2" style="width:16px; height:16px;"></i>
         </div>
         <div>
-          <span style="color: #FDF7F0; font-size: 15px; font-weight: 600; letter-spacing: 0.04em;">BananaSys</span>
-          <div style="color: rgba(253,247,240,0.45); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;">Agro Intelligence</div>
+          <span style="color: var(--accent); font-size: 15px; font-weight: 600; letter-spacing: 0.04em;">BananoSys</span>
+          <div style="color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">AGRO INTELLIGENCE</div>
         </div>
       </div>
 
       <!-- User -->
       <div class="px-6 py-4 border-b" style="border-color: rgba(255,255,255,0.08);">
-        <div style="color: rgba(253,247,240,0.5); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">Sesión activa</div>
-        <div id="userNameDisplay" style="color: #FDF7F0; font-size: 15px; font-weight: 500;">Cargando...</div>
+        <div style="color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">Sesión activa</div>
+        <div id="userNameDisplay" style="color: #ffffff; font-size: 15px; font-weight: 500;">Cargando...</div>
       </div>
 
       <!-- Navigation -->
@@ -89,32 +89,32 @@
     <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden relative">
       
       <!-- Topbar -->
-      <header class="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #FDF7F0; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
+      <header class="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
         <div class="min-w-0">
-          <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: 20px; font-weight: 400; color: #1B4332; letter-spacing: -0.02em; line-height: 1.3;">
+          <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: 20px; font-weight: 400; color: var(--text-main); letter-spacing: -0.02em; line-height: 1.3;">
             Panel de Control de Banano
           </h1>
-          <div style="font-size: 12px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
+          <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
             Temporada activa — Sem. 23 — 07 Jun 2026
           </div>
         </div>
 
         <div class="flex items-center gap-3">
-          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: #fff; border: 1px solid #E8E0D5; color: #B5A08A; font-size: 14px; min-width: 100%; max-width: 200px;">
+          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); font-size: 14px; min-width: 100%; max-width: 200px;">
             <i data-lucide="search" class="icon-fixed" stroke-width="1.5" style="width: 13px; height: 13px;"></i>
             <span>Buscar pedidos, parcelas...</span>
           </div>
 
-          <button class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: #fff; border: 1px solid #E8E0D5;">
+          <button class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
             <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
-            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: #D4A373;"></span>
+            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: var(--accent);"></span>
           </button>
 
-          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: #fff; border: 1px solid #E8E0D5;">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: #1B4332;">
-              <span style="font-size: 12px; color: #FDF7F0; font-weight: 600;">AJ</span>
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: var(--text-main);">
+              <span style="font-size: 12px; color: #ffffff; font-weight: 600;">AJ</span>
             </div>
-            <span style="font-size: 14px; color: #3D3026; font-weight: 500;">Abel José</span>
+            <span style="font-size: 14px; color: var(--text-main); font-weight: 500;">Abel José</span>
             <i data-lucide="chevron-down" class="icon-fixed" color="#B5A08A" style="width: 11px; height: 11px;"></i>
           </div>
         </div>
@@ -124,49 +124,49 @@
         
         <!-- Indicadores Clave -->
         <section class="min-w-0">
-          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #B5A08A; font-weight: 500; margin-bottom: 10px;">
+          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 500; margin-bottom: 10px;">
             Indicadores Clave
           </div>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             
-            <div class="flex flex-col justify-between p-4 rounded" style="background-color: #1B4332; min-height: 96px;">
+            <div class="flex flex-col justify-between p-4 rounded" style="background-color: var(--text-main); min-height: 96px;">
               <div class="flex items-center justify-between">
-                <i data-lucide="shopping-cart" class="icon-fixed" stroke-width="1.5" color="rgba(253,247,240,0.7)" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(253,247,240,0.6); font-family: 'Inter', sans-serif; font-weight: 400;">Total Pedidos</span>
+                <i data-lucide="shopping-cart" class="icon-fixed" stroke-width="1.5" color="rgba(255,255,255,0.7)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-weight: 400;">Total Pedidos</span>
               </div>
-              <div id="totalPedidos" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #FDF7F0; line-height: 1;">0</div>
+              <div id="totalPedidos" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1;">0</div>
             </div>
 
-            <div class="flex flex-col justify-between p-4 rounded" style="background-color: #2D6A4F; min-height: 96px;">
+            <div class="flex flex-col justify-between p-4 rounded bg-primary" style="min-height: 96px;">
               <div class="flex items-center justify-between">
-                <i data-lucide="truck" class="icon-fixed" stroke-width="1.5" color="rgba(253,247,240,0.7)" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(253,247,240,0.6); font-family: 'Inter', sans-serif; font-weight: 400;">Transporte</span>
+                <i data-lucide="truck" class="icon-fixed" stroke-width="1.5" color="rgba(255,255,255,0.7)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-weight: 400;">Transporte</span>
               </div>
-              <div id="pedidosPendientes" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #FDF7F0; line-height: 1;">0</div>
+              <div id="pedidosPendientes" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1;">0</div>
             </div>
 
-            <div class="flex flex-col justify-between p-4 rounded" style="background-color: #40916C; min-height: 96px;">
+            <div class="flex flex-col justify-between p-4 rounded bg-primary" style="min-height: 96px;">
               <div class="flex items-center justify-between">
-                <i data-lucide="refresh-cw" class="icon-fixed" stroke-width="1.5" color="rgba(253,247,240,0.7)" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(253,247,240,0.6); font-family: 'Inter', sans-serif; font-weight: 400;">En Proceso</span>
+                <i data-lucide="refresh-cw" class="icon-fixed" stroke-width="1.5" color="rgba(255,255,255,0.7)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-weight: 400;">En Proceso</span>
               </div>
-              <div id="pedidosProceso" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #FDF7F0; line-height: 1;">0</div>
+              <div id="pedidosProceso" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1;">0</div>
             </div>
 
-            <div class="flex flex-col justify-between p-4 rounded" style="background-color: #fff; border: 1px solid #74C69D33; min-height: 96px;">
+            <div class="flex flex-col justify-between p-4 rounded bg-card border-accent" style="border: 1px solid var(--accent); min-height: 96px;">
               <div class="flex items-center justify-between">
-                <i data-lucide="send" class="icon-fixed" stroke-width="1.5" color="#74C69D" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #74C69D; font-family: 'Inter', sans-serif; font-weight: 400;">Enviados</span>
+                <i data-lucide="send" class="icon-fixed" stroke-width="1.5" color="var(--primary)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 400;">Enviados</span>
               </div>
-              <div id="pedidosEnviados" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #74C69D; line-height: 1;">0</div>
+              <div id="pedidosEnviados" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: var(--primary); line-height: 1;">0</div>
             </div>
 
-            <div class="flex flex-col justify-between p-4 rounded" style="background-color: #fff; border: 1px solid #B7E4C733; min-height: 96px;">
+            <div class="flex flex-col justify-between p-4 rounded bg-card border-accent" style="border: 1px solid var(--accent); min-height: 96px;">
               <div class="flex items-center justify-between">
-                <i data-lucide="check-circle" class="icon-fixed" stroke-width="1.5" color="#B7E4C7" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #B7E4C7; font-family: 'Inter', sans-serif; font-weight: 400;">Completados</span>
+                <i data-lucide="check-circle" class="icon-fixed" stroke-width="1.5" color="var(--primary)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 400;">Completados</span>
               </div>
-              <div id="pedidosEntregados" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #B7E4C7; line-height: 1;">0</div>
+              <div id="pedidosEntregados" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: var(--primary); line-height: 1;">0</div>
             </div>
 
           </div>
@@ -174,79 +174,77 @@
 
         <!-- Condiciones Operativas -->
         <section class="min-w-0">
-          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #B5A08A; font-weight: 500; margin-bottom: 10px;">
+          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 500; margin-bottom: 10px;">
             Condiciones Operativas
           </div>
           
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             
             <!-- Weather -->
-            <div class="p-5 rounded" style="background-color: #fff; border: 1px solid #E8E0D5; font-family: 'Inter', sans-serif;">
+            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-4">
                 <div>
-                  <div id="locationName" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8B7355; font-weight: 500;">
+                  <div id="locationName" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">
                     Milagro, Ecuador
                   </div>
-                  <div id="currentTime" style="font-size: 12px; color: #B5A08A; margin-top: 1px;">
+                  <div id="currentTime" style="font-size: 12px; color: var(--text-muted); margin-top: 1px;">
                     Cargando...
                   </div>
                 </div>
-                <div style="font-size: 12px; color: #40916C; background-color: rgba(64,145,108,0.08); border: 1px solid rgba(64,145,108,0.2); padding: 2px 8px; border-radius: 2px; font-weight: 500; letter-spacing: 0.04em;">
-                  ACTIVO
-                </div>
+                <div class="badge-pill badge-activo">ACTIVO</div>
               </div>
 
               <div class="flex items-end gap-3 mb-5">
-                <div id="temperature" style="font-size: 48px; font-weight: 200; color: #1B4332; line-height: 1;">--</div>
-                <div style="font-size: 20px; color: #8B7355; margin-bottom: 6px;">°C</div>
-                <div style="color: #8B7355; font-size: 14px; margin-bottom: 8px;">
+                <div id="temperature" style="font-size: 48px; font-weight: 200; color: var(--text-main); line-height: 1;">--</div>
+                <div style="font-size: 20px; color: var(--text-muted); margin-bottom: 6px;">°C</div>
+                <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">
                   <span id="weatherDescription">Obteniendo clima...</span> · <span id="feelsLike">Sensación --°</span>
                 </div>
               </div>
 
               <div class="grid grid-cols-2 gap-2">
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
+                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
                   <i data-lucide="droplets" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
                   <div>
-                    <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.06em;">Humedad</div>
-                    <div id="humidity" style="font-size: 14px; font-weight: 500; color: #1B4332;">--%</div>
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">Humedad</div>
+                    <div id="humidity" style="font-size: 14px; font-weight: 500; color: var(--text-main);">--%</div>
                   </div>
                 </div>
                 
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
+                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
                   <i data-lucide="wind" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
                   <div>
-                    <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.06em;">Viento</div>
-                    <div id="windSpeed" style="font-size: 14px; font-weight: 500; color: #1B4332;">-- km/h</div>
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">Viento</div>
+                    <div id="windSpeed" style="font-size: 14px; font-weight: 500; color: var(--text-main);">-- km/h</div>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
+                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
                   <i data-lucide="eye" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
                   <div>
-                    <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.06em;">UV</div>
-                    <div id="uvIndex" style="font-size: 14px; font-weight: 500; color: #1B4332;">--</div>
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">UV</div>
+                    <div id="uvIndex" style="font-size: 14px; font-weight: 500; color: var(--text-main);">--</div>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
+                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
                   <i data-lucide="thermometer" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
                   <div>
-                    <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.06em;">Visibilidad</div>
-                    <div id="visibility" style="font-size: 14px; font-weight: 500; color: #1B4332;">-- km</div>
+                    <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">Visibilidad</div>
+                    <div id="visibility" style="font-size: 14px; font-weight: 500; color: var(--text-main);">-- km</div>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Harvest Prediction -->
-            <div class="p-5 rounded" style="background-color: #fff; border: 1px solid #E8E0D5; font-family: 'Inter', sans-serif;">
+            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-4">
                 <div>
-                  <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8B7355; font-weight: 500;">
+                  <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">
                     Última Predicción de Cosecha
                   </div>
-                  <div id="predictionDate" style="font-size: 12px; color: #B5A08A; margin-top: 1px;">
+                  <div id="predictionDate" style="font-size: 12px; color: var(--text-muted); margin-top: 1px;">
                     Fecha: --
                   </div>
                 </div>
@@ -254,34 +252,34 @@
               </div>
 
               <div class="flex items-end gap-2 mb-5">
-                <div id="predictionYield" style="font-size: 40px; font-weight: 200; color: #1B4332; line-height: 1;">--</div>
+                <div id="predictionYield" style="font-size: 40px; font-weight: 200; color: var(--text-main); line-height: 1;">--</div>
               </div>
 
               <div class="grid grid-cols-2 gap-2 mb-3">
                 <div class="p-3 rounded" style="background-color: rgba(64,145,108,0.06); border: 1px solid rgba(64,145,108,0.15);">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #8B7355;">Variación</div>
-                  <div id="expectedGrowth" style="font-size: 20px; font-weight: 500; color: #40916C;">--%</div>
-                  <div style="font-size: 12px; color: #8B7355;">vs sem. anterior</div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);">Variación</div>
+                  <div id="expectedGrowth" style="font-size: 20px; font-weight: 500; color: var(--primary);">--%</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">vs sem. anterior</div>
                 </div>
                 <div class="p-3 rounded" style="background-color: rgba(27,67,50,0.04); border: 1px solid #EDE7DC;">
-                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #8B7355;">Confianza</div>
-                  <div id="qualityScore" style="font-size: 20px; font-weight: 500; color: #1B4332;">--%</div>
-                  <div style="font-size: 12px; color: #8B7355;">modelo ML</div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);">Confianza</div>
+                  <div id="qualityScore" style="font-size: 20px; font-weight: 500; color: var(--text-main);">--%</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">modelo ML</div>
                 </div>
               </div>
 
               <div class="grid grid-cols-3 gap-2">
-                <div class="p-2 rounded text-center" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
-                  <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.05em;">Parcelas activas</div>
-                  <div style="font-size: 15px; font-weight: 600; color: #1B4332;">38</div>
+                <div class="p-2 rounded text-center" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
+                  <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Parcelas activas</div>
+                  <div style="font-size: 15px; font-weight: 600; color: var(--text-main);">38</div>
                 </div>
-                <div class="p-2 rounded text-center" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
-                  <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.05em;">Riesgo climático</div>
-                  <div id="riskLevel" style="font-size: 15px; font-weight: 600; color: #D4A373;">--</div>
+                <div class="p-2 rounded text-center" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
+                  <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Riesgo climático</div>
+                  <div id="riskLevel" style="font-size: 15px; font-weight: 600; color: var(--accent);">--</div>
                 </div>
-                <div class="p-2 rounded text-center" style="background-color: #FDF7F0; border: 1px solid #EDE7DC;">
-                  <div style="font-size: 11px; color: #B5A08A; text-transform: uppercase; letter-spacing: 0.05em;">Días cosecha</div>
-                  <div id="harvestDays" style="font-size: 15px; font-weight: 600; color: #1B4332;">--</div>
+                <div class="p-2 rounded text-center" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
+                  <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Días cosecha</div>
+                  <div id="harvestDays" style="font-size: 15px; font-weight: 600; color: var(--text-main);">--</div>
                 </div>
               </div>
             </div>
@@ -291,51 +289,51 @@
 
         <!-- Action Grid -->
         <section>
-          <div class="p-5 rounded" style="background-color: #fff; border: 1px solid #E8E0D5; font-family: 'Inter', sans-serif;">
+          <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
             <div class="flex items-center justify-between mb-5">
-              <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: #1B4332;">Acciones Rápidas</h2>
+              <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--text-main);">Acciones Rápidas</h2>
             </div>
             
             <div class="modules-grid">
               
-              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #1B4332; border-color: #1B4332;">
-                <i data-lucide="package-check" class="icon-fixed" style="color: #D4A373; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #FDF7F0;">Nueva Exportación</div>
+              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-main); border-color: var(--text-main);">
+                <i data-lucide="package-check" class="icon-fixed" style="color: var(--accent); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: #ffffff;">Nueva Exportación</div>
               </div>
 
-              <div onclick="window.location.href='calendario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="sprout" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">Registrar Cosecha</div>
+              <div onclick="window.location.href='calendario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="sprout" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">Registrar Cosecha</div>
               </div>
 
-              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="truck" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">Asignar Transporte</div>
+              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="truck" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">Asignar Transporte</div>
               </div>
 
-              <div onclick="window.location.href='analisis.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="bar-chart-3" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">Ver Reportes</div>
+              <div onclick="window.location.href='analisis.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="bar-chart-3" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">Ver Reportes</div>
               </div>
               
-              <div onclick="window.location.href='control-plagas.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="shield-check" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">Control Calidad</div>
+              <div onclick="window.location.href='control-plagas.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="shield-check" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">Control Calidad</div>
               </div>
               
-              <div onclick="window.location.href='costo.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="calculator" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">Calcular Costos</div>
+              <div onclick="window.location.href='costo.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="calculator" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">Calcular Costos</div>
               </div>
               
-              <div onclick="window.location.href='inventario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="map" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">Mapa de Parcelas</div>
+              <div onclick="window.location.href='inventario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="map" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">Mapa de Parcelas</div>
               </div>
               
-              <div onclick="window.location.href='prediccion.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #FDF7F0; border-color: #EDE7DC;">
-                <i data-lucide="cpu" class="icon-fixed" style="color: #40916C; width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #3D3026;">IA Predicciones</div>
+              <div onclick="window.location.href='prediccion.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+                <i data-lucide="cpu" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-main);">IA Predicciones</div>
               </div>
 
             </div>
@@ -344,25 +342,25 @@
 
         <!-- Charts (Análisis y Visualización) -->
         <section class="min-w-0">
-          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: #B5A08A; font-weight: 500; margin-bottom: 10px;">
+          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 500; margin-bottom: 10px;">
             Análisis y Visualización
           </div>
           
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div class="p-5 rounded" style="background-color: #fff; border: 1px solid #E8E0D5; font-family: 'Inter', sans-serif;">
+            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-1">
-                <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 16px; font-weight: 400; color: #1B4332;">Estados de Pedidos</h3>
+                <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 16px; font-weight: 400; color: var(--text-main);">Estados de Pedidos</h3>
               </div>
-              <div style="font-size: 12px; color: #B5A08A; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Distribución actual</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Distribución actual</div>
               
               <div id="estadosChart" style="height: 180px; width: 100%;"></div>
             </div>
 
-            <div class="p-5 rounded" style="background-color: #fff; border: 1px solid #E8E0D5; font-family: 'Inter', sans-serif;">
+            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-1">
-                <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 16px; font-weight: 400; color: #1B4332;">Destinos Principales</h3>
+                <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 16px; font-weight: 400; color: var(--text-main);">Destinos Principales</h3>
               </div>
-              <div style="font-size: 12px; color: #B5A08A; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Cajas exportadas</div>
+              <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Cajas exportadas</div>
               
               <div id="destinosChart" style="height: 180px; width: 100%;"></div>
             </div>
@@ -371,10 +369,10 @@
 
         <!-- Exports Table (Exportaciones Recientes) -->
         <section class="pb-8 min-w-0">
-          <div class="rounded w-full overflow-x-auto" style="background-color: #fff; border: 1px solid #E8E0D5; font-family: 'Inter', sans-serif;">
+          <div class="rounded w-full overflow-x-auto" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
             
             <div class="flex items-center justify-between px-5 py-4" style="border-bottom: 1px solid #EDE7DC;">
-              <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: #1B4332;">Exportaciones Recientes</h3>
+              <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--text-main);">Exportaciones Recientes</h3>
               <button style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #2D6A4F; border: 1px solid rgba(45,106,79,0.3); padding: 4px 12px; border-radius: 2px; background-color: transparent; cursor: pointer; display: flex; align-items: center; gap: 4px;">
                 Ver todo <i data-lucide="arrow-up-right" class="icon-fixed" style="width:10px; height:10px;"></i>
               </button>
@@ -383,13 +381,13 @@
             <div class="w-full">
               <!-- Encabezado de la tabla -->
               <div class="flex px-5 py-2.5" style="border-bottom: 1px solid #EDE7DC; background: #fff;">
-                <div style="flex:1; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #B5A08A; font-weight: 500;">Ref. / Detalles</div>
-                <div style="width:100px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #B5A08A; font-weight: 500; text-align: right;">Estado</div>
+                <div style="flex:1; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 500;">Ref. / Detalles</div>
+                <div style="width:100px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); font-weight: 500; text-align: right;">Estado</div>
               </div>
               
               <!-- Contenedor dinámico (lleno por JS) -->
               <div id="recentExports">
-                <p style="text-align: center; color: #B5A08A; padding: 20px; font-size: 14px;">No hay exportaciones registradas</p>
+                <p style="text-align: center; color: var(--text-muted); padding: 20px; font-size: 14px;">No hay exportaciones registradas</p>
               </div>
             </div>
             
@@ -544,10 +542,10 @@
             type: 'pie',
             radius: '70%',
             data: [
-              {value: stats.pendiente, name: 'Pendientes', itemStyle: {color: '#D4A373'}},
-              {value: stats.proceso, name: 'En Proceso', itemStyle: {color: '#40916C'}},
-              {value: stats.enviado, name: 'Enviados', itemStyle: {color: '#2D6A4F'}},
-              {value: stats.entregado, name: 'Entregados', itemStyle: {color: '#1B4332'}}
+              {value: stats.pendiente, name: 'Pendientes', itemStyle: {color: '#5eead4'}},
+              {value: stats.proceso, name: 'En Proceso', itemStyle: {color: '#1e664d'}},
+              {value: stats.enviado, name: 'Enviados', itemStyle: {color: '#164e3b'}},
+              {value: stats.entregado, name: 'Entregados', itemStyle: {color: '#0f172a'}}
             ]
           }]
         };
@@ -570,7 +568,7 @@
           series: [{
             data: sortedDestinations.map(([, cantidad]) => cantidad),
             type: 'bar',
-            itemStyle: { color: '#2D6A4F' }
+            itemStyle: { color: '#164e3b' }
           }]
         };
         chart.setOption(option);
@@ -581,7 +579,7 @@
         const container = document.getElementById('recentExports');
         
         if (recentOrders.length === 0) {
-          container.innerHTML = '<p style="text-align: center; color: #B5A08A; padding: 20px; font-size: 14px;">No hay exportaciones registradas</p>';
+          container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 20px; font-size: 14px;">No hay exportaciones registradas</p>';
           return;
         }
 

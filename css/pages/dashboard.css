@@ -23,7 +23,37 @@ html {
   height: auto !important;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Merriweather:wght@400;700&display=swap');
+
+:root {
+  --primary: #164e3b;
+  --primary-light: #1e664d;
+  --accent: #5eead4;
+  --bg: #f8fafc;
+  --card-bg: #ffffff;
+  --card-secondary: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+/* Clases de utilidad semánticas (colores y fondos) */
+.bg-primary { background-color: var(--primary); }
+.bg-primary-light { background-color: var(--primary-light); }
+.bg-accent { background-color: var(--accent); }
+.bg-base { background-color: var(--bg); }
+.bg-card { background-color: var(--card-bg); }
+.bg-card-secondary { background-color: var(--card-secondary); }
+
+.text-primary { color: var(--primary); }
+.text-accent { color: var(--accent); }
+.text-main { color: var(--text-main); }
+.text-muted { color: var(--text-muted); }
+.text-white { color: #ffffff; }
+
+.border-primary { border-color: var(--primary); }
+.border-accent { border-color: var(--accent); }
+.border-base { border-color: var(--border-color); }
 
 /* Reglas base y reset responsivo */
 *, *::before, *::after {
@@ -31,12 +61,39 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #FDF7F0;
-  color: #1B4332;
+  font-family: 'Outfit', 'Inter', sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+/* Tipografía de títulos */
+h1, h2, h3, h4, .card-title {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Badges de Estado rediseñados (AGRO INTELLIGENCE) */
+.badge-pill {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.badge-activo {
+  background-color: rgba(94, 234, 212, 0.2);
+  color: var(--primary);
+  border: 1px solid rgba(94, 234, 212, 0.4);
+}
+.badge-riesgo-alto {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
 /* Permitir wrap seguro global en textos largos */
@@ -136,22 +193,24 @@ h1, h2, h3, h4, h5, h6, p, div, span, a, li {
   margin-bottom: 0.125rem;
   transition: all 0.2s;
   background-color: transparent;
-  color: rgba(253,247,240,0.6);
+  color: rgba(255,255,255,0.7);
   font-size: 0.9063rem;
   font-weight: 400;
-  border: 1px solid transparent;
+  border-left: 3px solid transparent;
   text-decoration: none;
 }
 
 .menu-link:hover {
   background-color: rgba(255,255,255,0.05);
+  color: #ffffff;
 }
 
 .menu-link.active {
-  background-color: rgba(212,163,115,0.18);
-  color: #D4A373;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent);
   font-weight: 500;
-  border: 1px solid rgba(212,163,115,0.25);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
 }
 
 /* Grillas Customizadas para Módulos Responsivas */
