@@ -353,7 +353,7 @@
               </div>
               <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Distribución actual</div>
               
-              <div id="estadosChart" style="height: 180px; width: 100%;"></div>
+              <div id="estadosChart" style="height: 220px; width: 100%;"></div>
             </div>
 
             <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
@@ -362,7 +362,7 @@
               </div>
               <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Cajas exportadas</div>
               
-              <div id="destinosChart" style="height: 180px; width: 100%;"></div>
+              <div id="destinosChart" style="height: 220px; width: 100%;"></div>
             </div>
           </div>
         </section>
@@ -535,18 +535,71 @@
 
       function createStatesChart(stats) {
         const chart = echarts.init(document.getElementById('estadosChart'));
+        const total = stats.pendiente + stats.proceso + stats.enviado + stats.entregado || 1;
+        
+        const data = [
+          {value: stats.proceso, name: 'En Proceso', itemStyle: {color: '#1e664d'}},
+          {value: stats.enviado, name: 'Enviados', itemStyle: {color: '#34d399'}},
+          {value: stats.entregado, name: 'Entregados', itemStyle: {color: '#0f172a'}},
+          {value: stats.pendiente, name: 'Pendientes', itemStyle: {color: '#5eead4'}}
+        ];
+
         const option = {
-          tooltip: { trigger: 'item', formatter: '{a} <br/>{b}: {c} ({d}%)' },
+          tooltip: { 
+            trigger: 'item', 
+            formatter: '{b}: {c} ({d}%)',
+            backgroundColor: '#ffffff',
+            borderWidth: 0,
+            textStyle: { color: '#0f172a', fontFamily: 'Outfit' },
+            extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-radius: 4px;'
+          },
+          legend: {
+            orient: 'vertical',
+            left: '0%',
+            top: 'middle',
+            itemWidth: 14,
+            itemHeight: 14,
+            icon: 'roundRect',
+            itemGap: 16,
+            formatter: function (name) {
+              const item = data.find(d => d.name === name);
+              const percent = (total === 1 && item.value === 0) ? 0 : Math.round((item.value / total) * 100);
+              return `{name|${name}}{percent|${percent}%}`;
+            },
+            textStyle: {
+              rich: {
+                name: {
+                  color: '#0f172a',
+                  fontFamily: 'Outfit',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  width: 90
+                },
+                percent: {
+                  color: '#0f172a',
+                  fontFamily: 'Outfit',
+                  fontSize: 14,
+                  fontWeight: 400,
+                  align: 'right'
+                }
+              }
+            }
+          },
           series: [{
             name: 'Estados',
             type: 'pie',
-            radius: '70%',
-            data: [
-              {value: stats.pendiente, name: 'Pendientes', itemStyle: {color: '#5eead4'}},
-              {value: stats.proceso, name: 'En Proceso', itemStyle: {color: '#1e664d'}},
-              {value: stats.enviado, name: 'Enviados', itemStyle: {color: '#164e3b'}},
-              {value: stats.entregado, name: 'Entregados', itemStyle: {color: '#0f172a'}}
-            ]
+            radius: ['0%', '80%'],
+            center: ['68%', '50%'],
+            itemStyle: {
+              shadowBlur: 20,
+              shadowColor: 'rgba(0, 0, 0, 0.15)',
+              shadowOffsetX: 5,
+              shadowOffsetY: 10,
+              borderColor: '#ffffff',
+              borderWidth: 1
+            },
+            label: { show: false },
+            data: data
           }]
         };
         chart.setOption(option);
