@@ -72,22 +72,22 @@ body {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 24px 32px;
+    padding: 1.5rem 2rem;
 }
 
 /* --- Header (Flat, moderno) --- */
 .header {
     background: var(--white);
     color: var(--slate-900);
-    padding: 20px 0;
+    padding: 1.25rem 0;
     border-radius: 0;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     box-shadow: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 1rem;
     border-bottom: 1px solid var(--slate-200);
 }
 
@@ -97,7 +97,7 @@ body {
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.75rem;
     color: var(--slate-900);
     letter-spacing: -0.02em;
 }
@@ -106,8 +106,8 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     background: var(--green-100);
     color: var(--brand-green);
     border-radius: 10px;
@@ -118,23 +118,23 @@ body {
 
 .header-actions {
     display: flex;
-    gap: 10px;
+    gap: 0.625rem;
     flex-wrap: wrap;
 }
 
 /* --- Botones (Fase 3) --- */
 .btn {
-    padding: 9px 18px;
+    padding: 0.5625rem 1.125rem;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-    font-size: 13px;
+    font-size: 0.8125rem;
     font-weight: 500;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 0.375rem;
     transition: var(--transition);
     white-space: nowrap;
 }
@@ -163,8 +163,8 @@ body {
 }
 
 .btn-small {
-    padding: 6px 10px;
-    font-size: 12px;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
     border-radius: 6px;
 }
 
@@ -172,7 +172,7 @@ body {
     background: transparent;
     color: var(--brand-green);
     border: none;
-    padding: 6px;
+    padding: 0.375rem;
 }
 
 .btn-success:hover {
@@ -184,7 +184,7 @@ body {
     background: transparent;
     color: var(--amber-800);
     border: none;
-    padding: 6px;
+    padding: 0.375rem;
 }
 
 .btn-warning:hover {
@@ -195,7 +195,7 @@ body {
     background: transparent;
     color: var(--red-600);
     border: none;
-    padding: 6px;
+    padding: 0.375rem;
 }
 
 .btn-danger:hover {
@@ -205,9 +205,9 @@ body {
 /* --- Filtros (Fase 4) --- */
 .filtros-panel {
     background: var(--white);
-    padding: 20px;
+    padding: 1.25rem;
     border-radius: var(--radius-card);
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--slate-200);
     animation: fadeInUp 0.3s ease-out;
@@ -216,31 +216,31 @@ body {
 .filtros-grid {
     display: grid;
     grid-template-columns: 2fr repeat(3, 1fr);
-    gap: 16px;
+    gap: 1rem;
     align-items: end;
 }
 
 .filtro-grupo {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.375rem;
 }
 
 .filtro-grupo label {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-weight: 500;
     color: var(--slate-500);
-    font-size: 12px;
+    font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
 .filtro-grupo input,
 .filtro-grupo select {
-    padding: 9px 12px;
+    padding: 0.5625rem 0.75rem;
     border: 1px solid var(--slate-300);
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     transition: var(--transition);
     background: var(--white);
@@ -253,7 +253,7 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    padding-right: 32px;
+    padding-right: 2rem;
 }
 
 .filtro-grupo input:focus,
@@ -265,25 +265,25 @@ body {
 
 .filtro-grupo input::placeholder {
     color: var(--slate-500);
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 /* --- KPIs / Estadísticas (Fase 4) --- */
 .estadisticas {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
 }
 
 .stat-card {
     background: var(--white);
-    padding: 20px;
+    padding: 1.25rem;
     border-radius: 0 var(--radius-card) var(--radius-card) 0;
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
     transition: var(--transition);
     border: 1px solid var(--slate-200);
     border-left: 4px solid var(--slate-300);
@@ -320,8 +320,8 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
+    width: 2.625rem;
+    height: 2.625rem;
     border-radius: 10px;
     font-size: 1.1rem;
     flex-shrink: 0;
@@ -349,14 +349,14 @@ body {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--slate-900);
-    margin-bottom: 2px;
+    margin-bottom: 0.125rem;
     letter-spacing: -0.02em;
 }
 
 .stat-info p {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     color: var(--slate-500);
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.03em;
@@ -368,7 +368,7 @@ body {
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     border: 1px solid var(--slate-200);
     animation: fadeInUp 0.4s ease-out 0.3s;
     animation-fill-mode: both;
@@ -377,28 +377,28 @@ body {
 .tabla-lotes {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .tabla-lotes th {
     background: var(--slate-50);
     color: var(--slate-500);
-    padding: 14px 16px;
+    padding: 0.875rem 1rem;
     text-align: left;
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-weight: 600;
-    font-size: 11px;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     border-bottom: 1px solid var(--slate-200);
 }
 
 .tabla-lotes td {
-    padding: 14px 16px;
+    padding: 0.875rem 1rem;
     border-bottom: 1px solid var(--slate-100);
     vertical-align: middle;
     color: var(--slate-700);
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .tabla-lotes td strong {
@@ -406,9 +406,9 @@ body {
     font-weight: 600;
     color: var(--slate-900);
     background: var(--slate-100);
-    padding: 2px 8px;
+    padding: 0.125rem 0.5rem;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .tabla-lotes tbody tr {
@@ -429,9 +429,9 @@ body {
 
 /* --- Badges de Estado (Fase 5) --- */
 .estado-badge {
-    padding: 4px 12px;
+    padding: 0.25rem 0.75rem;
     border-radius: 999px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.03em;
@@ -456,9 +456,9 @@ body {
 
 /* --- Badges de Calidad --- */
 .calidad-badge {
-    padding: 3px 10px;
+    padding: 0.1875rem 0.625rem;
     border-radius: 999px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     font-weight: 600;
     text-transform: capitalize;
 }
@@ -485,9 +485,9 @@ body {
 
 /* --- Badges de Plagas --- */
 .plagas-badge {
-    padding: 3px 8px;
+    padding: 0.1875rem 0.5rem;
     border-radius: 999px;
-    font-size: 10px;
+    font-size: 0.625rem;
     font-weight: 600;
     text-transform: capitalize;
 }
@@ -515,9 +515,9 @@ body {
 /* --- Días Almacenado (Fase 5) --- */
 .dias-almacenado {
     font-weight: 600;
-    padding: 3px 10px;
+    padding: 0.1875rem 0.625rem;
     border-radius: 6px;
-    font-size: 12px;
+    font-size: 0.75rem;
     display: inline-block;
 }
 
@@ -539,24 +539,24 @@ body {
 
 /* --- Tabla: Paginación (Fase 7) --- */
 .table-footer {
-    padding: 14px 20px;
+    padding: 0.875rem 1.25rem;
     border-top: 1px solid var(--slate-200);
     background: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--slate-500);
 }
 
 .pagination-controls {
     display: flex;
-    gap: 6px;
+    gap: 0.375rem;
     align-items: center;
 }
 
 .page-btn {
-    padding: 5px 14px;
+    padding: 0.3125rem 0.875rem;
     border-radius: 6px;
     background: var(--white);
     border: 1px solid var(--slate-300);
@@ -565,7 +565,7 @@ body {
     transition: var(--transition);
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .page-btn:hover:not(:disabled) {
@@ -579,9 +579,9 @@ body {
 }
 
 .page-info {
-    font-size: 13px;
+    font-size: 0.8125rem;
     color: var(--slate-500);
-    padding: 0 8px;
+    padding: 0 0.5rem;
 }
 
 .page-info strong {
@@ -628,7 +628,7 @@ body {
 .modal-header {
     background: var(--brand-green);
     color: var(--white);
-    padding: 18px 28px;
+    padding: 1.125rem 1.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -642,7 +642,7 @@ body {
 }
 
 .close {
-    font-size: 24px;
+    font-size: clamp(1.20rem, 2vw, 1.50rem);
     font-weight: bold;
     cursor: pointer;
     opacity: 0.8;
@@ -656,19 +656,19 @@ body {
 }
 
 .modal-body {
-    padding: 28px;
+    padding: 1.75rem;
 }
 
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 18px;
+    gap: 1.125rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.375rem;
 }
 
 .form-group.full-width {
@@ -679,16 +679,16 @@ body {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-weight: 500;
     color: var(--slate-700);
-    font-size: 13px;
+    font-size: 0.8125rem;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-    padding: 10px 12px;
+    padding: 0.625rem 0.75rem;
     border: 1px solid var(--slate-300);
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     transition: var(--transition);
     color: var(--slate-900);
@@ -701,7 +701,7 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
-    padding-right: 32px;
+    padding-right: 2rem;
 }
 
 .form-group input:focus,
@@ -714,14 +714,14 @@ body {
 
 .form-group textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 5rem;
 }
 
 .modal-footer {
-    padding: 16px 28px;
+    padding: 1rem 1.75rem;
     border-top: 1px solid var(--slate-200);
     display: flex;
-    gap: 12px;
+    gap: 0.75rem;
     justify-content: flex-end;
     background: var(--slate-50);
     border-radius: 0 0 var(--radius-card) var(--radius-card);
@@ -730,7 +730,7 @@ body {
 /* --- Mensaje vacío --- */
 .mensaje-vacio {
     text-align: center;
-    padding: 60px 20px;
+    padding: 3.75rem 1.25rem;
     background: var(--white);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-sm);
@@ -740,20 +740,20 @@ body {
 .mensaje-vacio i {
     font-size: 3.5rem;
     color: var(--slate-300);
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
 }
 
 .mensaje-vacio h3 {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 1.3rem;
     color: var(--slate-900);
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     font-weight: 600;
 }
 
 .mensaje-vacio p {
     color: var(--slate-500);
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 /* --- Responsive --- */
@@ -765,13 +765,13 @@ body {
 
 @media (max-width: 768px) {
     .container {
-        padding: 16px;
+        padding: 1rem;
     }
 
     .header {
         flex-direction: column;
         text-align: center;
-        padding: 16px 0;
+        padding: 1rem 0;
     }
 
     .header h1 {
@@ -792,7 +792,7 @@ body {
     }
 
     .stat-card {
-        padding: 16px;
+        padding: 1rem;
     }
 
     .tabla-container {
@@ -800,13 +800,13 @@ body {
     }
 
     .tabla-lotes {
-        min-width: 900px;
+        min-width: 56.25rem;
     }
 
     .tabla-lotes th,
     .tabla-lotes td {
-        padding: 10px 10px;
-        font-size: 12px;
+        padding: 0.625rem 0.625rem;
+        font-size: 0.75rem;
     }
 
     .modal-content {
@@ -829,7 +829,7 @@ body {
 
     .table-footer {
         flex-direction: column;
-        gap: 10px;
+        gap: 0.625rem;
         text-align: center;
     }
 }
@@ -842,8 +842,8 @@ body {
 
 @media (max-width: 480px) {
     .btn {
-        padding: 8px 14px;
-        font-size: 12px;
+        padding: 0.5rem 0.875rem;
+        font-size: 0.75rem;
     }
 
     .header-actions {
@@ -853,8 +853,8 @@ body {
 
     .tabla-lotes th,
     .tabla-lotes td {
-        padding: 8px 6px;
-        font-size: 11px;
+        padding: 0.5rem 0.375rem;
+        font-size: 0.6875rem;
     }
 }
 
@@ -866,14 +866,14 @@ body {
 }
 
 .swal-wide {
-    width: 600px !important;
+    width: 37.5rem !important;
     max-width: 90vw !important;
 }
 
 .swal-btn-custom {
     border-radius: 8px !important;
     font-weight: 500 !important;
-    padding: 10px 20px !important;
+    padding: 0.625rem 1.25rem !important;
     font-size: 14px !important;
     transition: var(--transition) !important;
 }
