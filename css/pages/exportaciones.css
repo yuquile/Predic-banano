@@ -1,4 +1,19 @@
 
+/* FASE 2: Contención Global y Textos Largos */
+html {
+  overflow-x: hidden;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Selectores específicos para textos dinámicos o largos */
+.export-details, .user-name, .card-title, .product-description, h1, h2, h3, h4, h5, h6, p, a, span, li, th, td {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+
 /* Contención estricta para iconos e imágenes (Fase 1) */
 .icon-fixed {
   flex-shrink: 0 !important;
