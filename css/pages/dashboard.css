@@ -97,11 +97,9 @@ h1, h2, h3, h4, .card-title {
   border: 1px solid rgba(239, 68, 68, 0.2);
 }
 
-/* Permitir wrap seguro global en textos largos */
-h1, h2, h3, h4, h5, h6, p, div, span, a, li {
+/* Permitir wrap seguro global en textos largos sin romper flex layouts */
+h1, h2, h3, h4, h5, h6, p, a, li {
   overflow-wrap: break-word;
-  word-break: break-word;
-  min-width: 0;
 }
 
 /* ===== EXPORTACIONES RECIENTES (JS) ===== */
