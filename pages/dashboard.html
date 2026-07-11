@@ -349,7 +349,7 @@
               </div>
               <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Distribución actual</div>
               
-              <div id="estadosChart" style="height: 220px; width: 100%;"></div>
+              <div id="estadosChart" style="height: 220px; width: 100%; overflow: hidden; position: relative;"></div>
             </div>
 
             <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
@@ -358,7 +358,7 @@
               </div>
               <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em;">Cajas exportadas</div>
               
-              <div id="destinosChart" style="height: 220px; width: 100%;"></div>
+              <div id="destinosChart" style="height: 220px; width: 100%; overflow: hidden; position: relative;"></div>
             </div>
           </div>
         </section>
@@ -529,8 +529,13 @@
         showRecentExports(orders);
       }
 
+      let statesChartInstance = null;
+      let destinationsChartInstance = null;
+
       function createStatesChart(stats) {
-        const chart = echarts.init(document.getElementById('estadosChart'));
+        if (!statesChartInstance) {
+          statesChartInstance = echarts.init(document.getElementById('estadosChart'));
+        }
         const total = stats.pendiente + stats.proceso + stats.enviado + stats.entregado || 1;
         
         const data = [
@@ -541,71 +546,80 @@
         ];
 
         const option = {
-          tooltip: { 
-            trigger: 'item', 
-            formatter: '{b}: {c} ({d}%)',
-            backgroundColor: '#ffffff',
-            borderWidth: 0,
-            textStyle: { color: '#0f172a', fontFamily: 'Outfit' },
-            extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-radius: 4px;'
-          },
-          legend: {
-            orient: 'vertical',
-            left: '0%',
-            top: 'middle',
-            itemWidth: 14,
-            itemHeight: 14,
-            icon: 'roundRect',
-            itemGap: 16,
-            formatter: function (name) {
-              const item = data.find(d => d.name === name);
-              const percent = (total === 1 && item.value === 0) ? 0 : Math.round((item.value / total) * 100);
-              return `{name|${name}}{percent|${percent}%}`;
+          baseOption: {
+            tooltip: { 
+              trigger: 'item', 
+              formatter: '{b}: {c} ({d}%)',
+              backgroundColor: '#ffffff',
+              borderWidth: 0,
+              textStyle: { color: '#0f172a', fontFamily: 'Outfit' },
+              extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-radius: 4px;'
             },
-            textStyle: {
-              rich: {
-                name: {
-                  color: '#0f172a',
-                  fontFamily: 'Outfit',
-                  fontSize: 14,
-                  fontWeight: 500,
-                  width: 90
-                },
-                percent: {
-                  color: '#0f172a',
-                  fontFamily: 'Outfit',
-                  fontSize: 14,
-                  fontWeight: 400,
-                  align: 'right'
+            legend: {
+              orient: 'vertical',
+              left: '0%',
+              top: 'middle',
+              itemWidth: 14,
+              itemHeight: 14,
+              icon: 'roundRect',
+              itemGap: 16,
+              formatter: function (name) {
+                const item = data.find(d => d.name === name);
+                const percent = (total === 1 && item.value === 0) ? 0 : Math.round((item.value / total) * 100);
+                return `{name|${name}}{percent|${percent}%}`;
+              },
+              textStyle: {
+                rich: {
+                  name: { color: '#0f172a', fontFamily: 'Outfit', fontSize: 14, fontWeight: 500, width: 90 },
+                  percent: { color: '#0f172a', fontFamily: 'Outfit', fontSize: 14, fontWeight: 400, align: 'right' }
                 }
               }
-            }
-          },
-          series: [{
-            name: 'Estados',
-            type: 'pie',
-            radius: ['0%', '80%'],
-            center: ['68%', '50%'],
-            itemStyle: {
-              shadowBlur: 20,
-              shadowColor: 'rgba(0, 0, 0, 0.15)',
-              shadowOffsetX: 5,
-              shadowOffsetY: 10,
-              borderColor: '#ffffff',
-              borderWidth: 1
             },
-            label: { show: false },
-            data: data
-          }]
+            series: [{
+              name: 'Estados',
+              type: 'pie',
+              radius: ['0%', '75%'],
+              center: ['68%', '50%'],
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(0, 0, 0, 0.15)',
+                shadowOffsetX: 5,
+                shadowOffsetY: 10,
+                borderColor: '#ffffff',
+                borderWidth: 1
+              },
+              label: { show: false },
+              data: data
+            }]
+          },
+          media: [
+            {
+              query: { maxWidth: 400 },
+              option: {
+                legend: { show: false },
+                series: [{ center: ['50%', '50%'], radius: ['0%', '85%'] }]
+              }
+            },
+            {
+              query: { minWidth: 401 },
+              option: {
+                legend: { show: true },
+                series: [{ center: ['68%', '50%'], radius: ['0%', '75%'] }]
+              }
+            }
+          ]
         };
-        chart.setOption(option);
+        statesChartInstance.setOption(option);
       }
 
       function createDestinationsChart(orders) {
+        if (!destinationsChartInstance) {
+          destinationsChartInstance = echarts.init(document.getElementById('destinosChart'));
+        }
         const destinations = {};
         orders.forEach(order => { destinations[order.paisDestino] = (destinations[order.paisDestino] || 0) + 1; });
         const sortedDestinations = Object.entries(destinations).sort(([,a], [,b]) => b - a).slice(0, 6);
-        const chart = echarts.init(document.getElementById('destinosChart'));
+        
         const option = {
           tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
           xAxis: {
@@ -620,7 +634,7 @@
             itemStyle: { color: '#164e3b' }
           }]
         };
-        chart.setOption(option);
+        destinationsChartInstance.setOption(option);
       }
 
       function showRecentExports(orders) {
@@ -651,6 +665,19 @@
 
       updateExportMetrics();
       setInterval(updateExportMetrics, 30000);
+
+      // Add ResizeObserver for responsive charts
+      const resizeObserver = new ResizeObserver(() => {
+        if (statesChartInstance) statesChartInstance.resize();
+        if (destinationsChartInstance) destinationsChartInstance.resize();
+      });
+      resizeObserver.observe(document.getElementById('estadosChart'));
+      resizeObserver.observe(document.getElementById('destinosChart'));
+      
+      window.addEventListener('resize', () => {
+        if (statesChartInstance) statesChartInstance.resize();
+        if (destinationsChartInstance) destinationsChartInstance.resize();
+      });
     });
   </script>
 </body>
