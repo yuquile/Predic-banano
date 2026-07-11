@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control de Plagas y Calidad Pre-Exportación</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.css">
@@ -15,11 +18,20 @@
     </div>
 
     <div class="header">
-        <a href="./dashboard.html" class="back-to-dashboard" onclick="goToDashboard()">
-            <i class="fas fa-arrow-left"></i> Regresar al Dashboard
-        </a>
-        <h1><i class="fas fa-bug"></i> Control de Plagas y Calidad Pre-Exportación</h1>
-        <p>Sistema de inspección y control de calidad para productos de exportación</p>
+        <div class="header-container">
+            <div class="header-main">
+                <div class="header-icon-box">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="header-titles">
+                    <h1>Control de Plagas y Calidad Pre-Exportación</h1>
+                    <p>Sistema de inspección y control de calidad para productos de exportación</p>
+                </div>
+            </div>
+            <a href="#" class="back-to-dashboard" onclick="goToDashboard(event)">
+                <i class="fas fa-arrow-left"></i> Regresar al Dashboard
+            </a>
+        </div>
     </div>
 
     <div class="container">
@@ -58,7 +70,10 @@
         <div class="main-grid">
             <!-- Formulario Principal -->
             <div class="form-section">
-                <h2><i class="fas fa-clipboard-check"></i> Registro de Inspección</h2>
+                <div class="panel-header">
+                    <div class="panel-icon"><i class="fas fa-clipboard"></i></div>
+                    <h2>Registro de Inspección</h2>
+                </div>
                 
                 <form id="inspectionForm">
                     <div class="quality-grid">
@@ -166,7 +181,10 @@
 
             <!-- Sidebar -->
             <div class="sidebar">
-                <h3><i class="fas fa-history"></i> Inspecciones Recientes</h3>
+                <div class="panel-header">
+                    <div class="panel-icon"><i class="fas fa-history"></i></div>
+                    <h3>Inspecciones Recientes</h3>
+                </div>
                 <ul class="recent-inspections" id="recentInspections">
                     <div class="empty-state">
                         <i class="fas fa-clipboard-list"></i>
@@ -179,7 +197,10 @@
 
         <!-- Historial -->
         <div class="historial-section">
-            <h2><i class="fas fa-chart-line"></i> Historial de Plagas y Tratamientos</h2>
+            <div class="panel-header">
+                <div class="panel-icon"><i class="fas fa-chart-line"></i></div>
+                <h2>Historial de Plagas y Tratamientos</h2>
+            </div>
             <table class="historial-table">
                 <thead>
                     <tr>

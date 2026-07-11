@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Gestión de Inventario y Postcosecha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/pages/inventario.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -123,6 +126,14 @@
                     <!-- Los lotes se cargarán dinámicamente -->
                 </tbody>
             </table>
+        </div>
+        <div class="table-footer">
+            <span id="paginacionInfo">Mostrando 0 resultados</span>
+            <div class="pagination-controls">
+                <button id="btnPagAnterior" class="page-btn" disabled>Anterior</button>
+                <span id="paginaActual" class="page-info"></span>
+                <button id="btnPagSiguiente" class="page-btn">Siguiente</button>
+            </div>
         </div>
 
         <!-- Mensaje cuando no hay datos -->
@@ -256,4 +267,80 @@
     <script src="../js/pages/inventario.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.32/sweetalert2.all.min.js"></script>
 
-    <style>
+    <!-- Paginación (Fase 7): Script separado, NO modifica inventario.js -->
+    <script>
+    (function() {
+        'use strict';
+        const ITEMS_PER_PAGE = 10;
+        let currentPage = 1;
+
+        const tbody = document.getElementById('tablaLotes');
+        const btnAnterior = document.getElementById('btnPagAnterior');
+        const btnSiguiente = document.getElementById('btnPagSiguiente');
+        const paginaActual = document.getElementById('paginaActual');
+        const paginacionInfo = document.getElementById('paginacionInfo');
+
+        if (!tbody || !btnAnterior || !btnSiguiente) return;
+
+        function getVisibleRows() {
+            return Array.from(tbody.querySelectorAll('tr'));
+        }
+
+        function applyPagination() {
+            const rows = getVisibleRows();
+            const totalRows = rows.length;
+            const totalPages = Math.max(1, Math.ceil(totalRows / ITEMS_PER_PAGE));
+
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
+
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+
+            rows.forEach(function(row, i) {
+                row.style.display = (i >= start && i < end) ? '' : 'none';
+            });
+
+            // Update controls
+            btnAnterior.disabled = (currentPage <= 1);
+            btnSiguiente.disabled = (currentPage >= totalPages);
+
+            if (totalRows > 0) {
+                var showStart = start + 1;
+                var showEnd = Math.min(end, totalRows);
+                paginacionInfo.innerHTML = 'Mostrando <strong>' + showStart + '</strong> a <strong>' + showEnd + '</strong> de <strong>' + totalRows + '</strong> resultados';
+                paginaActual.innerHTML = 'Página <strong>' + currentPage + '</strong> de <strong>' + totalPages + '</strong>';
+            } else {
+                paginacionInfo.textContent = 'Sin resultados';
+                paginaActual.textContent = '';
+            }
+        }
+
+        btnAnterior.addEventListener('click', function() {
+            if (currentPage > 1) {
+                currentPage--;
+                applyPagination();
+            }
+        });
+
+        btnSiguiente.addEventListener('click', function() {
+            currentPage++;
+            applyPagination();
+        });
+
+        // Plan B: MutationObserver — detects when inventario.js re-renders tbody
+        var observer = new MutationObserver(function() {
+            currentPage = 1;
+            applyPagination();
+        });
+
+        observer.observe(tbody, { childList: true });
+        console.warn('[Paginación] MutationObserver activo sobre #tablaLotes (Plan B)');
+
+        // Initial apply after DOM load
+        setTimeout(function() { applyPagination(); }, 500);
+    })();
+    </script>
+
+</body>
+</html>

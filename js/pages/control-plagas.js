@@ -41,10 +41,12 @@
         }
 
         // Función para ir al dashboard
-        function goToDashboard() {
+        function goToDashboard(event) {
+            if (event) event.preventDefault();
+            
             Swal.fire({
                 title: '¿Regresar al Dashboard?',
-                text: 'Los datos no guardados se perderán',
+                text: 'Si tienes un formulario a medio llenar, esos datos se perderán',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#2c5530',
@@ -59,15 +61,9 @@
                 if (result.isConfirmed) {
                     showLoading();
                     setTimeout(() => {
-                        hideLoading();
-                        Swal.fire({
-                            title: '¡Redirigiendo!',
-                            text: 'Regresando al dashboard principal...',
-                            icon: 'success',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-                    }, 1000);
+                        window.isNavigatingAway = true; // Permite salir sin lanzar alerta del navegador
+                        window.location.href = './dashboard.html';
+                    }, 500);
                 }
             });
         }
@@ -716,11 +712,14 @@
 
         // Confirmar antes de cerrar si hay datos sin guardar
         window.addEventListener('beforeunload', function(e) {
+            if (window.isNavigatingAway) return; // Si estamos saliendo por el botón de regresar, no preguntar de nuevo
+
             const formData = new FormData(document.getElementById('inspectionForm'));
             let hasData = false;
             
             for (let [key, value] of formData.entries()) {
-                if (value && value.trim() !== '') {
+                // Ignorar la fecha de inspección porque se llena sola al cargar la página
+                if (key !== 'inspectionDate' && value && value.trim() !== '') {
                     hasData = true;
                     break;
                 }

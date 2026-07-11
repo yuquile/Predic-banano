@@ -4,67 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendario Agrícola</title>
-    <link rel="stylesheet" href="../css/pages/calendario.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.1/sweetalert2.min.css">
+    <link rel="stylesheet" href="../css/pages/calendario.css?v=2.0">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🌱 Calendario Agrícola</h1>
-            <p>Control completo de actividades de cultivo por lotes</p>
+    <div class="header">
+        <div class="header-container">
+            <div class="header-main">
+                <div class="header-icon-box">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="header-titles">
+                    <h1>Calendario Agrícola</h1>
+                    <p>Control completo de actividades de cultivo por lotes</p>
+                </div>
+            </div>
+            <a href="./dashboard.html" class="back-to-dashboard">
+                <i class="fas fa-arrow-left"></i> Regresar al Dashboard
+            </a>
         </div>
+    </div>
 
-        <div class="controls">
+    <div class="controls-bar">
+        <div class="controls-container">
             <div class="view-controls">
-                <button class="btn btn-primary active" id="monthView">Vista Mensual</button>
-                <button class="btn btn-secondary" id="weekView">Vista Semanal</button>
+                <button class="view-btn active" id="monthView">Vista Mensual</button>
+                <button class="view-btn" id="weekView">Vista Semanal</button>
             </div>
             <div class="nav-controls">
-                <button class="nav-btn" id="prevPeriod">‹ Anterior</button>
+                <button class="nav-btn" id="prevPeriod"><i class="fas fa-chevron-left"></i></button>
                 <div class="current-date" id="currentDate"></div>
-                <button class="nav-btn" id="nextPeriod">Siguiente ›</button>
+                <button class="nav-btn" id="nextPeriod"><i class="fas fa-chevron-right"></i></button>
             </div>
+            <div class="spacer"></div>
         </div>
+    </div>
 
-        <div class="main-content">
+        <div class="main-content container-main">
             <div class="sidebar">
-                <div class="add-event-form">
-                    <h3>📝 Agregar Actividad</h3>
-                    <form id="eventForm">
-                        <div class="form-group">
-                            <label>Tipo de Actividad</label>
-                            <select id="eventType" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="siembra">🌱 Siembra</option>
-                                <option value="poda">✂️ Poda</option>
-                                <option value="fertilizacion">🌿 Fertilización</option>
-                                <option value="riego">💧 Riego</option>
-                                <option value="cosecha">🌾 Cosecha</option>
+                <div class="add-event-form panel-card">
+                    <div class="panel-header">
+                        <div class="panel-icon"><i class="fas fa-pen"></i></div>
+                        <h3>Agregar Actividad</h3>
+                    </div>
+                    <form id="eventForm" class="panel-body">
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="eventType" required>
+                                <option value="" disabled selected></option>
+                                <option value="siembra">Siembra</option>
+                                <option value="poda">Poda</option>
+                                <option value="fertilizacion">Fertilización</option>
+                                <option value="riego">Riego</option>
+                                <option value="cosecha">Cosecha</option>
                             </select>
+                            <label for="eventType">Tipo de Actividad</label>
                         </div>
-                        <div class="form-group">
-                            <label>Lote</label>
-                            <input type="text" id="eventLote" placeholder="Ej: Lote A, Sector 1" required>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="eventLote" placeholder="Ej: Lote A, Sector 1" required>
+                            <label for="eventLote">Lote</label>
                         </div>
-                        <div class="form-group">
-                            <label>Fecha</label>
-                            <input type="date" id="eventDate" required>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="eventDate" required>
+                            <label for="eventDate">Fecha</label>
                         </div>
-                        <div class="form-group">
-                            <label>Descripción</label>
-                            <textarea id="eventDescription" rows="3" placeholder="Detalles de la actividad..."></textarea>
+                        <div class="form-floating mb-4">
+                            <textarea class="form-control" id="eventDescription" placeholder="Detalles de la actividad..."></textarea>
+                            <label for="eventDescription">Descripción</label>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Agregar Actividad</button>
+                        <button type="submit" class="btn btn-primary btn-block">Agregar Actividad</button>
                     </form>
                 </div>
 
-                <div class="upcoming-events">
-                    <h3>⏰ Próximas Actividades</h3>
-                    <div id="upcomingList"></div>
+                <div class="upcoming-events panel-card">
+                    <div class="panel-header">
+                        <div class="panel-icon"><i class="fas fa-clock"></i></div>
+                        <h3>Próximas Actividades</h3>
+                    </div>
+                    <div id="upcomingList" class="panel-body"></div>
                 </div>
             </div>
 
             <div class="calendar-container">
-                <div class="calendar month-view active" id="monthCalendar">
+                <div class="calendar month-view active panel-card" id="monthCalendar">
                     <div class="calendar-header">
                         <div class="calendar-day-header">Dom</div>
                         <div class="calendar-day-header">Lun</div>
@@ -77,12 +103,11 @@
                     <div class="calendar-grid" id="calendarGrid"></div>
                 </div>
 
-                <div class="calendar week-view" id="weekCalendar">
+                <div class="calendar week-view panel-card" id="weekCalendar">
                     <div class="week-grid" id="weekGrid"></div>
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="notifications" id="notifications"></div>
 

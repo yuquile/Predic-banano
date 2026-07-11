@@ -3,136 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💵 Gestión de Costos y Rentabilidad</title>
+    <title>Simulador de Rentabilidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="../css/pages/costo.css">
+    <link rel="stylesheet" href="../css/pages/costo.css?v=4.0">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>💵 Gestión de Costos y Rentabilidad</h1>
-            <p>Evalúa la rentabilidad de tu producción y exportación por rutas</p>
-        </div>
-
-        <div class="dashboard">
-            <!-- Registro de Costos -->
+    <div class="max-w-7xl">
+        <header class="page-header">
+            <div>
+                <h1>Simulador de Rentabilidad</h1>
+                <p>Ingrese los datos para analizar costos e ingresos de exportación.</p>
+            </div>
+            <a href="./dashboard.html" class="back-to-dashboard">
+                <i class="fas fa-arrow-left"></i> Volver al Dashboard
+            </a>
+        </header>
+        
+        <div class="dashboard-grid">
+            <!-- Columna 1: Registro de Costos -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">💰</div>
+                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                     <div class="card-title">Registro de Costos</div>
                 </div>
                 <div class="form-group">
-                    <label for="finca">Finca/Campaña:</label>
-                    <input type="text" id="finca" placeholder="Nombre de la finca">
+                    <label for="finca">Finca / Campaña</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="finca" placeholder="Ej. Finca El Paraíso - 2024">
+                        <i class="fas fa-map-marker-alt input-icon"></i>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="manoObra">Mano de Obra ($):</label>
-                    <input type="number" id="manoObra" placeholder="Ej: 2500.00" step="0.01">
+                    <label for="manoObra">Mano de Obra ($)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="manoObra" placeholder="0.00" step="0.01">
+                        <i class="fas fa-dollar-sign input-icon"></i>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="fertilizantes">Fertilizantes ($):</label>
-                    <input type="number" id="fertilizantes" placeholder="Ej: 1800.00" step="0.01">
+                    <label for="fertilizantes">Fertilizantes ($)</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="fertilizantes" placeholder="0.00" step="0.01">
+                        <i class="fas fa-box input-icon"></i>
+                    </div>
                 </div>
             </div>
 
-            <!-- Rutas de Exportación -->
+            <!-- Columna 2: Rutas de Exportación -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">🚢</div>
+                    <div class="card-icon"><i class="fas fa-truck"></i></div>
                     <div class="card-title">Rutas de Exportación</div>
                 </div>
                 <div class="form-group">
-                    <label for="rutaExportacion">Ruta de Exportación:</label>
-                    <select id="rutaExportacion" onchange="actualizarRutaInfo()">
-                        <option value="">Seleccionar ruta</option>
-                        <option value="EEUU" data-precio="7500">Estados Unidos</option>
-                        <option value="Europa" data-precio="8000">Europa</option>
-                        <option value="MedioOriente" data-precio="8000">Medio Oriente</option>
-                    </select>
+                    <label for="rutaExportacion">Ruta de Exportación</label>
+                    <div class="input-wrapper">
+                        <select id="rutaExportacion" onchange="actualizarRutaInfo()">
+                            <option value="">Seleccione una ruta</option>
+                            <option value="EEUU" data-precio="7500">Estados Unidos</option>
+                            <option value="Europa" data-precio="8000">Europa</option>
+                            <option value="MedioOriente" data-precio="8000">Medio Oriente</option>
+                        </select>
+                        <i class="fas fa-map-marker-alt input-icon"></i>
+                    </div>
                 </div>
-                <div id="rutaInfo" class="route-info" style="display: none;">
-                    <h4>Información de la Ruta</h4>
-                    <p id="rutaDestino"></p>
-                    <p id="rutaPrecio"></p>
+                <div id="rutaInfo" class="route-info" style="display: none; font-size: 0.875rem; color: var(--gray-500); margin-top: -0.5rem; margin-bottom: 0.5rem;">
+                    <span id="rutaDestino"></span> - <span id="rutaPrecio"></span>
                 </div>
+                
                 <div class="form-group">
-                    <label for="numContenedores">Número de Contenedores:</label>
-                    <input type="number" id="numContenedores" placeholder="Cantidad de contenedores" min="1" step="1" onchange="calcularCostoTransporte()">
+                    <label for="numContenedores">Número de Contenedores</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="numContenedores" placeholder="0" min="1" step="1" onchange="calcularCostoTransporte()">
+                        <i class="fas fa-box input-icon"></i>
+                    </div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="cantidadCajas">Cantidad de Cajas por Contenedor:</label>
-                    <select id="cantidadCajas" onchange="calcularCostoTransporte()">
-                        <option value="">Seleccionar cantidad</option>
-                        <option value="960">960 cajas</option>
-                        <option value="1080">1,080 cajas</option>
-                        <option value="1134">1,134 cajas</option>
-                        <option value="1200">1,200 cajas</option>
-                        <option value="1500">1,500 cajas</option>
-                    </select>
+                    <label for="cantidadCajas">Cantidad de Cajas por Contenedor</label>
+                    <div class="input-wrapper">
+                        <select id="cantidadCajas" onchange="calcularCostoTransporte()">
+                            <option value="">Seleccione cantidad</option>
+                            <option value="960">960 cajas</option>
+                            <option value="1080">1,080 cajas</option>
+                            <option value="1134">1,134 cajas</option>
+                            <option value="1200">1,200 cajas</option>
+                            <option value="1500">1,500 cajas</option>
+                        </select>
+                        <i class="fas fa-box input-icon"></i>
+                    </div>
                 </div>
-                <div class="container-section">
-                    <h4 style="color: var(--primary-color); margin-bottom: 10px;">📦 Resumen de Contenedores</h4>
-                    <p><strong>Costo por contenedor:</strong> <span id="costoPorContenedor">$0</span></p>
-                    <p><strong>Total contenedores:</strong> <span id="totalContenedores">0</span></p>
-                    <p><strong>Cajas por contenedor:</strong> <span id="cajasPorContenedor">0</span></p>
-                    <p><strong>Total de cajas:</strong> <span id="totalCajas">0</span></p>
-                    <p><strong>Costo total de transporte:</strong> <span id="costoTotalTransporte">$0</span></p>
+
+                <div class="summary-box">
+                    <h3 class="summary-title">Resumen de Contenedores</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <p>Total Cajas</p>
+                            <p id="totalCajas">0</p>
+                        </div>
+                        <div class="summary-item highlight">
+                            <p>Contenedores</p>
+                            <p id="totalContenedores">0</p>
+                        </div>
+                    </div>
+                    <!-- Hidden elements needed by JS -->
+                    <div style="display:none;">
+                        <span id="costoPorContenedor">$0</span>
+                        <span id="cajasPorContenedor">0</span>
+                        <span id="costoTotalTransporte">$0</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Ingresos por Exportación -->
+            <!-- Columna 3: Ingresos por Exportación -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-icon">📈</div>
+                    <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
                     <div class="card-title">Ingresos por Exportación</div>
                 </div>
-                <div style="background: var(--light-background); padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--accent-color);">
-                    <p style="margin: 0; color: var(--text-dark); font-weight: 600;">
-                        💡 Precio por caja: <span style="color: var(--success-color);">$6.50</span>
-                    </p>
+
+                <div class="revenue-box">
+                    <p>Precio por caja asegurado</p>
+                    <p>$6.50 <span>USD</span></p>
                 </div>
-                <div class="form-group">
-                    <label for="totalCajasCalculado">Total de Cajas a Exportar:</label>
-                    <input type="number" id="totalCajasCalculado" placeholder="0" readonly style="background-color: #f5f5f5;">
+
+                <div class="revenue-stat">
+                    <div style="width: 100%;">
+                        <p class="revenue-stat-label">Total de Cajas a Exportar</p>
+                        <div class="revenue-stat-val">
+                            <input type="text" id="totalCajasCalculado" class="input-as-text" value="0" readonly>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="ingresosTotales">Ingresos Totales ($):</label>
-                    <input type="number" id="ingresosTotales" placeholder="0.00" readonly style="background-color: #f5f5f5;">
+
+                <div class="revenue-stat">
+                    <div style="width: 100%;">
+                        <p class="revenue-stat-label">Ingresos Totales Estimados</p>
+                        <div class="revenue-stat-val large" style="display: flex; align-items: center;">
+                            $<input type="text" id="ingresosTotales" class="input-as-text" value="0.00" readonly>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-primary" onclick="calcularRentabilidad()">
-                    Calcular Rentabilidad
+
+                <button class="btn-main" onclick="calcularRentabilidad()">
+                    <i class="fas fa-calculator"></i>
+                    CALCULAR RENTABILIDAD
                 </button>
             </div>
+        </div>
 
-            <!-- Acciones Rápidas -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-title">Acciones Rápidas</div>
+        <!-- Acciones Rápidas -->
+        <div class="actions-container">
+            <div class="card actions-card">
+                <h3 class="summary-title" style="margin-bottom: 1.25rem;">Acciones Rápidas</h3>
+                <div class="actions-grid">
+                    <button class="btn-action" onclick="guardarDatos()">
+                        <i class="fas fa-save"></i> GUARDAR REGISTRO
+                    </button>
+                    <button class="btn-action" onclick="mostrarComparacion()">
+                        <i class="fas fa-chart-bar"></i> VER COMPARACIÓN
+                    </button>
+                    <button class="btn-action" onclick="limpiarFormulario()">
+                        <i class="fas fa-eraser"></i> LIMPIAR FORMULARIO
+                    </button>
+                    <button class="btn-action danger" onclick="eliminarTodosLosDatos()">
+                        <i class="fas fa-trash-alt"></i> ELIMINAR TODOS LOS DATOS
+                    </button>
                 </div>
-                <button class="btn btn-success" onclick="guardarDatos()" style="width: 100%; margin-bottom: 10px;">
-                    Guardar Registro
-                </button>
-                <button class="btn btn-info" onclick="mostrarComparacion()" style="width: 100%; margin-bottom: 10px;">
-                    Ver Comparación
-                </button>
-                <button class="btn btn-primary" onclick="limpiarFormulario()" style="width: 100%; margin-bottom: 10px;">
-                    Limpiar Formulario
-                </button>
-                <button class="btn btn-danger" onclick="eliminarTodosLosDatos()" style="width: 100%;">
-                    Eliminar Todos los Datos
-                </button>
             </div>
         </div>
 
         <!-- Sección de Resultados -->
         <div class="results-section" id="resultsSection" style="display: none;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <h2 style="color: var(--primary-color); margin: 0;">
-                    📊 Resultados del Análisis
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; color: var(--gray-900);">
+                    <i class="fas fa-chart-pie" style="color: var(--primary-600);"></i> Resultados del Análisis
                 </h2>
-                <button class="btn btn-info" onclick="volverAlDashboard()">
-                    🏠 Volver al Dashboard
+                <button class="btn-action" style="min-width: auto;" onclick="volverAlDashboard()">
+                    <i class="fas fa-home"></i> Volver
                 </button>
             </div>
             
@@ -151,46 +203,47 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 20px;">
-                <div id="gananciaText" style="font-size: 1.5em; font-weight: bold;"></div>
-                <div id="costoUnitario" style="font-size: 1.2em; margin-top: 10px; color: var(--text-light);"></div>
-                <div id="desgloseCostos" style="font-size: 1.1em; margin-top: 15px; color: var(--text-light);"></div>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <div id="gananciaText" style="font-size: 1.5em; font-weight: bold; color: var(--gray-900);"></div>
+                <div id="costoUnitario" style="font-size: 1.125em; margin-top: 0.75rem; color: var(--gray-500);"></div>
+                <div id="desgloseCostos" style="font-size: 1em; margin-top: 1rem; color: var(--gray-500);"></div>
             </div>
         </div>
 
         <!-- Tabla de Comparación -->
         <div class="results-section" id="comparisonSection" style="display: none;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-                <h2 style="color: var(--primary-color); margin: 0;">
-                    📈 Comparación entre Fincas/Rutas
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h2 style="font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; color: var(--gray-900);">
+                    <i class="fas fa-table" style="color: var(--primary-600);"></i> Comparación Histórica
                 </h2>
-                <button class="btn btn-info" onclick="volverAlDashboard()">
-                    🏠 Volver al Dashboard
+                <button class="btn-action" style="min-width: auto;" onclick="volverAlDashboard()">
+                    <i class="fas fa-home"></i> Volver
                 </button>
             </div>
             
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Finca/Campaña</th>
-                        <th>Ruta Exportación</th>
-                        <th>Contenedores</th>
-                        <th>Cajas por Contenedor</th>
-                        <th>Total Cajas</th>
-                        <th>Costos Totales</th>
-                        <th>Ingresos</th>
-                        <th>Ganancia</th>
-                        <th>Rentabilidad</th>
-                        <th>Fecha</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="comparisonTableBody">
-                </tbody>
-            </table>
+            <div style="overflow-x: auto;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Finca/Campaña</th>
+                            <th>Ruta</th>
+                            <th>Contenedores</th>
+                            <th>Cajas/Cont.</th>
+                            <th>Total Cajas</th>
+                            <th>Costos</th>
+                            <th>Ingresos</th>
+                            <th>Ganancia</th>
+                            <th>Rentabilidad</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comparisonTableBody">
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
     <script src="../js/pages/costo.js"></script>
 </body>
 </html>
