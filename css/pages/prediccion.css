@@ -1,3 +1,13 @@
+
+/* Contención estricta para iconos e imágenes (Fase 1) */
+.icon-fixed {
+  flex-shrink: 0 !important;
+}
+.img-fluid {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
 /* css/pages/prediccion.css */
 :root {
   --green-50: #f0fdf4;

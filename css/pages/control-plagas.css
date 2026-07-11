@@ -1,3 +1,13 @@
+
+/* Contención estricta para iconos e imágenes (Fase 1) */
+.icon-fixed {
+  flex-shrink: 0 !important;
+}
+.img-fluid {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
 /* ============================================
    CONTROL DE PLAGAS — Modernización Visual
    Fase 4: Reescritura completa del CSS
