@@ -300,7 +300,7 @@ body {
 
 .btn-action {
   flex: 1;
-  min-width: 200px;
+  min-width: 12.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -517,3 +517,4 @@ body {
     gap: 1rem;
   }
 }
+
