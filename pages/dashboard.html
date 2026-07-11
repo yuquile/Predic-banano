@@ -101,12 +101,37 @@
             <span>Buscar pedidos, parcelas...</span>
           </div>
 
-          <button class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
-            <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
-            <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: var(--accent);"></span>
-          </button>
+          <div class="relative">
+            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s;">
+              <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: #ef4444; border: 1.5px solid #fff;"></span>
+            </button>
+            <!-- Dropdown -->
+            <div id="notifDropdown" class="notification-dropdown">
+              <div class="p-3 border-b" style="border-color: var(--border-color);">
+                <h4 style="font-size: 14px; font-weight: 600; color: var(--text-main); margin: 0;">Notificaciones</h4>
+              </div>
+              <div class="notification-item">
+                <div class="w-2 h-2 mt-1.5 rounded-full bg-red-500" style="background-color: #ef4444; flex-shrink: 0;"></div>
+                <div>
+                  <p style="font-size: 13px; font-weight: 500; color: var(--text-main); margin: 0 0 4px 0;">Alerta de Clima</p>
+                  <p style="font-size: 12px; color: var(--text-muted); margin: 0;">Posible exceso de humedad en el sector 4.</p>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="w-2 h-2 mt-1.5 rounded-full" style="background-color: var(--accent); flex-shrink: 0;"></div>
+                <div>
+                  <p style="font-size: 13px; font-weight: 500; color: var(--text-main); margin: 0 0 4px 0;">Exportación Completada</p>
+                  <p style="font-size: 12px; color: var(--text-muted); margin: 0;">El lote #842 llegó a destino.</p>
+                </div>
+              </div>
+              <div class="p-2 text-center">
+                <a href="#" style="font-size: 12px; color: var(--primary); font-weight: 500; text-decoration: none;">Ver todas</a>
+              </div>
+            </div>
+          </div>
 
-          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.2s;">
             <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: var(--text-main);">
               <span style="font-size: 12px; color: #ffffff; font-weight: 600;">AJ</span>
             </div>
@@ -177,7 +202,7 @@
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             
             <!-- Weather -->
-            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
+            <div class="card p-5" style="font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-4">
                 <div>
                   <div id="locationName" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">
@@ -234,7 +259,7 @@
             </div>
 
             <!-- Harvest Prediction -->
-            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
+            <div class="card p-5" style="font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-4">
                 <div>
                   <div style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); font-weight: 500;">
@@ -285,7 +310,7 @@
 
         <!-- Action Grid -->
         <section>
-          <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
+          <div class="card p-5" style="font-family: 'Inter', sans-serif;">
             <div class="flex items-center justify-between mb-5">
               <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--text-main);">Acciones Rápidas</h2>
             </div>
@@ -343,7 +368,7 @@
           </div>
           
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
+            <div class="card p-5" style="font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-1">
                 <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 16px; font-weight: 400; color: var(--text-main);">Estados de Pedidos</h3>
               </div>
@@ -352,7 +377,7 @@
               <div id="estadosChart" style="height: 220px; width: 100%; overflow: hidden; position: relative;"></div>
             </div>
 
-            <div class="p-5 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); font-family: 'Inter', sans-serif;">
+            <div class="card p-5" style="font-family: 'Inter', sans-serif;">
               <div class="flex items-center justify-between mb-1">
                 <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 16px; font-weight: 400; color: var(--text-main);">Destinos Principales</h3>
               </div>
