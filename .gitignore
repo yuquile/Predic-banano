@@ -67,3 +67,8 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Custom exclusions
+diselño_visual/
+diseño_visual/
+qa-scripts/

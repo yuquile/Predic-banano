@@ -33,9 +33,12 @@
       </div>
 
       <!-- User -->
-      <div class="px-6 py-4 border-b" style="border-color: rgba(255,255,255,0.08);">
-        <div style="color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">Sesión activa</div>
-        <div id="userNameDisplay" style="color: #ffffff; font-size: 15px; font-weight: 500;">Cargando...</div>
+      <div class="px-6 py-4 border-b flex items-center gap-3" style="border-color: rgba(255,255,255,0.08);">
+        <img src="../assets/img/usuario.png" alt="Perfil" id="userProfileImg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Camila+Almdia&background=random'" />
+        <div>
+          <div id="userNameDisplay" style="color: #ffffff; font-size: 15px; font-weight: 600;">camila almdia</div>
+          <div style="color: rgba(255,255,255,0.7); font-size: 12px;">Administrador</div>
+        </div>
       </div>
 
       <!-- Navigation -->
@@ -131,13 +134,7 @@
             </div>
           </div>
 
-          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.2s;">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: var(--text-main);">
-              <span style="font-size: 12px; color: #ffffff; font-weight: 600;">AJ</span>
-            </div>
-            <span style="font-size: 14px; color: var(--text-main); font-weight: 500;">Abel José</span>
-            <i data-lucide="chevron-down" class="icon-fixed" color="#B5A08A" style="width: 11px; height: 11px;"></i>
-          </div>
+
         </div>
       </header>
 
@@ -482,6 +479,14 @@
         if (user) {
           const displayName = user.displayName || user.email;
           userNameDisplay.textContent = displayName;
+          
+          const userProfileImg = document.getElementById('userProfileImg');
+          if (userProfileImg && user.photoURL) {
+            userProfileImg.src = user.photoURL;
+            userProfileImg.onerror = function() {
+              this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
+            };
+          }
         } else {
           window.location.href = 'login.html';
         }
