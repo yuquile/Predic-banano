@@ -61,7 +61,7 @@ body {
 
 /* Sidebar */
 .sidebar-dark {
-  width: 16.25rem;
+  width: 320px;
   background-color: var(--primary);
   color: var(--surface);
   display: flex;
