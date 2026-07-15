@@ -48,8 +48,8 @@
     .message-ai {
       align-self: flex-start;
       background-color: #f1f5f9;
-      color: var(--text-main);
-      border: 1px solid var(--border-color);
+      color: var(--text);
+      border: 1px solid var(--border);
       border-bottom-left-radius: 0;
     }
     
@@ -88,7 +88,7 @@
     
     .chat-input-area {
       padding: 1rem;
-      border-top: 1px solid var(--border-color);
+      border-top: 1px solid var(--border);
       background-color: white;
       border-radius: 0 0 0.5rem 0.5rem;
     }
@@ -166,37 +166,37 @@
       <!-- Topbar -->
       <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
         <div class="flex-1" style="min-width: 280px;">
-          <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text-main); letter-spacing: -0.02em; line-height: 1.3;">
+          <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text); letter-spacing: -0.02em; line-height: 1.3;">
             Análisis de Inteligencia Artificial
           </h1>
-          <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
+          <div style="font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
             Llama 3 Local — Análisis de Cultivos
           </div>
         </div>
 
         <div class="flex items-center gap-3 shrink-0 flex-1 justify-start md:justify-end" style="min-width: 320px;">
-          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); font-size: 14px; width: 250px;">
+          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-size: 14px; width: 250px;">
             <i data-lucide="search" class="icon-fixed" stroke-width="1.5" style="width: 13px; height: 13px;"></i>
             <span>Buscar historial de IA...</span>
           </div>
 
           <div class="relative">
-            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s;">
+            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s;">
               <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
             </button>
             <div id="notifDropdown" class="notification-dropdown">
-              <div class="p-3 border-b" style="border-color: var(--border-color);">
-                <h4 style="font-size: 14px; font-weight: 600; color: var(--text-main); margin: 0;">Notificaciones</h4>
+              <div class="p-3 border-b" style="border-color: var(--border);">
+                <h4 style="font-size: 14px; font-weight: 600; color: var(--text); margin: 0;">Notificaciones</h4>
               </div>
               <div class="p-4 text-center text-sm text-gray-500">No hay notificaciones nuevas.</div>
             </div>
           </div>
 
-          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.2s;">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: var(--text-main);">
+          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--surface); border: 1px solid var(--border); transition: all 0.2s;">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: var(--text);">
               <span style="font-size: 12px; color: #ffffff; font-weight: 600;">AJ</span>
             </div>
-            <span style="font-size: 14px; color: var(--text-main); font-weight: 500;">Abel José</span>
+            <span style="font-size: 14px; color: var(--text); font-weight: 500;">Abel José</span>
           </div>
         </div>
       </header>
@@ -206,7 +206,7 @@
         <!-- Header Section -->
         <section class="flex flex-wrap items-center justify-between gap-4">
           <div>
-            <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 18px; color: var(--text-main);">Asistente Agrónomo Local</h2>
+            <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 18px; color: var(--text);">Asistente Agrónomo Local</h2>
             <p class="text-sm text-muted mt-1">Chat interactivo impulsado por Ollama para análisis de plagas, inventario y recomendaciones.</p>
           </div>
           <button id="btnNewChat" class="flex items-center gap-2 px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-light transition-colors text-sm">

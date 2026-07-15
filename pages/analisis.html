@@ -30,8 +30,8 @@
         }
 
         body {
-            background-color: var(--background);
-            color: var(--foreground);
+            background-color: var(--bg);
+            color: var(--text);
             min-height: 100vh;
         }
 
@@ -69,7 +69,7 @@
         .logo-icon {
             width: 48px;
             height: 48px;
-            background-color: var(--forest);
+            background-color: var(--primary);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -81,7 +81,7 @@
         .logo-text h1 {
             font-size: 20px;
             font-weight: 700;
-            color: var(--forest);
+            color: var(--primary);
             letter-spacing: -0.025em;
         }
 
@@ -162,11 +162,11 @@
         .btn-secondary:hover { background-color: #f8fafc; }
 
         .btn-primary {
-            background: linear-gradient(to bottom, var(--forest-light), var(--forest));
+            background: linear-gradient(to bottom, var(--secondary), var(--primary));
             color: white;
             box-shadow: 0 4px 6px -1px rgba(22, 101, 52, 0.2);
         }
-        .btn-primary:hover { background: var(--forest); }
+        .btn-primary:hover { background: var(--primary); }
 
         .main-content {
             max-width: 1600px;
@@ -186,7 +186,7 @@
         @media (min-width: 1024px) { .kpi-grid { grid-template-columns: repeat(4, 1fr); } }
 
         .card {
-            background-color: var(--card);
+            background-color: var(--surface);
             border-radius: 16px;
             padding: 24px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
@@ -209,7 +209,7 @@
         .kpi-value {
             font-size: 36px;
             font-weight: 700;
-            color: var(--forest);
+            color: var(--primary);
             letter-spacing: -0.025em;
             margin-top: 16px;
         }
@@ -240,7 +240,7 @@
         .chart-title {
             font-size: 18px;
             font-weight: 600;
-            color: var(--forest);
+            color: var(--primary);
             margin-bottom: 24px;
         }
 
@@ -259,11 +259,11 @@
             justify-content: space-between;
             align-items: center;
         }
-        .table-title { font-size: 18px; font-weight: 700; color: var(--forest); }
+        .table-title { font-size: 18px; font-weight: 700; color: var(--primary); }
         .table-responsive { overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th {
-            background-color: var(--forest);
+            background-color: var(--primary);
             color: white;
             padding: 16px 24px;
             font-size: 14px;
@@ -293,7 +293,7 @@
             display: none;
             text-align: center;
             padding: 40px;
-            color: var(--forest);
+            color: var(--primary);
             font-size: 1.2rem;
         }
 
@@ -325,14 +325,14 @@
             font-weight: 500;
         }
         .page-btn:hover:not(:disabled) { background: #e2e8f0; }
-        .page-btn.active { background: white; border-color: #cbd5e1; color: var(--foreground); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .page-btn.active { background: white; border-color: #cbd5e1; color: var(--text); box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .page-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .table-action-btn {
             padding: 6px 12px;
             border-radius: 6px;
             font-size: 14px;
             font-weight: 500;
-            color: var(--forest);
+            color: var(--primary);
             background: transparent;
             border: none;
             cursor: pointer;
@@ -340,7 +340,7 @@
         }
         .table-action-btn:hover { background: #dcfce7; }
         .export-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
-        .table-checkbox { accent-color: var(--forest); width: 14px; height: 14px; cursor: pointer; }
+        .table-checkbox { accent-color: var(--primary); width: 14px; height: 14px; cursor: pointer; }
         .sort-icon { font-size: 10px; opacity: 0.5; margin-left: 4px; }
         th { cursor: pointer; }
         th:hover .sort-icon { opacity: 1; }
@@ -984,17 +984,17 @@
                     <td style="text-align: center;"><input type="checkbox" class="table-checkbox"></td>
                     <td style="font-weight: 500;">${item.month}</td>
                     <td style="color: #64748b;">${item.year}</td>
-                    <td style="font-weight: 600; color: var(--forest);">${item.finca.charAt(0).toUpperCase() + item.finca.slice(1)}</td>
+                    <td style="font-weight: 600; color: var(--primary);">${item.finca.charAt(0).toUpperCase() + item.finca.slice(1)}</td>
                     <td><span class="badge">${tipoName}</span></td>
                     <td style="text-align: right; font-weight: 600;">${item.production.toLocaleString()}</td>
                     <td style="text-align: right; color: #64748b;">${item.hectares}</td>
                     <td style="text-align: right; font-weight: 600;">${rendimiento.toLocaleString()}</td>
                     <td style="text-align: right;">
                         <div style="display: flex; align-items: center; justify-content: flex-end; gap: 8px;">
-                            <span style="font-weight: 600; color: ${item.exported > 80 ? 'var(--moss-dark)' : 'var(--terracotta)'};">
+                            <span style="font-weight: 600; color: ${item.exported > 80 ? 'var(--primary)' : 'var(--warning)'};">
                                 ${item.exported}%
                             </span>
-                            ${item.exported > 80 ? '<div class="export-dot" style="background-color: var(--moss-dark);"></div>' : ''}
+                            ${item.exported > 80 ? '<div class="export-dot" style="background-color: var(--primary);"></div>' : ''}
                         </div>
                     </td>
                 `;
