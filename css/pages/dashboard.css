@@ -26,35 +26,25 @@ html {
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Merriweather:wght@400;700&display=swap');
 
-:root {
-  --primary: #164e3b;
-  --primary-light: #1e664d;
-  --accent: #5eead4;
-  --bg: #fdfbf7;
-  --card-bg: #ffffff;
-  --card-secondary: #f1f5f9;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
-}
+
 
 /* Clases de utilidad semánticas (colores y fondos) */
 .bg-primary { background-color: var(--primary); }
-.bg-primary-light { background-color: var(--primary-light); }
+.bg-primary-light { background-color: var(--secondary); }
 .bg-accent { background-color: var(--accent); }
 .bg-base { background-color: var(--bg); }
-.bg-card { background-color: var(--card-bg); }
-.bg-card-secondary { background-color: var(--card-secondary); }
+.bg-card { background-color: var(--surface); }
+.bg-card-secondary { background-color: var(--surface); }
 
 .text-primary { color: var(--primary); }
 .text-accent { color: var(--accent); }
-.text-main { color: var(--text-main); }
-.text-muted { color: var(--text-muted); }
+.text-main { color: var(--text); }
+.text-muted { color: var(--text-soft); }
 .text-white { color: #ffffff; }
 
 .border-primary { border-color: var(--primary); }
 .border-accent { border-color: var(--accent); }
-.border-base { border-color: var(--border-color); }
+.border-base { border-color: var(--border); }
 
 /* Reglas base y reset responsivo */
 *, *::before, *::after {
@@ -64,7 +54,7 @@ html {
 body {
   font-family: 'Outfit', 'Inter', sans-serif;
   background-color: var(--bg);
-  color: var(--text-main);
+  color: var(--text);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -240,8 +230,8 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 
 /* Dropdown y Tarjetas Corporativas */
 .card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -257,7 +247,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   right: 0;
   width: 300px;
   background: #ffffff;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   border-radius: 0.5rem;
   box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
   opacity: 0;
