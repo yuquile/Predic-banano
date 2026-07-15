@@ -74,6 +74,7 @@ body {
   font-size: clamp(1.00rem, 2vw, 1.25rem);
   font-weight: 700;
   color: var(--surface);
+  font-family: var(--font-family-display);
 }
 
 .sidebar-nav {
@@ -199,6 +200,7 @@ body {
   font-weight: 700;
   color: var(--text);
   margin-bottom: 0.25rem;
+  font-family: var(--font-family-display);
 }
 
 .header-titles p {
@@ -226,6 +228,7 @@ body {
   font-weight: 700;
   color: var(--text);
   margin-bottom: 0.5rem;
+  font-family: var(--font-family-display);
 }
 
 .section > p.section-desc {

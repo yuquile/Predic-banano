@@ -9,9 +9,16 @@
    -------------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
+@font-face {
+  font-family: 'Galerian';
+  src: url('../assets/fonts/Galerian.otf') format('opentype');
+  font-display: swap;
+}
+
 :root {
   --font-base: 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-family-display: 'Galerian', -apple-system, sans-serif;
 
   /* AgroExport — Módulo exportaciones usa la base */
   --font-family-primary: var(--font-base);
