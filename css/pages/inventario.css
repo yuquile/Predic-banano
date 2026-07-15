@@ -41,28 +41,6 @@ html {
 
 :root {
     /* --- Nueva paleta de colores (Fase 1) --- */
-    --brand-green: #198754;
-    --brand-green-hover: #157347;
-    --bg-gray: #f8f9fa;
-    --slate-50: #f8fafc;
-    --slate-100: #f1f5f9;
-    --slate-200: #e2e8f0;
-    --slate-300: #cbd5e1;
-    --slate-500: #64748b;
-    --slate-700: #334155;
-    --slate-900: #0f172a;
-    --green-50: #f0fdf4;
-    --green-100: #dcfce7;
-    --green-800: #166534;
-    --amber-50: #fffbeb;
-    --amber-100: #fef3c7;
-    --amber-800: #92400e;
-    --blue-50: #eff6ff;
-    --blue-100: #dbeafe;
-    --blue-800: #1e40af;
-    --red-50: #fef2f2;
-    --red-600: #dc2626;
-    --white: #ffffff;
     --radius-card: 12px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
@@ -78,8 +56,8 @@ html {
 /* --- Fase 3: Layout General --- */
 body {
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-    background-color: var(--bg-gray);
-    color: var(--slate-900);
+    background-color: var(--bg);
+    color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
 }
@@ -92,8 +70,8 @@ body {
 
 /* --- Header (Flat, moderno) --- */
 .header {
-    background: var(--white);
-    color: var(--slate-900);
+    background: var(--surface);
+    color: var(--text);
     padding: 1.25rem 0;
     border-radius: 0;
     margin-bottom: 1.5rem;
@@ -103,7 +81,7 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    border-bottom: 1px solid var(--slate-200);
+    border-bottom: 1px solid var(--border);
 }
 
 .header h1 {
@@ -113,7 +91,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: var(--slate-900);
+    color: var(--text);
     letter-spacing: -0.02em;
 }
 
@@ -123,12 +101,12 @@ body {
     justify-content: center;
     width: 2.5rem;
     height: 2.5rem;
-    background: var(--green-100);
-    color: var(--brand-green);
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--primary);
     border-radius: 10px;
     font-size: 1rem;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--border);
 }
 
 .header-actions {
@@ -155,26 +133,26 @@ body {
 }
 
 .btn-primary {
-    background: var(--brand-green);
-    color: var(--white);
+    background: var(--primary);
+    color: var(--surface);
     box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-    background: var(--brand-green-hover);
+    background: var(--secondary);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
-    background: var(--white);
-    color: var(--slate-700);
-    border: 1px solid var(--slate-300);
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
 }
 
 .btn-secondary:hover {
-    background: var(--slate-50);
-    border-color: var(--slate-500);
+    background: var(--bg);
+    border-color: var(--text-soft);
 }
 
 .btn-small {
@@ -185,46 +163,46 @@ body {
 
 .btn-success {
     background: transparent;
-    color: var(--brand-green);
+    color: var(--primary);
     border: none;
     padding: 0.375rem;
 }
 
 .btn-success:hover {
-    background: var(--green-50);
-    color: var(--green-800);
+    background: color-mix(in srgb, var(--success) 8%, transparent);
+    color: var(--success);
 }
 
 .btn-warning {
     background: transparent;
-    color: var(--amber-800);
+    color: var(--warning);
     border: none;
     padding: 0.375rem;
 }
 
 .btn-warning:hover {
-    background: var(--amber-50);
+    background: color-mix(in srgb, var(--warning) 8%, transparent);
 }
 
 .btn-danger {
     background: transparent;
-    color: var(--red-600);
+    color: var(--error);
     border: none;
     padding: 0.375rem;
 }
 
 .btn-danger:hover {
-    background: var(--red-50);
+    background: color-mix(in srgb, var(--error) 10%, transparent);
 }
 
 /* --- Filtros (Fase 4) --- */
 .filtros-panel {
-    background: var(--white);
+    background: var(--surface);
     padding: 1.25rem;
     border-radius: var(--radius-card);
     margin-bottom: 1.25rem;
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--border);
     animation: fadeInUp 0.3s ease-out;
 }
 
@@ -244,7 +222,7 @@ body {
 .filtro-grupo label {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-weight: 500;
-    color: var(--slate-500);
+    color: var(--text-soft);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -253,13 +231,13 @@ body {
 .filtro-grupo input,
 .filtro-grupo select {
     padding: 0.5625rem 0.75rem;
-    border: 1px solid var(--slate-300);
+    border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 0.875rem;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     transition: var(--transition);
-    background: var(--white);
-    color: var(--slate-900);
+    background: var(--surface);
+    color: var(--text);
     appearance: none;
     -webkit-appearance: none;
 }
@@ -274,12 +252,12 @@ body {
 .filtro-grupo input:focus,
 .filtro-grupo select:focus {
     outline: none;
-    border-color: var(--brand-green);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.1);
 }
 
 .filtro-grupo input::placeholder {
-    color: var(--slate-500);
+    color: var(--text-soft);
     font-size: 0.8125rem;
 }
 
@@ -292,7 +270,7 @@ body {
 }
 
 .stat-card {
-    background: var(--white);
+    background: var(--surface);
     padding: 1.25rem;
     border-radius: 0 var(--radius-card) var(--radius-card) 0;
     box-shadow: var(--shadow-sm);
@@ -300,8 +278,8 @@ body {
     align-items: center;
     gap: 1rem;
     transition: var(--transition);
-    border: 1px solid var(--slate-200);
-    border-left: 4px solid var(--slate-300);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
     animation: fadeInUp 0.3s ease-out;
     animation-fill-mode: both;
     position: relative;
@@ -320,15 +298,15 @@ body {
 }
 
 .stat-card.disponible {
-    border-left-color: var(--brand-green);
+    border-left-color: var(--primary);
 }
 
 .stat-card.reservado {
-    border-left-color: var(--amber-800);
+    border-left-color: var(--warning);
 }
 
 .stat-card.exportado {
-    border-left-color: var(--blue-800);
+    border-left-color: var(--info);
 }
 
 .stat-card i {
@@ -340,37 +318,37 @@ body {
     border-radius: 10px;
     font-size: 1.1rem;
     flex-shrink: 0;
-    background: var(--slate-100);
-    color: var(--slate-700);
+    background: var(--bg);
+    color: var(--text);
 }
 
 .stat-card.disponible i {
-    background: var(--green-100);
-    color: var(--green-800);
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
 }
 
 .stat-card.reservado i {
-    background: var(--amber-100);
-    color: var(--amber-800);
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
 }
 
 .stat-card.exportado i {
-    background: var(--blue-100);
-    color: var(--blue-800);
+    background: color-mix(in srgb, var(--info) 15%, transparent);
+    color: var(--info);
 }
 
 .stat-info h3 {
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--slate-900);
+    color: var(--text);
     margin-bottom: 0.125rem;
     letter-spacing: -0.02em;
 }
 
 .stat-info p {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
-    color: var(--slate-500);
+    color: var(--text-soft);
     font-size: 0.75rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -379,12 +357,12 @@ body {
 
 /* --- Tabla (Fase 5) --- */
 .tabla-container {
-    background: var(--white);
+    background: var(--surface);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
     margin-bottom: 1.25rem;
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--border);
     animation: fadeInUp 0.4s ease-out 0.3s;
     animation-fill-mode: both;
 }
@@ -396,8 +374,8 @@ body {
 }
 
 .tabla-lotes th {
-    background: var(--slate-50);
-    color: var(--slate-500);
+    background: var(--bg);
+    color: var(--text-soft);
     padding: 0.875rem 1rem;
     text-align: left;
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
@@ -405,22 +383,22 @@ body {
     font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-bottom: 1px solid var(--slate-200);
+    border-bottom: 1px solid var(--border);
 }
 
 .tabla-lotes td {
     padding: 0.875rem 1rem;
-    border-bottom: 1px solid var(--slate-100);
+    border-bottom: 1px solid var(--bg);
     vertical-align: middle;
-    color: var(--slate-700);
+    color: var(--text);
     font-size: 0.8125rem;
 }
 
 .tabla-lotes td strong {
     font-family: 'Inter', monospace;
     font-weight: 600;
-    color: var(--slate-900);
-    background: var(--slate-100);
+    color: var(--text);
+    background: var(--bg);
     padding: 0.125rem 0.5rem;
     border-radius: 4px;
     font-size: 0.75rem;
@@ -455,18 +433,18 @@ body {
 }
 
 .estado-disponible {
-    background: var(--green-100);
-    color: var(--green-800);
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
 }
 
 .estado-reservado {
-    background: var(--amber-100);
-    color: var(--amber-800);
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
 }
 
 .estado-exportado {
-    background: var(--blue-100);
-    color: var(--blue-800);
+    background: color-mix(in srgb, var(--info) 15%, transparent);
+    color: var(--info);
 }
 
 /* --- Badges de Calidad --- */
@@ -479,23 +457,23 @@ body {
 }
 
 .calidad-excelente {
-    background: var(--green-100);
-    color: var(--green-800);
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
 }
 
 .calidad-buena {
-    background: var(--blue-100);
-    color: var(--blue-800);
+    background: color-mix(in srgb, var(--info) 15%, transparent);
+    color: var(--info);
 }
 
 .calidad-regular {
-    background: var(--amber-100);
-    color: var(--amber-800);
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
 }
 
 .calidad-rechazada {
-    background: var(--red-50);
-    color: var(--red-600);
+    background: color-mix(in srgb, var(--error) 10%, transparent);
+    color: var(--error);
 }
 
 /* --- Badges de Plagas --- */
@@ -508,23 +486,23 @@ body {
 }
 
 .plagas-ninguna {
-    background: var(--green-100);
-    color: var(--green-800);
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
 }
 
 .plagas-leve {
-    background: var(--amber-50);
-    color: var(--amber-800);
+    background: color-mix(in srgb, var(--warning) 8%, transparent);
+    color: var(--warning);
 }
 
 .plagas-moderada {
-    background: var(--amber-100);
-    color: var(--amber-800);
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
 }
 
 .plagas-severa {
-    background: var(--red-50);
-    color: var(--red-600);
+    background: color-mix(in srgb, var(--error) 10%, transparent);
+    color: var(--error);
 }
 
 /* --- Días Almacenado (Fase 5) --- */
@@ -537,31 +515,31 @@ body {
 }
 
 .dias-fresh {
-    background: var(--green-100);
-    color: var(--green-800);
+    background: color-mix(in srgb, var(--success) 15%, transparent);
+    color: var(--success);
 }
 
 .dias-warning {
-    background: var(--amber-100);
-    color: var(--amber-800);
+    background: color-mix(in srgb, var(--warning) 15%, transparent);
+    color: var(--warning);
 }
 
 .dias-danger {
-    background: var(--red-50);
-    color: var(--red-600);
+    background: color-mix(in srgb, var(--error) 10%, transparent);
+    color: var(--error);
     font-weight: 700;
 }
 
 /* --- Tabla: Paginación (Fase 7) --- */
 .table-footer {
     padding: 0.875rem 1.25rem;
-    border-top: 1px solid var(--slate-200);
-    background: var(--white);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.8125rem;
-    color: var(--slate-500);
+    color: var(--text-soft);
 }
 
 .pagination-controls {
@@ -573,9 +551,9 @@ body {
 .page-btn {
     padding: 0.3125rem 0.875rem;
     border-radius: 6px;
-    background: var(--white);
-    border: 1px solid var(--slate-300);
-    color: var(--slate-700);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
     cursor: pointer;
     transition: var(--transition);
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
@@ -584,8 +562,8 @@ body {
 }
 
 .page-btn:hover:not(:disabled) {
-    background: var(--slate-50);
-    border-color: var(--slate-500);
+    background: var(--bg);
+    border-color: var(--text-soft);
 }
 
 .page-btn:disabled {
@@ -595,12 +573,12 @@ body {
 
 .page-info {
     font-size: 0.8125rem;
-    color: var(--slate-500);
+    color: var(--text-soft);
     padding: 0 0.5rem;
 }
 
 .page-info strong {
-    color: var(--slate-900);
+    color: var(--text);
     font-weight: 600;
 }
 
@@ -618,7 +596,7 @@ body {
 }
 
 .modal-content {
-    background: var(--white);
+    background: var(--surface);
     margin: 3% auto;
     border-radius: var(--radius-card);
     width: 90%;
@@ -641,8 +619,8 @@ body {
 }
 
 .modal-header {
-    background: var(--brand-green);
-    color: var(--white);
+    background: var(--primary);
+    color: var(--surface);
     padding: 1.125rem 1.75rem;
     display: flex;
     justify-content: space-between;
@@ -693,7 +671,7 @@ body {
 .form-group label {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-weight: 500;
-    color: var(--slate-700);
+    color: var(--text);
     font-size: 0.8125rem;
 }
 
@@ -701,13 +679,13 @@ body {
 .form-group select,
 .form-group textarea {
     padding: 0.625rem 0.75rem;
-    border: 1px solid var(--slate-300);
+    border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 0.875rem;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     transition: var(--transition);
-    color: var(--slate-900);
-    background: var(--white);
+    color: var(--text);
+    background: var(--surface);
 }
 
 .form-group select {
@@ -723,7 +701,7 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: var(--brand-green);
+    border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.1);
 }
 
@@ -734,11 +712,11 @@ body {
 
 .modal-footer {
     padding: 1rem 1.75rem;
-    border-top: 1px solid var(--slate-200);
+    border-top: 1px solid var(--border);
     display: flex;
     gap: 0.75rem;
     justify-content: flex-end;
-    background: var(--slate-50);
+    background: var(--bg);
     border-radius: 0 0 var(--radius-card) var(--radius-card);
 }
 
@@ -746,28 +724,28 @@ body {
 .mensaje-vacio {
     text-align: center;
     padding: 3.75rem 1.25rem;
-    background: var(--white);
+    background: var(--surface);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-sm);
-    border: 1px solid var(--slate-200);
+    border: 1px solid var(--border);
 }
 
 .mensaje-vacio i {
     font-size: 3.5rem;
-    color: var(--slate-300);
+    color: var(--border);
     margin-bottom: 1rem;
 }
 
 .mensaje-vacio h3 {
     font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
     font-size: 1.3rem;
-    color: var(--slate-900);
+    color: var(--text);
     margin-bottom: 0.5rem;
     font-weight: 600;
 }
 
 .mensaje-vacio p {
-    color: var(--slate-500);
+    color: var(--text-soft);
     font-size: 0.875rem;
 }
 
@@ -905,26 +883,26 @@ body {
 }
 
 .swal2-popup.swal2-modal {
-    background: var(--white) !important;
-    color: var(--slate-900) !important;
+    background: var(--surface) !important;
+    color: var(--text) !important;
 }
 
 .swal2-title {
-    color: var(--slate-900) !important;
+    color: var(--text) !important;
     font-weight: 600 !important;
 }
 
 .swal2-content {
-    color: var(--slate-500) !important;
+    color: var(--text-soft) !important;
 }
 
 .swal2-confirm {
-    background: var(--brand-green) !important;
+    background: var(--primary) !important;
     border: none !important;
 }
 
 .swal2-confirm:hover {
-    background: var(--brand-green-hover) !important;
+    background: var(--secondary) !important;
 }
 
 .swal2-cancel {
