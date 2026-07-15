@@ -19,6 +19,9 @@
 }
 
 /* Aplicar tipografía globalmente */
+html {
+  font-size: 114% !important; /* Incremento ligero del tamaño base (aprox 18px) */
+}
 body {
   font-family: var(--font-base);
 }
