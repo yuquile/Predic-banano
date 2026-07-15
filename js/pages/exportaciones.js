@@ -168,54 +168,125 @@
         });
         
         return `
-            <div class="order-card">
-                <div class="order-header">
-                    <div class="order-id">${order.id}</div>
-                    <div class="status-badge status-${order.estado}">${order.estado.toUpperCase()}</div>
+            <div class="tracking-card">
+                <!-- Encabezado: ID + Badge de estado -->
+                <div class="card-header">
+                    <div class="export-id">
+                        <span class="export-id-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
+                        </span>
+                        ${order.id}
+                    </div>
+                    <span class="badge-status badge-${order.estado}">
+                        <span class="badge-dot"></span> ${order.estado.toUpperCase()}
+                    </span>
                 </div>
-                <div class="order-details">
-                    <div class="detail-item">
-                        <div class="detail-label">Cliente</div>
-                        <div class="detail-value">${order.cliente}</div>
+
+                <!-- Divisor -->
+                <div class="divider"></div>
+
+                <!-- Grid de 3 columnas -->
+                <div class="info-grid">
+                    <!-- Cliente -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M12 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Cliente</span>
+                            <span class="info-value">${order.cliente}</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Destino</div>
-                        <div class="detail-value">${order.paisDestino}</div>
+
+                    <!-- Variedad -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Variedad</span>
+                            <span class="info-value">${order.variedad}</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Variedad</div>
-                        <div class="detail-value">${order.variedad}</div>
+
+                    <!-- Cantidad -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Cantidad</span>
+                            <span class="info-value">${order.cantidad.toLocaleString()} unidades</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Cantidad</div>
-                        <div class="detail-value">${order.cantidad.toLocaleString()} unidades</div>
+
+                    <!-- Fecha de envío -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Fecha Envío</span>
+                            <span class="info-value">${new Date(order.fechaEnvio).toLocaleDateString()}</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Fecha Envío</div>
-                        <div class="detail-value">${new Date(order.fechaEnvio).toLocaleDateString()}</div>
+
+                    <!-- Destino -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Destino</span>
+                            <span class="info-value">${order.paisDestino}</span>
+                        </div>
                     </div>
-                    <div class="detail-item">
-                        <div class="detail-label">Valor Total</div>
-                        <div class="detail-value">${totalValue}</div>
+
+                    <!-- Valor Total -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Valor Total</span>
+                            <span class="info-value highlight">${totalValue}</span>
+                        </div>
                     </div>
+                </div>
+
+                ${!isRecent || order.tracking ? '<div class="divider"></div>' : ''}
+
+                <!-- Tracking & Actions -->
+                <div class="tracking-footer-row">
                     ${order.tracking ? `
-                    <div class="detail-item">
-                        <div class="detail-label">Tracking</div>
-                        <div class="detail-value">${order.tracking}</div>
+                    <div class="info-item" style="flex: 0 0 auto;">
+                        <div class="info-icon">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </div>
+                        <div class="info-content">
+                            <span class="info-label">Tracking</span>
+                            <span class="tracking-highlight">${order.tracking}</span>
+                        </div>
+                    </div>
+                    ` : '<div></div>'}
+
+                    ${!isRecent ? `
+                    <div class="tracking-actions">
+                        <button class="action-btn" onclick="editOrder('${order.id}')">
+                            <svg class="icon" viewBox="0 0 24 24"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Editar
+                        </button>
+                        <button class="action-btn" onclick="trackOrderById('${order.id}')">
+                            <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Seguir
+                        </button>
+                        <button class="action-btn delete" onclick="deleteOrder('${order.id}')">
+                            <svg class="icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Eliminar
+                        </button>
                     </div>
                     ` : ''}
                 </div>
-                ${!isRecent ? `
-                <div class="order-actions">
-                    <button class="btn-secondary" onclick="editOrder('${order.id}')">✏️ Editar</button>
-                    <button class="btn-secondary" onclick="trackOrderById('${order.id}')">🔍 Seguir</button>
-                    <button class="btn-secondary" onclick="deleteOrder('${order.id}')">🗑️ Eliminar</button>
-                </div>
-                ` : ''}
             </div>
         `;
     }
-
     // Actualizar lista de pedidos
     function updateOrdersList() {
         const ordersHtml = orders.map(order => createOrderCard(order, false)).join('');
