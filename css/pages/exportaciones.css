@@ -102,7 +102,7 @@ body {
   width: 100%;
   padding: 0.75rem 1rem;
   background: transparent;
-  color: color-mix(in srgb, var(--secondary) 10%, transparent);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: all 0.2s ease;
   border: none;
