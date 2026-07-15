@@ -1604,3 +1604,73 @@ body {
 .doc-card:hover .doc-card-border {
     border-color: rgba(109, 213, 195, 0.3);
 }
+
+/* ==========================================================================
+   TIPOGRAFÍA — Open Sans (AgroExport)
+   Variables definidas en css/theme-variables.css:
+     --font-family-primary: 'Open Sans', -apple-system, 'Segoe UI', sans-serif
+     --font-weight-semibold: 600
+   Soporta: á é í ó ú ü ñ (Google Fonts subset latin + latin-ext)
+   ========================================================================== */
+
+/* Base del módulo */
+body {
+  font-family: var(--font-family-primary);
+}
+
+/* Títulos del header superior */
+.header-titles h1 {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: 24px;
+}
+
+/* Títulos de sección (h2 y h3 dentro de .section) */
+.section h2 {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.section h3 {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ID de pedido en tarjetas de seguimiento */
+.export-id {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Número destacado en tarjetas de estadística */
+.stat-number {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Etiqueta de estadística */
+.stat-label {
+  font-family: var(--font-family-primary);
+}
+
+/* Título de tarjeta de documento */
+.doc-card-title {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive — sin cambios de layout, solo tipografía heredada */
+@media (max-width: 480px) {
+  /* mobile: Open Sans se mantiene, tamaños gestionados por clamp() existentes */
+  body { font-family: var(--font-family-primary); }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  /* tablet: ídem */
+  body { font-family: var(--font-family-primary); }
+}
+
+@media (min-width: 1024px) {
+  /* desktop: ídem */
+  body { font-family: var(--font-family-primary); }
+}

@@ -12,6 +12,10 @@
 :root {
   --font-base: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  /* AgroExport — Open Sans (módulo exportaciones) */
+  --font-family-primary: 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
+  --font-weight-semibold: 600;
 }
 
 /* Aplicar tipografía globalmente */
