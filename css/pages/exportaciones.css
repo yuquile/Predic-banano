@@ -410,39 +410,39 @@ body {
 
 /* Badge Variations */
 .badge-pendiente {
-  background: #fff8e1;
-  color: #b45309;
-  border: 1px solid #fde68a;
+  background: var(--warning);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.badge-pendiente .badge-dot { background: #d97706; }
+.badge-pendiente .badge-dot { background: #ffffff; }
 
 .badge-proceso {
-  background: #f3e8ff;
-  color: #7e22ce;
-  border: 1px solid #e9d5ff;
+  background: var(--info);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.badge-proceso .badge-dot { background: #9333ea; }
+.badge-proceso .badge-dot { background: #ffffff; }
 
 .badge-enviado {
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #bfdbfe;
+  background: var(--success);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.badge-enviado .badge-dot { background: #2563eb; }
+.badge-enviado .badge-dot { background: #ffffff; }
 
 .badge-entregado {
-  background: #ecfdf5;
-  color: #047857;
-  border: 1px solid #a7f3d0;
+  background: var(--success);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.badge-entregado .badge-dot { background: #059669; }
+.badge-entregado .badge-dot { background: #ffffff; }
 
 .badge-cancelado {
-  background: #fef2f2;
-  color: #b91c1c;
-  border: 1px solid #fecaca;
+  background: var(--error);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.badge-cancelado .badge-dot { background: #dc2626; }
+.badge-cancelado .badge-dot { background: #ffffff; }
 
 .badge-dot {
   width: 7px;
