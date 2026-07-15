@@ -55,7 +55,7 @@ html {
 
 /* --- Fase 3: Layout General --- */
 body {
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
@@ -85,7 +85,7 @@ body {
 }
 
 .header h1 {
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-size: 1.5rem;
     font-weight: 600;
     display: flex;
@@ -121,7 +121,7 @@ body {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-size: 0.8125rem;
     font-weight: 500;
     text-decoration: none;
@@ -220,7 +220,7 @@ body {
 }
 
 .filtro-grupo label {
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-weight: 500;
     color: var(--text-soft);
     font-size: 0.75rem;
@@ -234,7 +234,7 @@ body {
     border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 0.875rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     transition: var(--transition);
     background: var(--surface);
     color: var(--text);
@@ -338,7 +338,7 @@ body {
 }
 
 .stat-info h3 {
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text);
@@ -347,7 +347,7 @@ body {
 }
 
 .stat-info p {
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     color: var(--text-soft);
     font-size: 0.75rem;
     font-weight: 500;
@@ -378,7 +378,7 @@ body {
     color: var(--text-soft);
     padding: 0.875rem 1rem;
     text-align: left;
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-weight: 600;
     font-size: 0.6875rem;
     text-transform: uppercase;
@@ -395,7 +395,7 @@ body {
 }
 
 .tabla-lotes td strong {
-    font-family: 'Inter', monospace;
+    font-family: var(--font-base);
     font-weight: 600;
     color: var(--text);
     background: var(--bg);
@@ -556,7 +556,7 @@ body {
     color: var(--text);
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-weight: 500;
     font-size: 0.8125rem;
 }
@@ -629,7 +629,7 @@ body {
 }
 
 .modal-header h2 {
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-size: 1.25rem;
     font-weight: 600;
 }
@@ -669,7 +669,7 @@ body {
 }
 
 .form-group label {
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-weight: 500;
     color: var(--text);
     font-size: 0.8125rem;
@@ -682,7 +682,7 @@ body {
     border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 0.875rem;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     transition: var(--transition);
     color: var(--text);
     background: var(--surface);
@@ -737,7 +737,7 @@ body {
 }
 
 .mensaje-vacio h3 {
-    font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    font-family: var(--font-base);
     font-size: 1.3rem;
     color: var(--text);
     margin-bottom: 0.5rem;
@@ -853,7 +853,7 @@ body {
 
 /* --- SweetAlert2 --- */
 .swal-popup-custom {
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif !important;
+    font-family: var(--font-base) !important;
     border-radius: var(--radius-card) !important;
     box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
 }
@@ -877,7 +877,7 @@ body {
 }
 
 .swal-toast-custom {
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif !important;
+    font-family: var(--font-base) !important;
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
 }
