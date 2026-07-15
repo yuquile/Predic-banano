@@ -111,6 +111,15 @@ body {
   overflow-y: auto;
 }
 
+.orders-grid {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-top: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
 .nav-btn {
   position: relative;
   display: flex;
