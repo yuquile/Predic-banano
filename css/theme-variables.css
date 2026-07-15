@@ -19,7 +19,7 @@
 }
 
 /* Aplicar tipografía globalmente */
-*, *::before, *::after {
+body {
   font-family: var(--font-base);
 }
 code, pre, kbd, samp, .font-mono {
