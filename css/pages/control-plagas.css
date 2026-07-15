@@ -51,7 +51,7 @@ html {
 }
 
 body {
-    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', 'Outfit', sans-serif;
     background-color: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -214,7 +214,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .stat-card .number {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--text);
@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     font-size: 0.875rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     color: var(--text);
     background: var(--surface);
     transition: var(--transition);
@@ -468,7 +468,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 .status-btn:hover {
@@ -503,7 +503,7 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0.5rem;
     width: 100%;
     box-shadow: var(--shadow-sm);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
 }
 
 .btn:hover {
@@ -635,7 +635,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .inspection-details-popup {
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Outfit', sans-serif !important;
     font-size: 0.95rem !important;
     color: var(--text) !important;
 }
