@@ -1,20 +1,20 @@
 /* ==========================================================================
    BANANOSYS THEME VARIABLES
    Extraído exactamente de diseño_visual/paletas-bananosys.html
-   Tipografía: Outfit (principal) + JetBrains Mono (código/etiquetas)
+   Tipografía: Open Sans (principal) + JetBrains Mono (código/etiquetas)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   TIPOGRAFÍA GLOBAL — Outfit + JetBrains Mono (ref: paletas-bananosys.html)
+   TIPOGRAFÍA GLOBAL — Open Sans + JetBrains Mono
    -------------------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  --font-base: 'Outfit', sans-serif;
+  --font-base: 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* AgroExport — Open Sans (módulo exportaciones) */
-  --font-family-primary: 'Open Sans', -apple-system, 'Segoe UI', sans-serif;
+  /* AgroExport — Módulo exportaciones usa la base */
+  --font-family-primary: var(--font-base);
   --font-weight-semibold: 600;
 }
 
