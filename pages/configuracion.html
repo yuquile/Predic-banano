@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="modern">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configuración - BananoSys</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Base Styles -->
+  <link rel="stylesheet" href="../css/pages/dashboard.css?v=6.0" />
+
+  <!-- Tema Global -->
+  <link rel="stylesheet" href="../css/theme-variables.css">
+  <script src="../js/theme-manager.js"></script>
+  
+  <style>
+    /* Selector de paletas (estructura replicada de diseño visual) */
+    .switcher{
+      display:flex; gap:10px; flex-wrap:wrap; margin:26px 0 34px;
+    }
+    .switcher button{
+      font-family:'Outfit',sans-serif; font-weight:600; font-size:14px;
+      padding:10px 18px; border-radius:12px; border:1.5px solid var(--border);
+      background:var(--surface); backdrop-filter:blur(10px); color:var(--text);
+      cursor:pointer; transition:all .25s ease; display:flex; align-items:center; gap:8px;
+    }
+    .switcher button .dot{ width:10px; height:10px; border-radius:50%; background:var(--primary); }
+    .switcher button.active{
+      background:var(--primary); color:#fff; border-color:var(--primary);
+      box-shadow:0 8px 20px -8px color-mix(in srgb, var(--primary) 60%, transparent);
+    }
+    .switcher button.active .dot{ background:#fff; }
+    .switcher button:hover:not(.active){ transform:translateY(-1px); }
+
+    .swatches{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:20px; }
+    .swatch{ border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+    .swatch .fill{ height:52px; }
+    .swatch .info{ padding:6px 8px; background:#fff; }
+    .swatch .name{ font-size:11px; font-weight:600; color: #000; }
+    .swatch .hex{ font-family:'JetBrains Mono',monospace; font-size:10px; color:#475569; }
+    
+    .panel-tema {
+        background:var(--surface); border:1px solid var(--border); border-radius:18px;
+        padding:20px; backdrop-filter:blur(10px);
+        color: var(--text);
+    }
+  </style>
+</head>
+<body class="bg-base">
+  
+  <div class="flex flex-col md:flex-row min-h-screen w-full box-border" >
+    
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="flex flex-col w-full md:w-64 shrink-0 md:min-h-screen transition-all duration-300 bg-primary">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-2.5 px-6 py-5 border-b" style="border-color: rgba(255,255,255,0.08);">
+        <div class="flex items-center justify-center w-8 h-8 rounded">
+          <i data-lucide="layers" class="icon-fixed" color="var(--accent)" stroke-width="2" style="width:16px; height:16px;"></i>
+        </div>
+        <div>
+          <span style="color: var(--accent); font-size: 15px; font-weight: 600; letter-spacing: 0.04em;">BananoSys</span>
+          <div style="color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">AGRO INTELLIGENCE</div>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div class="px-6 py-4 border-b flex items-center gap-3" style="border-color: rgba(255,255,255,0.08);">
+        <img src="../assets/img/usuario.png" alt="Perfil" id="userProfileImg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Camila+Almdia&background=random'" />
+        <div>
+          <div id="userNameDisplay" style="color: #ffffff; font-size: 15px; font-weight: 600;">camila almdia</div>
+          <div style="color: rgba(255,255,255,0.7); font-size: 12px;">Administrador</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex-1 px-3 py-4 overflow-y-auto">
+        <a href="prediccion.html" class="menu-link">
+          <i data-lucide="trending-up" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Predicción</span>
+        </a>
+        <a href="exportaciones.html" class="menu-link">
+          <i data-lucide="package" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Gestión de Exportaciones</span>
+        </a>
+        <a href="inventario.html" class="menu-link">
+          <i data-lucide="bar-chart-2" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Inventario y Postcosecha</span>
+        </a>
+        <a href="analisis.html" class="menu-link">
+          <i data-lucide="flask-conical" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Análisis Estadístico de Producción</span>
+        </a>
+        <a href="control-plagas.html" class="menu-link">
+          <i data-lucide="bug" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Control de Plagas y Calidad</span>
+        </a>
+        <a href="calendario.html" class="menu-link">
+          <i data-lucide="calendar" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Calendario Agrícola</span>
+        </a>
+        <a href="recomendaciones-ia.html" class="menu-link active">
+          <i data-lucide="cpu" class="icon-fixed" style="width:14px; height:14px;" stroke-width="2"></i>
+          <span class="flex-1 leading-snug min-w-0">Recomendaciones Inteligentes (IA)</span>
+          <i data-lucide="chevron-right" class="icon-fixed" style="width:12px; height:12px;"></i>
+        </a>
+        <a href="costo.html" class="menu-link">
+          <i data-lucide="dollar-sign" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Gestión de Costos y Rentabilidad</span>
+        </a>
+        <button id="logoutBtn" class="menu-link mt-2" style="border: none; cursor: pointer; text-align: left; color: rgba(253,247,240,0.45);">
+          <i data-lucide="log-out" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Cerrar sesión</span>
+        </button>
+      </nav>
+
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden relative">
+      
+      <!-- Topbar -->
+      <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
+        <div class="flex-1" style="min-width: 280px;">
+          <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text-main); letter-spacing: -0.02em; line-height: 1.3;">
+            Panel de Control de Banano
+          </h1>
+          <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
+            Temporada activa — Sem. 23 — 07 Jun 2026
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0 flex-1 justify-start md:justify-end" style="min-width: 320px;">
+          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-muted); font-size: 14px; width: 250px;">
+            <i data-lucide="search" class="icon-fixed" stroke-width="1.5" style="width: 13px; height: 13px;"></i>
+            <span>Buscar pedidos, parcelas...</span>
+          </div>
+
+          <div class="relative">
+            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--card-bg); border: 1px solid var(--border-color); cursor: pointer; transition: all 0.2s;">
+              <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: #ef4444; border: 1.5px solid #fff;"></span>
+            </button>
+            <!-- Dropdown -->
+            <div id="notifDropdown" class="notification-dropdown">
+              <div class="p-3 border-b" style="border-color: var(--border-color);">
+                <h4 style="font-size: 14px; font-weight: 600; color: var(--text-main); margin: 0;">Notificaciones</h4>
+              </div>
+              <div class="notification-item">
+                <div class="w-2 h-2 mt-1.5 rounded-full bg-red-500" style="background-color: #ef4444; flex-shrink: 0;"></div>
+                <div>
+                  <p style="font-size: 13px; font-weight: 500; color: var(--text-main); margin: 0 0 4px 0;">Alerta de Clima</p>
+                  <p style="font-size: 12px; color: var(--text-muted); margin: 0;">Posible exceso de humedad en el sector 4.</p>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="w-2 h-2 mt-1.5 rounded-full" style="background-color: var(--accent); flex-shrink: 0;"></div>
+                <div>
+                  <p style="font-size: 13px; font-weight: 500; color: var(--text-main); margin: 0 0 4px 0;">Exportación Completada</p>
+                  <p style="font-size: 12px; color: var(--text-muted); margin: 0;">El lote #842 llegó a destino.</p>
+                </div>
+              </div>
+              <div class="p-2 text-center">
+                <a href="#" style="font-size: 12px; color: var(--primary); font-weight: 500; text-decoration: none;">Ver todas</a>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </header>
+
+      
+    <main class="flex-1 flex flex-col min-h-screen relative w-full">
+      <!-- TOP HEADER -->
+      <header class="flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur-md border-b sticky top-0 z-40" style="border-color: var(--border);">
+        <div class="flex items-center gap-3">
+          <h1 class="text-2xl font-semibold" style="color: var(--text);">Configuración</h1>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <div class="p-6 lg:p-8 flex-1 overflow-y-auto" style="background-color: var(--bg);">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="panel-tema">
+                <h2 style="font-size:20px; font-weight:700; margin-bottom:4px;">Apariencia y Temas</h2>
+                <div style="color:var(--text-soft); font-size:13px; margin-bottom:20px;">Selecciona una paleta para aplicar a todo el sistema.</div>
+                
+                <div class="switcher" id="switcher"></div>
+                
+                <h3 style="font-size:14px; font-weight:700; margin-bottom:14px; margin-top: 28px;">Swatches de la paleta actual</h3>
+                <div class="swatches" id="swatches"></div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const palettes = {
+        modern: {
+          name: "1 · Modern Glass",
+          vars: { primary:"#164e3b", secondary:"#0f766e", accent:"#5eead4", success:"#10b981", warning:"#f59e0b", error:"#ef4444", info:"#3b82f6" }
+        },
+        agrotech: {
+          name: "2 · AgroTech IA",
+          vars: { primary:"#0f172a", secondary:"#10b981", accent:"#f59e0b", success:"#10b981", warning:"#f59e0b", error:"#ef4444", info:"#3b82f6" }
+        },
+        harvest: {
+          name: "3 · Banana Harvest",
+          vars: { primary:"#2c5530", secondary:"#eab308", accent:"#84cc16", success:"#65a30d", warning:"#d97706", error:"#b91c1c", info:"#0369a1" }
+        }
+      };
+
+      const switcherEl = document.getElementById('switcher');
+      const swatchesEl = document.getElementById('swatches');
+      const labels = {primary:"Primario", secondary:"Secundario", accent:"Acento", success:"Éxito", warning:"Advertencia", error:"Error", info:"Info"};
+
+      function updateUI(key){
+        // Botones activos
+        [...switcherEl.children].forEach(btn=> btn.classList.toggle('active', btn.dataset.key===key));
+        
+        // Swatches
+        const p = palettes[key];
+        swatchesEl.innerHTML = '';
+        ['primary','secondary','accent','success','warning','error','info'].forEach(k=>{
+          const val = p.vars[k];
+          const sw = document.createElement('div');
+          sw.className = 'swatch';
+          sw.innerHTML = `<div class="fill" style="background:${val}"></div>
+            <div class="info"><div class="name">${labels[k]}</div><div class="hex">${val}</div></div>`;
+          swatchesEl.appendChild(sw);
+        });
+      }
+
+      function onSelectTheme(key){
+        setTheme(key);
+        updateUI(key);
+      }
+
+      // Init
+      Object.entries(palettes).forEach(([key,p])=>{
+        const btn = document.createElement('button');
+        btn.dataset.key = key;
+        btn.innerHTML = `<span class="dot" style="background:${p.vars.primary}"></span>${p.name}`;
+        btn.onclick = ()=> onSelectTheme(key);
+        switcherEl.appendChild(btn);
+      });
+
+      const curr = document.documentElement.getAttribute('data-theme') || 'modern';
+      updateUI(curr);
+    </script>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.2/dist/echarts.min.js"></script>
+  <!-- Inicializador de Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <!-- Firebase scripts -->
+  <script type="module" src="../js/core/firebase.js"></script>
+  <script type="module">
+    import { auth } from '../js/core/firebase.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const logoutBtn = document.getElementById('logoutBtn');
+      const userNameDisplay = document.getElementById('userNameDisplay');
+
+      // Función para obtener el clima
+      async function getWeatherData() {
+        try {
+          const weatherData = {
+            temperature: Math.round(25 + Math.random() * 10),
+            feelsLike: Math.round(27 + Math.random() * 8),
+            description: ['Soleado', 'Parcialmente nublado', 'Nublado', 'Lluvia ligera'][Math.floor(Math.random() * 4)],
+            humidity: Math.round(60 + Math.random() * 30),
+            windSpeed: Math.round(5 + Math.random() * 15),
+            visibility: Math.round(8 + Math.random() * 7),
+            uvIndex: Math.round(6 + Math.random() * 5)
+          };
+
+          document.getElementById('temperature').textContent = weatherData.temperature;
+          document.getElementById('weatherDescription').textContent = weatherData.description;
+          document.getElementById('feelsLike').textContent = `Sensación ${weatherData.feelsLike}°`;
+          document.getElementById('windSpeed').textContent = `${weatherData.windSpeed} km/h`;
+          document.getElementById('humidity').textContent = `${weatherData.humidity}%`;
+          document.getElementById('visibility').textContent = `${weatherData.visibility} km`;
+          document.getElementById('uvIndex').textContent = weatherData.uvIndex;
+        } catch (error) {
+          console.error('Error al obtener datos del clima:', error);
+          document.getElementById('temperature').textContent = '25';
+          document.getElementById('weatherDescription').textContent = 'Clima no disponible';
+        }
+      }
+
+      function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('es-EC', { 
+          hour: '2-digit', 
+          minute: '2-digit',
+          hour12: true 
+        });
+        document.getElementById('currentTime').textContent = `Actualizado a las ${timeString}`;
+      }
+
+      getWeatherData();
+      updateTime();
+      setInterval(updateTime, 60000); 
+      setInterval(getWeatherData, 600000); 
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const displayName = user.displayName || user.email;
+          userNameDisplay.textContent = displayName;
+          
+          const userProfileImg = document.getElementById('userProfileImg');
+          if (userProfileImg && user.photoURL) {
+            userProfileImg.src = user.photoURL;
+            userProfileImg.onerror = function() {
+              this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
+            };
+          }
+        } else {
+          window.location.href = 'login.html';
+        }
+      });
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+          Swal.fire({
+            title: '¿Está seguro?',
+            text: '¿Desea cerrar sesión?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, cerrar sesión',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              signOut(auth).then(() => {
+                window.location.href = 'login.html';
+              });
+            }
+          });
+        });
+      }
+
+      const prediccion = localStorage.getItem("ultimaPrediccion");
+      if (prediccion) {
+        const datos = JSON.parse(prediccion);
+        document.getElementById('predictionYield').textContent = `${datos.rendimiento} ton/ha`;
+        document.getElementById('predictionDate').textContent = `Fecha: ${datos.fecha}`;
+        document.getElementById('expectedGrowth').textContent = `+${Math.round(10 + Math.random() * 20)}%`;
+        document.getElementById('qualityScore').textContent = `${Math.round(80 + Math.random() * 15)}%`;
+        document.getElementById('harvestDays').textContent = Math.round(30 + Math.random() * 30);
+        document.getElementById('riskLevel').textContent = ['Bajo', 'Medio', 'Alto'][Math.floor(Math.random() * 3)];
+      } else {
+        document.getElementById('predictionYield').textContent = '-- ton/ha';
+        document.getElementById('predictionDate').textContent = 'Fecha: No disponible';
+      }
+
+      function loadExportData() {
+        const savedOrders = localStorage.getItem('exportOrders');
+        if (savedOrders) {
+          try {
+            return JSON.parse(savedOrders);
+          } catch (error) {
+            return [];
+          }
+        }
+        return [];
+      }
+
+      function updateExportMetrics() {
+        const orders = loadExportData();
+        
+        const stats = {
+          total: orders.length,
+          pendiente: orders.filter(o => o.estado === 'pendiente').length,
+          proceso: orders.filter(o => o.estado === 'proceso').length,
+          enviado: orders.filter(o => o.estado === 'enviado').length,
+          entregado: orders.filter(o => o.estado === 'entregado').length
+        };
+
+        document.getElementById('totalPedidos').textContent = stats.total;
+        document.getElementById('pedidosPendientes').textContent = stats.pendiente;
+        document.getElementById('pedidosProceso').textContent = stats.proceso;
+        document.getElementById('pedidosEnviados').textContent = stats.enviado;
+        document.getElementById('pedidosEntregados').textContent = stats.entregado;
+
+        createStatesChart(stats);
+        createDestinationsChart(orders);
+        showRecentExports(orders);
+      }
+
+      let statesChartInstance = null;
+      let destinationsChartInstance = null;
+
+      function createStatesChart(stats) {
+        if (!statesChartInstance) {
+          statesChartInstance = echarts.init(document.getElementById('estadosChart'));
+        }
+        const total = stats.pendiente + stats.proceso + stats.enviado + stats.entregado || 1;
+        
+        const data = [
+          {value: stats.proceso, name: 'En Proceso', itemStyle: {color: '#1e664d'}},
+          {value: stats.enviado, name: 'Enviados', itemStyle: {color: '#34d399'}},
+          {value: stats.entregado, name: 'Entregados', itemStyle: {color: '#0f172a'}},
+          {value: stats.pendiente, name: 'Pendientes', itemStyle: {color: '#5eead4'}}
+        ];
+
+        const option = {
+          baseOption: {
+            tooltip: { 
+              trigger: 'item', 
+              formatter: '{b}: {c} ({d}%)',
+              backgroundColor: '#ffffff',
+              borderWidth: 0,
+              textStyle: { color: '#0f172a', fontFamily: 'Outfit' },
+              extraCssText: 'box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-radius: 4px;'
+            },
+            legend: {
+              orient: 'vertical',
+              left: '0%',
+              top: 'middle',
+              itemWidth: 14,
+              itemHeight: 14,
+              icon: 'roundRect',
+              itemGap: 16,
+              formatter: function (name) {
+                const item = data.find(d => d.name === name);
+                const percent = (total === 1 && item.value === 0) ? 0 : Math.round((item.value / total) * 100);
+                return `{name|${name}}{percent|${percent}%}`;
+              },
+              textStyle: {
+                rich: {
+                  name: { color: '#0f172a', fontFamily: 'Outfit', fontSize: 14, fontWeight: 500, width: 90 },
+                  percent: { color: '#0f172a', fontFamily: 'Outfit', fontSize: 14, fontWeight: 400, align: 'right' }
+                }
+              }
+            },
+            series: [{
+              name: 'Estados',
+              type: 'pie',
+              radius: ['0%', '75%'],
+              center: ['68%', '50%'],
+              itemStyle: {
+                shadowBlur: 20,
+                shadowColor: 'rgba(0, 0, 0, 0.15)',
+                shadowOffsetX: 5,
+                shadowOffsetY: 10,
+                borderColor: '#ffffff',
+                borderWidth: 1
+              },
+              label: { show: false },
+              data: data
+            }]
+          },
+          media: [
+            {
+              query: { maxWidth: 400 },
+              option: {
+                legend: { show: false },
+                series: [{ center: ['50%', '50%'], radius: ['0%', '85%'] }]
+              }
+            },
+            {
+              query: { minWidth: 401 },
+              option: {
+                legend: { show: true },
+                series: [{ center: ['68%', '50%'], radius: ['0%', '75%'] }]
+              }
+            }
+          ]
+        };
+        statesChartInstance.setOption(option);
+      }
+
+      function createDestinationsChart(orders) {
+        if (!destinationsChartInstance) {
+          destinationsChartInstance = echarts.init(document.getElementById('destinosChart'));
+        }
+        const destinations = {};
+        orders.forEach(order => { destinations[order.paisDestino] = (destinations[order.paisDestino] || 0) + 1; });
+        const sortedDestinations = Object.entries(destinations).sort(([,a], [,b]) => b - a).slice(0, 6);
+        
+        const option = {
+          tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+          xAxis: {
+            type: 'category',
+            data: sortedDestinations.map(([pais]) => pais),
+            axisLabel: { interval: 0, color: '#B5A08A', fontFamily: 'Inter' }
+          },
+          yAxis: { type: 'value', axisLabel: { color: '#B5A08A' } },
+          series: [{
+            data: sortedDestinations.map(([, cantidad]) => cantidad),
+            type: 'bar',
+            itemStyle: { color: '#164e3b' }
+          }]
+        };
+        destinationsChartInstance.setOption(option);
+      }
+
+      function showRecentExports(orders) {
+        const recentOrders = orders.sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion)).slice(0, 5);
+        const container = document.getElementById('recentExports');
+        
+        if (recentOrders.length === 0) {
+          container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 20px; font-size: 14px;">No hay exportaciones registradas</p>';
+          return;
+        }
+
+        const html = recentOrders.map(order => `
+          <div class="export-item">
+            <div class="export-info flex-1 min-w-0">
+              <div class="export-id">${order.id}</div>
+              <div class="export-details">
+                ${order.cliente} • ${order.paisDestino} • ${order.variedad} • ${order.cantidad.toLocaleString()} cajas
+              </div>
+            </div>
+            <div class="status-badge status-${order.estado}">
+              ${order.estado}
+            </div>
+          </div>
+        `).join('');
+
+        container.innerHTML = html;
+      }
+
+      updateExportMetrics();
+      setInterval(updateExportMetrics, 30000);
+
+      // Add ResizeObserver for responsive charts
+      const resizeObserver = new ResizeObserver(() => {
+        if (statesChartInstance) statesChartInstance.resize();
+        if (destinationsChartInstance) destinationsChartInstance.resize();
+      });
+      resizeObserver.observe(document.getElementById('estadosChart'));
+      resizeObserver.observe(document.getElementById('destinosChart'));
+      
+      window.addEventListener('resize', () => {
+        if (statesChartInstance) statesChartInstance.resize();
+        if (destinationsChartInstance) destinationsChartInstance.resize();
+      });
+    });
+  </script>
+</body>
+</html>
