@@ -9,9 +9,15 @@ html {
 }
 
 /* Selectores específicos para textos dinámicos o largos */
-.export-details, .user-name, .card-title, .product-description, h1, h2, h3, h4, h5, h6, p, a, span, li, th, td {
+.export-details, .user-name, .card-title, .product-description, h1, h2, h3, h4, h5, h6, p, a, li, th, td {
   overflow-wrap: break-word;
   word-break: break-word;
+}
+/* Los <span> de etiquetas en tarjetas NO deben partirse */
+span {
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
 }
 
 
@@ -286,3 +292,65 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
+/* ==========================================================================
+   GRILLAS DE UTILIDAD — reemplazo de clases Tailwind no cargadas
+   ========================================================================== */
+
+/* Indicadores Clave: siempre 5 columnas en escritorio, menos en móvil */
+.grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* grid-cols-2  (base mobile) */
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* md:grid-cols-3 — tablet ≥ 768px */
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* lg:grid-cols-5 — escritorio ≥ 1024px */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* gap-3 / gap-4 */
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+
+/* Flex utilities usadas en las tarjetas */
+.flex          { display: flex; }
+.flex-col      { flex-direction: column; }
+.items-center  { align-items: center; }
+.justify-between { justify-content: space-between; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.rounded { border-radius: 0.5rem; }
+.min-w-0 { min-width: 0; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.grid-cols-1 { grid-template-columns: 1fr; }
+
+/* md:grid-cols-2 */
+@media (min-width: 768px) {
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tarjetas de indicadores: texto NO se parte, icono siempre a la izquierda */
+.grid.grid-cols-2 span,
+.grid.md\:grid-cols-3 span,
+.grid.lg\:grid-cols-5 span {
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
+}
