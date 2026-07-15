@@ -1,0 +1,52 @@
+/* ==========================================================================
+   BANANOSYS THEME VARIABLES
+   Extraído exactamente de diseño_visual/paletas-bananosys.html
+   ========================================================================== */
+
+/* 1. PALETA "modern" (Modern Glass — default) */
+:root[data-theme="modern"] {
+  --bg: #f8fafc;
+  --surface: rgba(255, 255, 255, 0.75);
+  --border: rgba(255, 255, 255, 0.4);
+  --primary: #164e3b;
+  --secondary: #0f766e;
+  --accent: #5eead4;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+  --text: #0f172a;
+  --text-soft: #475569;
+}
+
+/* 2. PALETA "agrotech" (AgroTech IA) */
+:root[data-theme="agrotech"] {
+  --bg: #eef2f7;
+  --surface: rgba(255, 255, 255, 0.7);
+  --border: rgba(15, 23, 42, 0.15);
+  --primary: #0f172a;
+  --secondary: #10b981;
+  --accent: #f59e0b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+  --text: #0f172a;
+  --text-soft: #475569;
+}
+
+/* 3. PALETA "harvest" (Banana Harvest) */
+:root[data-theme="harvest"] {
+  --bg: #fffdf5;
+  --surface: rgba(255, 255, 255, 0.78);
+  --border: rgba(180, 140, 20, 0.25);
+  --primary: #2c5530;
+  --secondary: #eab308;
+  --accent: #84cc16;
+  --success: #65a30d;
+  --warning: #d97706;
+  --error: #b91c1c;
+  --info: #0369a1;
+  --text: #1c1917;
+  --text-soft: #57534e;
+}
