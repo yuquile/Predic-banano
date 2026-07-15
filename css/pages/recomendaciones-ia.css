@@ -31,7 +31,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2E8B57 0%, #3CB371 50%, #98FB98 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
     min-height: 100vh;
     padding: 1.25rem;
 }
@@ -39,7 +39,7 @@ body {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--surface);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 1.875rem;
@@ -52,14 +52,14 @@ body {
 }
 
 .header h1 {
-    color: #2F4F2F;
+    color: var(--text);
     font-size: 2.5em;
     margin-bottom: 0.625rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header p {
-    color: #556B2F;
+    color: var(--text-soft);
     font-size: 1.2em;
     font-weight: 500;
 }
@@ -81,12 +81,12 @@ body {
 }
 
 .plantation-type.conventional {
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    color: #8B4513;
+    background: linear-gradient(135deg, var(--warning), var(--accent));
+    color: var(--text);
 }
 
 .plantation-type.organic {
-    background: linear-gradient(135deg, #32CD32, #228B22);
+    background: linear-gradient(135deg, var(--success), var(--primary));
     color: white;
 }
 
@@ -121,7 +121,7 @@ body {
     font-size: 1.4em;
     font-weight: bold;
     margin-bottom: 1.25rem;
-    color: #2F4F2F;
+    color: var(--text);
 }
 
 .panel-title .icon {
@@ -144,22 +144,22 @@ body {
 }
 
 .alert-critical {
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    background: linear-gradient(135deg, var(--error), color-mix(in srgb, var(--error) 60%, transparent));
     color: white;
 }
 
 .alert-warning {
-    background: linear-gradient(135deg, #ffa726, #ffcc02);
+    background: linear-gradient(135deg, var(--warning), var(--warning));
     color: white;
 }
 
 .alert-info {
-    background: linear-gradient(135deg, #42a5f5, #64b5f6);
+    background: linear-gradient(135deg, var(--info), color-mix(in srgb, var(--info) 60%, transparent));
     color: white;
 }
 
 .alert-success {
-    background: linear-gradient(135deg, #66bb6a, #81c784);
+    background: linear-gradient(135deg, var(--success), var(--accent));
     color: white;
 }
 
@@ -169,8 +169,8 @@ body {
 }
 
 .recommendation {
-    background: linear-gradient(135deg, #f8fff8, #e8f5e8);
-    border-left: 5px solid #228B22;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--success) 10%, transparent), color-mix(in srgb, var(--success) 15%, transparent));
+    border-left: 5px solid var(--primary);
     padding: 1.25rem;
     margin: 0.9375rem 0;
     border-radius: 0 10px 10px 0;
@@ -178,18 +178,18 @@ body {
 }
 
 .recommendation:hover {
-    background: linear-gradient(135deg, #e8f5e8, #d4edda);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--success) 15%, transparent), color-mix(in srgb, var(--success) 20%, transparent));
     transform: translateX(5px);
 }
 
 .recommendation h4 {
-    color: #155724;
+    color: var(--text);
     margin-bottom: 0.5rem;
     font-size: 1.1em;
 }
 
 .recommendation p {
-    color: #155724;
+    color: var(--text);
     line-height: 1.5;
 }
 
@@ -202,9 +202,9 @@ body {
     margin-left: 0.625rem;
 }
 
-.priority-alta { background: #dc3545; color: white; }
-.priority-media { background: #ffc107; color: #856404; }
-.priority-baja { background: #28a745; color: white; }
+.priority-alta { background: var(--error); color: white; }
+.priority-media { background: var(--warning); color: var(--text); }
+.priority-baja { background: var(--success); color: white; }
 
 .banana-plots {
     display: grid;
@@ -214,17 +214,17 @@ body {
 }
 
 .plot-card {
-    background: linear-gradient(135deg, #fff8dc, #f0f8d0);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--warning) 10%, transparent), color-mix(in srgb, var(--warning) 15%, transparent));
     border-radius: 15px;
     padding: 1.25rem;
-    border: 3px solid #32CD32;
+    border: 3px solid var(--success);
     transition: all 0.3s ease;
     position: relative;
 }
 
 .plot-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(50, 205, 50, 0.3);
+    box-shadow: 0 10px 25px color-mix(in srgb, var(--success) 30%, transparent);
 }
 
 .plot-header {
@@ -242,12 +242,12 @@ body {
 }
 
 .badge-conventional {
-    background: #FFD700;
-    color: #8B4513;
+    background: var(--warning);
+    color: var(--text);
 }
 
 .badge-organic {
-    background: #32CD32;
+    background: var(--success);
     color: white;
 }
 
@@ -256,7 +256,7 @@ body {
     align-items: center;
     margin: 0.625rem 0;
     padding: 0.625rem;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--surface);
     border-radius: 8px;
 }
 
@@ -266,19 +266,19 @@ body {
 }
 
 .stage-info h5 {
-    color: #2F4F2F;
+    color: var(--text);
     margin-bottom: 0.3125rem;
 }
 
 .stage-info p {
-    color: #556B2F;
+    color: var(--text-soft);
     font-size: 0.9em;
 }
 
 .progress-bar {
     width: 100%;
     height: 0.5rem;
-    background: #e9ecef;
+    background: var(--border);
     border-radius: 4px;
     margin: 0.625rem 0;
     overflow: hidden;
@@ -290,9 +290,9 @@ body {
     transition: width 1s ease;
 }
 
-.progress-optimal { background: linear-gradient(90deg, #32CD32, #228B22); }
-.progress-warning { background: linear-gradient(90deg, #FFD700, #FFA500); }
-.progress-critical { background: linear-gradient(90deg, #dc3545, #e74c3c); }
+.progress-optimal { background: linear-gradient(90deg, var(--success), var(--primary)); }
+.progress-warning { background: linear-gradient(90deg, var(--warning), var(--accent)); }
+.progress-critical { background: linear-gradient(90deg, var(--error), var(--error)); }
 
 .metrics {
     display: grid;
@@ -303,20 +303,20 @@ body {
 .metric {
     text-align: center;
     padding: 0.9375rem;
-    background: linear-gradient(135deg, #f8fff8, #ffffff);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--success) 10%, transparent), #fff);
     border-radius: 10px;
-    border: 2px solid #32CD32;
+    border: 2px solid var(--success);
 }
 
 .metric-value {
     font-size: 2em;
     font-weight: bold;
-    color: #228B22;
+    color: var(--primary);
     margin-bottom: 0.3125rem;
 }
 
 .metric-label {
-    color: #556B2F;
+    color: var(--text-soft);
     font-size: 0.9em;
     font-weight: 500;
 }
@@ -330,7 +330,7 @@ body {
 }
 
 button {
-    background: linear-gradient(135deg, #32CD32, #228B22);
+    background: linear-gradient(135deg, var(--success), var(--primary));
     color: white;
     border: none;
     padding: 0.75rem 1.5625rem;
@@ -343,15 +343,15 @@ button {
 
 button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+    box-shadow: 0 5px 15px color-mix(in srgb, var(--success) 40%, transparent);
 }
 
 .disease-chart {
     width: 100%;
     height: 15.625rem;
-    background: linear-gradient(135deg, #f8fff8, #ffffff);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--success) 10%, transparent), #fff);
     border-radius: 10px;
-    border: 2px solid #32CD32;
+    border: 2px solid var(--success);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -382,13 +382,13 @@ button:hover {
     margin-bottom: 0.625rem;
 }
 
-.bar-sigatoka { background: linear-gradient(to top, #8B4513, #D2691E); }
-.bar-nematodos { background: linear-gradient(to top, #DC143C, #FF6347); }
-.bar-bacteriosis { background: linear-gradient(to top, #4B0082, #9370DB); }
+.bar-sigatoka { background: linear-gradient(to top, var(--text), var(--warning)); }
+.bar-nematodos { background: linear-gradient(to top, var(--error), var(--error)); }
+.bar-bacteriosis { background: linear-gradient(to top, var(--secondary), var(--accent)); }
 
 .bar-label {
     font-size: 0.8em;
-    color: #2F4F2F;
+    color: var(--text);
     font-weight: bold;
     text-align: center;
 }
