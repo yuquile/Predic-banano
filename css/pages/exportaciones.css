@@ -1677,3 +1677,84 @@ body {
   /* desktop: ídem */
   body { font-family: var(--font-family-primary); }
 }
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT & MOBILE MENU (FASE 1: Exportaciones)
+   ========================================================================== */
+
+/* Checkbox oculto para el menú en móviles */
+.mobile-menu-toggle {
+    display: none;
+}
+
+/* Botón hamburguesa */
+.mobile-menu-btn {
+    display: none; /* Oculto en desktop */
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    cursor: pointer;
+    background: var(--surface);
+    color: var(--primary);
+    padding: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    background: var(--bg);
+}
+
+/* En resoluciones menores a 769px (Mobile y Tablet Pequeña) */
+@media (max-width: 768px) {
+    /* 1. Cambiar el layout principal a columna */
+    .dashboard-layout {
+        flex-direction: column;
+    }
+    
+    /* 2. Mostrar el botón hamburguesa */
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* 3. Ajustar el sidebar a off-canvas (oculto por defecto) */
+    .sidebar-dark {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: -320px; /* Oculto a la izquierda */
+        z-index: 1000;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 4px 0 10px rgba(0,0,0,0.2);
+    }
+
+    /* 4. Mostrar sidebar cuando el checkbox está activado */
+    .mobile-menu-toggle:checked ~ .sidebar-dark {
+        left: 0;
+    }
+
+    /* 5. Mover el top-header para hacer espacio al botón hamburguesa */
+    .top-header {
+        padding-left: 4.5rem !important; /* Espacio para el botón */
+    }
+
+    /* 6. Fix para grid de formularios: 1 sola columna en mobile */
+    .form-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem;
+    }
+
+    /* 7. Reducir paddings generales para aprovechar espacio en pantallas pequeñas */
+    .content-area {
+        padding: 1rem !important;
+    }
+    
+    .panel-box, .stat-card, .doc-selection-card {
+        padding: 1rem !important;
+    }
+}
