@@ -1,8 +1,6 @@
-
 /* FASE 2: Contención Global y Textos Largos */
 html {
   overflow-x: hidden;
-  font-size: 108%; /* Reemplazo de zoom para un escalado seguro de rems */
 }
 *, *::before, *::after {
   box-sizing: border-box;
