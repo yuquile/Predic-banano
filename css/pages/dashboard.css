@@ -389,10 +389,266 @@ main#contenido section {
 /* 4. Jerarquía Tipográfica */
 main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   font-size: 0.85rem !important;
+  background-color: rgba(255,255,255,0.05);
+  color: #ffffff;
+}
+
+.menu-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--accent);
+  font-weight: 500;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Grillas Customizadas para Módulos Responsivas */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .modules-grid {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .modules-grid { 
+    grid-template-columns: repeat(4, 1fr); 
+  }
+}
+
+@media (max-width: 480px) {
+  .modules-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+/* Dropdown y Tarjetas Corporativas */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 300px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 50;
+}
+.notification-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+.notification-item:hover {
+  background-color: #f8fafc;
+}
+
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.cursor-pointer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* ==========================================================================
+   GRILLAS DE UTILIDAD — reemplazo de clases Tailwind no cargadas
+   ========================================================================== */
+
+/* Indicadores Clave: siempre 5 columnas en escritorio, menos en móvil */
+.grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* grid-cols-2  (base mobile) */
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* md:grid-cols-3 — tablet ≥ 768px */
+@media (min-width: 768px) {
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* lg:grid-cols-5 — escritorio ≥ 1024px */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* gap-3 / gap-4 */
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+
+/* Flex utilities usadas en las tarjetas */
+.flex          { display: flex; }
+.flex-col      { flex-direction: column; }
+.items-center  { align-items: center; }
+.justify-between { justify-content: space-between; }
+.p-4 { padding: 1rem; }
+.p-5 { padding: 1.25rem; }
+.rounded { border-radius: 0.5rem; }
+.min-w-0 { min-width: 0; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-5 { margin-bottom: 1.25rem; }
+.grid-cols-1 { grid-template-columns: 1fr; }
+
+/* md:grid-cols-2 */
+@media (min-width: 768px) {
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tarjetas de indicadores: texto NO se parte, icono siempre a la izquierda */
+.grid.grid-cols-2 span,
+.grid.md\:grid-cols-3 span,
+.grid.lg\:grid-cols-5 span {
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   MEJORAS DE JERARQUÍA VISUAL (Dashboard)
+   ========================================================================== */
+
+/* 1. Fondo General del Dashboard */
+body, .bg-base, main#contenido {
+  background-color: #f5f6f4 !important;
+}
+
+/* 2. Tarjetas y Contenedores (Fondo blanco, borde sutil, sombra) */
+.card,
+.bg-card,
+.bg-card-secondary,
+main#contenido section > div.rounded.w-full.overflow-x-auto,
+main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"] {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(44, 85, 48, 0.15) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03) !important;
+}
+
+/* Hover cards */
+.card:hover,
+main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"]:hover {
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03) !important;
+  border-color: rgba(44, 85, 48, 0.25) !important;
+}
+
+/* 3. Separación entre secciones */
+main#contenido section {
+  margin-bottom: 2.5rem !important;
+}
+
+/* 4. Jerarquía Tipográfica */
+main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
+  font-size: 0.85rem !important;
   font-weight: 700 !important;
   color: var(--primary) !important;
   letter-spacing: 0.05em !important;
   margin-bottom: 1.25rem !important;
   padding-bottom: 0.5rem !important;
   border-bottom: 2px solid rgba(44, 85, 48, 0.08) !important;
+}
+
+/* ==========================================================================
+   FASE 4: Optimizaciones para Escritorio Grande (Desktop)
+   ========================================================================== */
+
+@media (min-width: 1025px) {
+  
+  /* 1. Etiquetas en mayúsculas (clamp) */
+  /* Indicadores Clave y títulos pequeños */
+  main#contenido span[style*="text-transform: uppercase"],
+  main#contenido div[style*="text-transform: uppercase"] {
+    font-size: clamp(0.75rem, 0.9vw, 0.95rem) !important; /* Escala de 12px a ~15px */
+  }
+
+  /* Etiquetas de Acciones Rápidas */
+  main#contenido .modules-grid div[style*="font-size: 13px"] {
+    font-size: clamp(0.8125rem, 1vw, 0.95rem) !important; /* Escala de 13px a ~15px */
+  }
+
+  /* 2. Íconos escalados */
+  /* Íconos de indicadores (14px) */
+  main#contenido i.icon-fixed[style*="width:14px"] {
+    width: clamp(14px, 1.2vw, 18px) !important;
+    height: clamp(14px, 1.2vw, 18px) !important;
+  }
+  
+  /* Íconos de clima (12px) */
+  main#contenido i.icon-fixed[style*="width:12px"] {
+    width: clamp(12px, 1.1vw, 16px) !important;
+    height: clamp(12px, 1.1vw, 16px) !important;
+  }
+  
+  /* Íconos de Acciones Rápidas (20px) */
+  main#contenido i.icon-fixed[style*="width:20px"] {
+    width: clamp(20px, 1.5vw, 24px) !important;
+    height: clamp(20px, 1.5vw, 24px) !important;
+  }
+  
+  /* 4. Padding interno de tarjetas y 5. Espaciado de íconos en Acciones Rápidas */
+  /* Indicadores (original p-4 = 1rem) -> aumentamos a 1.5rem */
+  main#contenido section > div.grid > div.p-4 {
+    padding: 1.5rem !important;
+  }
+  
+  /* Clima y Gráficos (original p-5 = 1.25rem) -> aumentamos a 2rem */
+  main#contenido .card.p-5 {
+    padding: 2rem !important;
+  }
+  
+  /* Acciones Rápidas (original p-4) -> aumentamos padding y gap (original gap-3 = 0.75rem) */
+  main#contenido .modules-grid > div.p-4 {
+    padding: 1.5rem !important;
+    gap: 1.25rem !important;
+  }
+
+  /* Tabla exportaciones */
+  main#contenido #recentExports {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
 }
