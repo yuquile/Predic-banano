@@ -449,12 +449,12 @@ body {
 
 .estado-disponible {
     background: color-mix(in srgb, var(--success) 15%, transparent);
-    color: var(--success);
+    color: var(--text);
 }
 
 .estado-reservado {
     background: color-mix(in srgb, var(--warning) 15%, transparent);
-    color: var(--warning);
+    color: var(--text);
 }
 
 .estado-exportado {
@@ -473,7 +473,7 @@ body {
 
 .calidad-excelente {
     background: color-mix(in srgb, var(--success) 15%, transparent);
-    color: var(--success);
+    color: var(--text);
 }
 
 .calidad-buena {
@@ -483,7 +483,7 @@ body {
 
 .calidad-regular {
     background: color-mix(in srgb, var(--warning) 15%, transparent);
-    color: var(--warning);
+    color: var(--text);
 }
 
 .calidad-rechazada {
@@ -502,17 +502,17 @@ body {
 
 .plagas-ninguna {
     background: color-mix(in srgb, var(--success) 15%, transparent);
-    color: var(--success);
+    color: var(--text);
 }
 
 .plagas-leve {
     background: color-mix(in srgb, var(--warning) 8%, transparent);
-    color: var(--warning);
+    color: var(--text);
 }
 
 .plagas-moderada {
     background: color-mix(in srgb, var(--warning) 15%, transparent);
-    color: var(--warning);
+    color: var(--text);
 }
 
 .plagas-severa {
