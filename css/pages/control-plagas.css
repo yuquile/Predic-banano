@@ -652,13 +652,17 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: var(--radius-card) !important;
 }
 
-/* --- Responsive --- */
+/* --- Responsive Design --- */
+
+/* Laptop / Desktop Pequeño (hasta 1024px) */
 @media (max-width: 1024px) {
     .main-grid {
         grid-template-columns: 1fr;
     }
+    /* El sidebar apilará debajo del form automáticamente porque grid-template-columns es 1fr */
 }
 
+/* Tablet (hasta 768px) */
 @media (max-width: 768px) {
     .header-container {
         padding: 1rem;
@@ -671,14 +675,22 @@ h1, h2, h3, h4, h5, h6 {
     .header-main {
         flex-direction: column;
         text-align: center;
+        gap: 0.5rem;
     }
     
     .back-to-dashboard {
         align-self: center;
+        margin-top: 0.5rem;
     }
 
-    .quality-grid, 
-    .checkbox-group, 
+    .quality-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .checkbox-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .status-buttons {
         grid-template-columns: 1fr;
     }
@@ -692,6 +704,32 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .historial-table {
-        min-width: 50rem;
+        min-width: 50rem; /* Fuerza scroll horizontal para no romper contenido */
+    }
+}
+
+/* Mobile (hasta 480px) - Probado en 320px */
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2x2 grid en mobile */
+    }
+    
+    .stat-card {
+        padding: 1rem 0.5rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr; /* Una columna para checkboxes en mobile */
+    }
+
+    .header-titles h1 {
+        font-size: 1.25rem;
+    }
+    
+    .header-titles p {
+        font-size: 0.85rem;
     }
 }
