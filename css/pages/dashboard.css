@@ -352,3 +352,47 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   word-break: normal;
   white-space: nowrap;
 }
+
+/* ==========================================================================
+   MEJORAS DE JERARQUÍA VISUAL (Dashboard)
+   ========================================================================== */
+
+/* 1. Fondo General del Dashboard */
+body, .bg-base, main#contenido {
+  background-color: #f5f6f4 !important;
+}
+
+/* 2. Tarjetas y Contenedores (Fondo blanco, borde sutil, sombra) */
+.card,
+.bg-card,
+.bg-card-secondary,
+main#contenido section > div.rounded.w-full.overflow-x-auto,
+main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"] {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(44, 85, 48, 0.15) !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03) !important;
+}
+
+/* Hover cards */
+.card:hover,
+main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"]:hover {
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03) !important;
+  border-color: rgba(44, 85, 48, 0.25) !important;
+}
+
+/* 3. Separación entre secciones */
+main#contenido section {
+  margin-bottom: 2.5rem !important;
+}
+
+/* 4. Jerarquía Tipográfica */
+main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 1.25rem !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: 2px solid rgba(44, 85, 48, 0.08) !important;
+}
