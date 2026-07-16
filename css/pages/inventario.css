@@ -764,13 +764,16 @@ body {
     font-size: 0.875rem;
 }
 
-/* --- Responsive --- */
+/* --- Responsive Design Oficial --- */
+
+/* Laptop / Desktop Pequeño (hasta 1024px) */
 @media (max-width: 1024px) {
     .estadisticas {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
+/* Tablet (hasta 768px) */
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
@@ -780,6 +783,7 @@ body {
         flex-direction: column;
         text-align: center;
         padding: 1rem 0;
+        gap: 1rem;
     }
 
     .header h1 {
@@ -789,6 +793,7 @@ body {
     .header-actions {
         width: 100%;
         justify-content: center;
+        flex-wrap: wrap;
     }
 
     .filtros-grid {
@@ -808,7 +813,7 @@ body {
     }
 
     .tabla-lotes {
-        min-width: 56.25rem;
+        min-width: 56.25rem; /* Fuerza el scroll sin asfixiar la tabla */
     }
 
     .tabla-lotes th,
@@ -842,21 +847,34 @@ body {
     }
 }
 
-@media (max-width: 640px) {
-    .estadisticas {
-        grid-template-columns: 1fr;
-    }
-}
-
+/* Mobile (hasta 480px) - Optimizado para 320px */
 @media (max-width: 480px) {
+    .estadisticas {
+        grid-template-columns: repeat(2, 1fr); /* Confirmado por el usuario: 2 columnas */
+    }
+    
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem;
+    }
+    
+    .stat-card i {
+        margin: 0 auto;
+    }
+
     .btn {
         padding: 0.5rem 0.875rem;
         font-size: 0.75rem;
+        width: 100%;
+        justify-content: center;
     }
 
     .header-actions {
         flex-direction: column;
         width: 100%;
+        gap: 0.5rem;
     }
 
     .tabla-lotes th,
