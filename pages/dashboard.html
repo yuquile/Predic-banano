@@ -88,7 +88,7 @@
     </aside>
 
     <!-- ===== MAIN CONTENT ===== -->
-    <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden relative md:h-[100dvh] md:overflow-y-auto">
+    <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden relative md:h-[100dvh] md:overflow-y-auto [overflow-anchor:none]">
       
       <!-- Topbar -->
       <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
@@ -699,18 +699,17 @@
       updateExportMetrics();
       setInterval(updateExportMetrics, 30000);
 
-      // Add ResizeObserver for responsive charts
+      // Add ResizeObserver for responsive charts with debounce to prevent loop and reflow storm
+      let resizeTimeout;
       const resizeObserver = new ResizeObserver(() => {
-        if (statesChartInstance) statesChartInstance.resize();
-        if (destinationsChartInstance) destinationsChartInstance.resize();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (statesChartInstance) statesChartInstance.resize();
+          if (destinationsChartInstance) destinationsChartInstance.resize();
+        }, 150);
       });
       resizeObserver.observe(document.getElementById('estadosChart'));
       resizeObserver.observe(document.getElementById('destinosChart'));
-      
-      window.addEventListener('resize', () => {
-        if (statesChartInstance) statesChartInstance.resize();
-        if (destinationsChartInstance) destinationsChartInstance.resize();
-      });
     });
   </script>
 </body>

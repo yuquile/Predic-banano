@@ -537,18 +537,17 @@
       updateExportMetrics();
       setInterval(updateExportMetrics, 30000);
 
-      // Add ResizeObserver for responsive charts
+      // Add ResizeObserver for responsive charts with debounce to prevent loop and reflow storm
+      let resizeTimeout;
       const resizeObserver = new ResizeObserver(() => {
-        if (statesChartInstance) statesChartInstance.resize();
-        if (destinationsChartInstance) destinationsChartInstance.resize();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          if (statesChartInstance) statesChartInstance.resize();
+          if (destinationsChartInstance) destinationsChartInstance.resize();
+        }, 150);
       });
       resizeObserver.observe(document.getElementById('estadosChart'));
       resizeObserver.observe(document.getElementById('destinosChart'));
-      
-      window.addEventListener('resize', () => {
-        if (statesChartInstance) statesChartInstance.resize();
-        if (destinationsChartInstance) destinationsChartInstance.resize();
-      });
     });
   </script>
 </body>
