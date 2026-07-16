@@ -81,14 +81,14 @@ h1, h2, h3, h4, .card-title {
   text-transform: uppercase;
 }
 .badge-activo {
-  background-color: rgba(94, 234, 212, 0.2);
+  background-color: color-mix(in srgb, var(--secondary) 15%, transparent);
   color: var(--primary);
-  border: 1px solid rgba(94, 234, 212, 0.4);
+  border: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
 }
 .badge-riesgo-alto {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #b91c1c;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  background-color: color-mix(in srgb, var(--error) 15%, transparent);
+  color: var(--error);
+  border: 1px solid color-mix(in srgb, var(--error) 30%, transparent);
 }
 
 /* Permitir wrap seguro global en textos largos sin romper flex layouts */
@@ -152,27 +152,33 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 
 /* Estados */
 .status-pendiente {
-  color: #D4A373;
-  background-color: rgba(212,163,115,0.1);
-  border: 1px solid rgba(212,163,115,0.25);
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--warning) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--warning) 50%, transparent);
 }
 
 .status-proceso {
-  color: #40916C;
-  background-color: rgba(64,145,108,0.08);
-  border: 1px solid rgba(64,145,108,0.2);
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--info) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--info) 40%, transparent);
 }
 
 .status-enviado {
-  color: #2D6A4F;
-  background-color: rgba(45,106,79,0.08);
-  border: 1px solid rgba(45,106,79,0.2);
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--secondary) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--secondary) 40%, transparent);
 }
 
 .status-entregado {
-  color: #1B4332;
-  background-color: rgba(27,67,50,0.1);
-  border: 1px solid rgba(27,67,50,0.25);
+  color: var(--primary);
+  background-color: color-mix(in srgb, var(--success) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--success) 50%, transparent);
+}
+
+.status-cancelado {
+  color: #ffffff; /* El fondo error (rojo) es algo oscuro, puede usar blanco en badges, o usamos dark text */
+  background-color: var(--error);
+  border: 1px solid var(--error);
 }
 
 /* Modificadores de Sidebar Link */

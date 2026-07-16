@@ -150,7 +150,7 @@ body {
 
 .alert-warning {
     background: linear-gradient(135deg, var(--warning), var(--warning));
-    color: white;
+    color: var(--primary);
 }
 
 .alert-info {
@@ -160,7 +160,7 @@ body {
 
 .alert-success {
     background: linear-gradient(135deg, var(--success), var(--accent));
-    color: white;
+    color: var(--primary);
 }
 
 .alert .icon {

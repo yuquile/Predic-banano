@@ -34,23 +34,23 @@ code, pre, kbd, samp, .font-mono {
 }
 
 /* --------------------------------------------------------------------------
-   DEFAULT — Banana Harvest como paleta principal
-   Se aplica en ausencia de data-theme o con data-theme="harvest"
+   DEFAULT — AgroTech IA como paleta principal
+   Se aplica en ausencia de data-theme o si JS inyecta un tema no definido
    -------------------------------------------------------------------------- */
 :root,
-:root[data-theme="harvest"] {
-  --bg: #fffdf5;
-  --surface: rgba(255, 255, 255, 0.78);
-  --border: rgba(180, 140, 20, 0.25);
-  --primary: #2c5530;
-  --secondary: #eab308;
-  --accent: #84cc16;
-  --success: #65a30d;
-  --warning: #d97706;
-  --error: #b91c1c;
-  --info: #0369a1;
-  --text: #1c1917;
-  --text-soft: #57534e;
+:root[data-theme="agrotech"] {
+  --bg: #eef2f7;
+  --surface: rgba(255, 255, 255, 0.7);
+  --border: rgba(15, 23, 42, 0.15);
+  --primary: #0f172a; /* Azul Pizarra Oscuro */
+  --secondary: #10b981; /* Verde Esmeralda Tech */
+  --accent: #f59e0b;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+  --text: #0f172a;
+  --text-soft: #475569;
 }
 
 /* --------------------------------------------------------------------------
@@ -72,19 +72,20 @@ code, pre, kbd, samp, .font-mono {
 }
 
 /* --------------------------------------------------------------------------
-   2. PALETA "agrotech" (Clásica/Original)
+   2. PALETA "banana" (Antigua Banana Harvest)
+   (Renombrada de "harvest" para que el fallback de JS caiga al nuevo :root)
    -------------------------------------------------------------------------- */
-:root[data-theme="agrotech"] {
-  --bg: #eef2f7;
-  --surface: rgba(255, 255, 255, 0.7);
-  --border: rgba(15, 23, 42, 0.15);
-  --primary: #0f172a;
-  --secondary: #10b981;
-  --accent: #f59e0b;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
-  --info: #3b82f6;
-  --text: #0f172a;
-  --text-soft: #475569;
+:root[data-theme="banana"] {
+  --bg: #fffdf5;
+  --surface: rgba(255, 255, 255, 0.78);
+  --border: rgba(180, 140, 20, 0.25);
+  --primary: #2c5530;
+  --secondary: #eab308;
+  --accent: #84cc16;
+  --success: #65a30d;
+  --warning: #d97706;
+  --error: #b91c1c;
+  --info: #0369a1;
+  --text: #1c1917;
+  --text-soft: #57534e;
 }
