@@ -39,7 +39,7 @@ html {
 body {
     font-family: 'Outfit', sans-serif;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
+    min-height: 100dvh;
     padding: 1.25rem;
     color: var(--text);
     line-height: 1.6;
