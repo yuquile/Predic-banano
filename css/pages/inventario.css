@@ -32,6 +32,12 @@ html {
 
 /* Google Fonts fallback declarado en font-family */
 
+/* Fix de especificidad para Font Awesome 
+   (Evita que el font-weight: 500 de .btn o herencias rompan los glifos sólidos) */
+i.fas, i.fa-solid, i[class*="fa-"] {
+    font-family: "Font Awesome 6 Free", "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
+}
 /* Reset y Variables CSS */
 * {
     margin: 0;
