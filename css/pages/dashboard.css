@@ -652,3 +652,37 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
     padding-right: 1rem !important;
   }
 }
+
+/* ==========================================================================
+   FASE 5: Tabla de Exportaciones Recientes
+   ========================================================================== */
+
+/* 1. Título cortado: Forzar padding horizontal universal (corrige fallo de CDN) */
+main#contenido section > div.rounded.w-full.overflow-x-auto > div.flex.items-center,
+main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.flex {
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+}
+
+@media (min-width: 1025px) {
+  /* 2. Textos escalados (Desktop) */
+  main#contenido .export-id {
+    font-size: clamp(0.9rem, 1.1vw, 1.05rem) !important;
+    font-weight: 600 !important;
+  }
+  
+  main#contenido .export-details {
+    font-size: clamp(0.8rem, 0.9vw, 0.9rem) !important;
+  }
+  
+  main#contenido .status-badge {
+    font-size: clamp(0.75rem, 0.85vw, 0.85rem) !important;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  /* 4. Padding vertical de filas (Desktop) */
+  main#contenido .export-item {
+    padding-top: 1.15rem !important;
+    padding-bottom: 1.15rem !important;
+  }
+}
