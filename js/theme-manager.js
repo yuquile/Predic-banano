@@ -5,8 +5,8 @@ function initTheme() {
     // 1. Leer de localStorage
     const savedTheme = localStorage.getItem('bananosys-theme');
     
-    // 2. Si existe, aplicarlo. Si no, aplicar "agrotech" por defecto
-    const themeToApply = savedTheme || 'agrotech';
+    // 2. Si existe, aplicarlo. Si no, aplicar "harvest" por defecto
+    const themeToApply = savedTheme || 'harvest';
     
     // 3. Inyectar en el documento inmediatamente
     document.documentElement.setAttribute('data-theme', themeToApply);

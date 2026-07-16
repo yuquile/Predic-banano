@@ -115,12 +115,12 @@ body {
 
 .nav-btn:hover {
   background-color: var(--secondary);
-  color: var(--surface);
+  color: var(--text);
 }
 
 .nav-btn.active {
   background-color: var(--secondary);
-  color: var(--surface);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -415,9 +415,9 @@ body {
 .badge-pendiente {
   background: var(--warning);
   color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.badge-pendiente .badge-dot { background: #ffffff; }
+.badge-pendiente .badge-dot { background: var(--text); }
 
 .badge-proceso {
   background: var(--info);
@@ -427,18 +427,18 @@ body {
 .badge-proceso .badge-dot { background: #ffffff; }
 
 .badge-enviado {
-  background: var(--success);
+  background: var(--accent);
   color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.badge-enviado .badge-dot { background: #ffffff; }
+.badge-enviado .badge-dot { background: var(--text); }
 
 .badge-entregado {
   background: var(--success);
   color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
-.badge-entregado .badge-dot { background: #ffffff; }
+.badge-entregado .badge-dot { background: var(--text); }
 
 .badge-cancelado {
   background: var(--error);
