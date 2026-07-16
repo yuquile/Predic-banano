@@ -942,16 +942,7 @@ body {
 }
 .btn-danger:hover { background: var(--error); }
 
-@media (max-width: 768px) {
-  .dashboard-layout { flex-direction: column; overflow: visible; height: auto; }
-  .sidebar-dark { width: 100%; flex-direction: row; flex-wrap: wrap; height: auto; align-items: center; }
-  .sidebar-nav { flex-direction: row; overflow-x: auto; padding: 1rem; }
-  .nav-btn { width: auto; flex: none; }
-  .sidebar-footer { display: none; }
-  .top-header { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .search-filter { flex-direction: column; align-items: stretch; }
-  .search-input { min-width: 100%; }
-}
+
 
 /* Tracking Dark Panel Design based on Reference */
 .tracking-dark-panel {
@@ -1756,5 +1747,14 @@ body {
     
     .panel-box, .stat-card, .doc-selection-card {
         padding: 1rem !important;
+    }
+
+    /* 8. Fix para filtros y busqueda */
+    .search-filter { 
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+    .search-input { 
+        min-width: 100%; 
     }
 }
