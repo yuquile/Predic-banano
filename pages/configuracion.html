@@ -417,6 +417,7 @@
         ];
 
         const option = {
+          animation: false,
           baseOption: {
             tooltip: { 
               trigger: 'item', 
@@ -492,6 +493,7 @@
         const sortedDestinations = Object.entries(destinations).sort(([,a], [,b]) => b - a).slice(0, 6);
         
         const option = {
+          animation: false,
           tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
           xAxis: {
             type: 'category',
