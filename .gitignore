@@ -72,3 +72,7 @@ node_modules/
 diselño_visual/
 diseño_visual/
 qa-scripts/
+
+*.bak
+*.zip
+_backup_removed/

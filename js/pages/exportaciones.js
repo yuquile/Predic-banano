@@ -32,7 +32,7 @@
         if (savedOrders) {
             try {
                 orders = JSON.parse(savedOrders);
-                console.log('Datos cargados desde localStorage:', orders.length, 'pedidos');
+                // console.log('Datos cargados desde localStorage:', orders.length, 'pedidos');
             } catch (error) {
                 console.error('Error al cargar datos guardados:', error);
                 orders = [];
@@ -40,7 +40,7 @@
         } else {
             // Si no hay datos guardados, usar array vacío
             orders = [];
-            console.log('No hay datos guardados, iniciando con lista vacía');
+            // console.log('No hay datos guardados, iniciando con lista vacía');
         }
     }
 
@@ -48,7 +48,7 @@
     function saveOrdersToStorage() {
         try {
             localStorage.setItem('exportOrders', JSON.stringify(orders));
-            console.log('Datos guardados en localStorage:', orders.length, 'pedidos');
+            // console.log('Datos guardados en localStorage:', orders.length, 'pedidos');
         } catch (error) {
             console.error('Error al guardar datos:', error);
         }

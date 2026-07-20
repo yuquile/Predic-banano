@@ -68,12 +68,12 @@ class SistemaInventario {
             const datosGuardados = localStorage.getItem('inventario_postcosecha');
             if (datosGuardados) {
                 const datos = JSON.parse(datosGuardados);
-                console.log('Datos cargados desde localStorage:', datos.length, 'lotes');
+                // console.log('Datos cargados desde localStorage:', datos.length, 'lotes');
                 return datos;
             }
             
             // Si no hay datos guardados, devolver array vacío
-            console.log('No hay datos guardados, iniciando array vacío');
+            // console.log('No hay datos guardados, iniciando array vacío');
             return [];
         } catch (error) {
             console.error('Error al cargar datos:', error);
@@ -87,7 +87,7 @@ class SistemaInventario {
         try {
             // Guardar en localStorage
             localStorage.setItem('inventario_postcosecha', JSON.stringify(this.lotes));
-            console.log('✅ Datos guardados en localStorage:', this.lotes.length, 'lotes');
+            // console.log('✅ Datos guardados en localStorage:', this.lotes.length, 'lotes');
             
             // También mantener en memoria como respaldo
             window.__inventarioData = [...this.lotes];
@@ -122,7 +122,7 @@ class SistemaInventario {
             this.actualizarTabla();
             this.actualizarEstadisticas();
             
-            console.log('Lote agregado:', lote.codigoLote, '- Total lotes:', this.lotes.length);
+            // console.log('Lote agregado:', lote.codigoLote, '- Total lotes:', this.lotes.length);
         } catch (error) {
             console.error('Error al agregar lote:', error);
             Swal.fire({
@@ -145,7 +145,7 @@ class SistemaInventario {
                 this.actualizarTabla();
                 this.actualizarEstadisticas();
                 
-                console.log('Lote editado:', loteActualizado.codigoLote);
+                // console.log('Lote editado:', loteActualizado.codigoLote);
             }
         } catch (error) {
             console.error('Error al editar lote:', error);
@@ -186,7 +186,7 @@ class SistemaInventario {
                 this.actualizarTabla();
                 this.actualizarEstadisticas();
                 
-                console.log('Lote eliminado:', lote.codigoLote, '- Total lotes:', this.lotes.length);
+                // console.log('Lote eliminado:', lote.codigoLote, '- Total lotes:', this.lotes.length);
                 
                 Swal.fire({
                     title: '¡Eliminado!',
@@ -502,7 +502,7 @@ class SistemaInventario {
                 this.actualizarTabla();
                 this.actualizarEstadisticas();
 
-                console.log('Estado cambiado:', lote.codigoLote, 'a', nuevoEstado);
+                // console.log('Estado cambiado:', lote.codigoLote, 'a', nuevoEstado);
 
                 // Toast de confirmación
                 const Toast = Swal.mixin({
@@ -783,7 +783,7 @@ class SistemaInventario {
                     showConfirmButton: false
                 });
                 
-                console.log('🗑️ Todos los datos han sido eliminados');
+                // console.log('🗑️ Todos los datos han sido eliminados');
             }
         });
     }
@@ -821,19 +821,19 @@ function limpiarDatos() {
 
 // Inicializar el sistema cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Inicializando sistema de inventario...');
+    // console.log('🚀 Inicializando sistema de inventario...');
     
     sistemaInventario = new SistemaInventario();
     
     const totalLotes = sistemaInventario.lotes.length;
-    console.log('📦 Sistema iniciado con', totalLotes, 'lotes cargados');
+    // console.log('📦 Sistema iniciado con', totalLotes, 'lotes cargados');
     
     // Solo generar datos de ejemplo si NO hay ningún dato guardado
     if (totalLotes === 0) {
-        console.log('📝 No hay datos guardados, generando datos de ejemplo...');
+        // console.log('📝 No hay datos guardados, generando datos de ejemplo...');
         sistemaInventario.generarDatosEjemplo();
     } else {
-        console.log('✅ Datos existentes cargados correctamente desde localStorage');
+        // console.log('✅ Datos existentes cargados correctamente desde localStorage');
         
         // Mostrar toast de bienvenida con datos cargados
         const Toast = Swal.mixin({
