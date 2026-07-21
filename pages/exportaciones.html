@@ -16,6 +16,51 @@
   <!-- Tema Global -->
   <link rel="stylesheet" href="../css/theme-variables.css">
   <script src="../js/theme-manager.js"></script>
+
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    .export-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        border-bottom: 1px solid var(--border);
+        padding: 0 clamp(1rem, 3vw, 2rem);
+        background-color: var(--surface);
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .export-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    .export-tabs .nav-btn {
+        position: relative;
+        background: transparent !important;
+        color: var(--text-soft) !important;
+        padding: 1rem 0 !important;
+        border: none !important;
+        border-bottom: 2px solid transparent !important;
+        border-radius: 0 !important;
+        font-weight: 500 !important;
+        white-space: nowrap;
+        width: auto !important;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .export-tabs .nav-btn:hover {
+        color: var(--primary) !important;
+    }
+    .export-tabs .nav-btn.active {
+        color: var(--primary) !important;
+        border-bottom-color: var(--primary) !important;
+        font-weight: 600 !important;
+    }
+    .export-tabs .nav-btn.active::before {
+        display: none !important; /* overrides sidebar style */
+    }
+  </style>
 </head>
 <body class="bg-base">
     <div class="dashboard-layout">
@@ -33,6 +78,25 @@
                     Volver al Dashboard
                 </button>
             </header>
+
+            <!-- Opciones de Navegación (Tabs) -->
+            <nav class="export-tabs">
+                <button class="nav-btn active" onclick="showSection('dashboard')">
+                    <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> Resumen
+                </button>
+                <button class="nav-btn" onclick="showSection('nuevo-pedido')">
+                    <i data-lucide="plus-circle" style="width: 18px; height: 18px;"></i> Nuevo Pedido
+                </button>
+                <button class="nav-btn" onclick="showSection('pedidos')">
+                    <i data-lucide="list" style="width: 18px; height: 18px;"></i> Gestión de Pedidos
+                </button>
+                <button class="nav-btn" onclick="showSection('seguimiento')">
+                    <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i> Seguimiento
+                </button>
+                <button class="nav-btn" onclick="showSection('documentos')">
+                    <i data-lucide="file-text" style="width: 18px; height: 18px;"></i> Documentos
+                </button>
+            </nav>
 
             <!-- Scrollable Content Area -->
             <div class="content-area">
@@ -251,6 +315,12 @@
     </div>
 
     <script src="../js/pages/exportaciones.js"></script>
+    <script>
+      // Inicializar iconos de Lucide (usados en los tabs)
+      if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+      }
+    </script>
 
     <!-- Firebase Auth Scripts Locales -->
     <script type="module" src="../js/core/firebase.js"></script>
