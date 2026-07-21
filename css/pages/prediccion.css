@@ -1,71 +1,58 @@
+/* ==========================================================================
+   Módulo de Predicción - Estilo SaaS Premium (12 Columnas)
+   ========================================================================== */
 
-/* FASE 2: Contención Global y Textos Largos */
 html {
   overflow-x: hidden;
 }
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* Selectores específicos para textos dinámicos o largos */
-.export-details, .user-name, .card-title, .product-description, h1, h2, h3, h4, h5, h6, p, a, span, li, th, td {
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
-
-
-/* Contención estricta para iconos e imágenes (Fase 1) */
-.icon-fixed {
-  flex-shrink: 0 !important;
-}
-.img-fluid {
-  max-width: 100% !important;
-  height: auto !important;
-}
-
-/* css/pages/prediccion.css */
-:root {
-  --green-50: #f0fdf4;
-  --green-100: #dcfce7;
-  --green-200: #bbf7d0;
-  --green-500: #22c55e;
-  --green-600: #16a34a;
-  --green-700: #15803d;
-  --green-800: #166534;
-  --green-900: #14532d;
-  --gray-300: #d1d5db;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --blue-50: #eff6ff;
-  --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --orange-50: #fff7ed;
-  --orange-600: #ea580c;
-  --orange-700: #c2410c;
-  --yellow-400: #facc15;
-}
-
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(to bottom right, var(--green-50), #ffffff, var(--green-50));
+  font-family: var(--font-base);
+  background-color: var(--bg);
   margin: 0;
   padding: 0;
   min-height: 100dvh;
-  color: var(--gray-800);
-  animation: fadeIn 0.6s ease-in;
+  color: var(--text);
+  animation: fadeIn 0.4s ease-in;
 }
 
 .page-wrapper {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.header-actions {
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.top-header {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+
+.header-titles h1 {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.25rem 0;
+}
+
+.header-titles p {
+  font-size: 0.875rem;
+  color: var(--text-soft);
+  margin: 0;
+  font-weight: 500;
 }
 
 .btn-volver {
@@ -73,291 +60,381 @@ body {
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  color: var(--green-700);
-  background: transparent;
-  border: none;
+  color: var(--text-soft);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .btn-volver:hover {
-  color: var(--green-900);
-  background: var(--green-50);
+  color: var(--text);
+  border-color: var(--text-soft);
+  background: var(--bg);
 }
 
-.grid-container {
+/* --------------------------------------------------------------------------
+   Grid Architecture
+   -------------------------------------------------------------------------- */
+.grid-layout {
   display: grid;
+  /* Móvil: 1 columna, Desktop: 3 paneles (25% - 50% - 25%) aprox */
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  align-items: start;
 }
 
 @media (min-width: 1024px) {
-  .grid-container {
-    grid-template-columns: repeat(3, 1fr);
+  .grid-layout {
+    grid-template-columns: 3fr 6fr 3fr;
   }
 }
 
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  border: 1px solid var(--green-100);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  animation: slideUp 0.5s ease;
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.card-title {
+/* --------------------------------------------------------------------------
+   Cards Globales
+   -------------------------------------------------------------------------- */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
-  font-size: clamp(1.20rem, 2vw, 1.50rem);
-  font-weight: 700;
-  color: var(--green-800);
-  margin-top: 0;
 }
 
-.card-title-emoji {
-  font-size: clamp(1.80rem, 2vw, 2.25rem);
-}
-
-fieldset {
-  border: none;
-  padding: 0;
+.card-header h2, .card-header-flex h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
   margin: 0;
 }
 
-legend {
-  display: none;
+.icon-container {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form-group {
-  margin-bottom: 1rem;
+.bg-primary-soft { background-color: var(--border); }
+.text-primary { color: var(--primary); }
+.text-info { color: var(--info); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-text-soft { color: var(--text-soft); }
+.bg-success { background-color: var(--success); }
+
+/* --------------------------------------------------------------------------
+   Panel Izquierdo: Formulario
+   -------------------------------------------------------------------------- */
+.prediction-form .form-group {
+  margin-bottom: 1.25rem;
 }
 
-.form-group label {
+.prediction-form label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-soft);
+  pointer-events: none;
+}
+
+.prediction-form input,
+.prediction-form select {
+  width: 100%;
+  padding: 0.625rem 1rem 0.625rem 2.5rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+.prediction-form input:focus,
+.prediction-form select:focus {
+  border-color: var(--primary);
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: var(--primary);
+  color: var(--surface); /* Texto blanco/superficie */
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s;
+  margin-top: 1.5rem;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* --------------------------------------------------------------------------
+   Panel Central: Gráfico y KPIs
+   -------------------------------------------------------------------------- */
+.card-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-soft);
+  margin: 0.25rem 0 0 0;
+}
+
+.badge-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.badge-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.chart-container {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-soft);
+  position: absolute;
+  text-align: center;
+  transition: opacity 0.3s ease;
+}
+
+.empty-state i {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.kpi-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.kpi-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem 0;
+}
+
+.kpi-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.25rem 0;
+  font-family: var(--font-mono);
+}
+
+.kpi-unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-soft);
+}
+
+.kpi-trend, .kpi-desc {
+  font-size: 0.8125rem;
+  color: var(--text-soft);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.kpi-trend i {
+  width: 14px;
+  height: 14px;
+}
+
+/* --------------------------------------------------------------------------
+   Panel Derecho: Clima
+   -------------------------------------------------------------------------- */
+.weather-hero {
+  text-align: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.weather-temp {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  line-height: 1;
+}
+
+.weather-desc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 1rem 0 0 0;
+}
+
+.weather-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--bg);
+  border-radius: 8px;
+}
+
+.metric-label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--gray-700);
-  margin-bottom: 0.5rem;
+  color: var(--text-soft);
 }
 
-.form-group input, 
-.form-group select {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--gray-300);
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.2s;
-  background-color: #ffffff;
+.metric-label i {
+  width: 18px;
+  height: 18px;
 }
 
-.form-group input:focus, 
-.form-group select:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 2px var(--green-500);
+.metric-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
 }
 
-button[type="submit"] {
-  width: 100%;
-  background-color: var(--green-600);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  margin-top: 0.5rem;
-}
-
-button[type="submit"]:hover {
-  background-color: var(--green-700);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-}
-
-.resultado {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: var(--green-50);
-  border: 2px solid var(--green-200);
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--green-800);
-  text-align: left;
-  transition: opacity 0.3s ease;
-  display: block;
-}
-
-.resultado:empty {
-  display: none;
-}
-
-/* Tarjeta 2: Estadísticas */
-.stats-title {
-  font-size: clamp(1.00rem, 2vw, 1.25rem);
-  font-weight: 700;
-  color: var(--gray-800);
-  margin: 0 0 0.25rem 0;
-}
-
-.stats-subtitle {
-  font-size: 0.875rem;
-  color: var(--gray-600);
-  margin: 0 0 1rem 0;
-}
-
-.grafico-container {
-  width: 100%;
-  height: 15.625rem;
-  position: relative;
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.stat-box {
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.stat-box.bg-green { background: var(--green-50); }
-.stat-box.bg-orange { background: var(--orange-50); }
-
-.stat-label {
-  font-size: 0.875rem;
-  color: var(--gray-600);
-  margin: 0 0 0.25rem 0;
-}
-
-.stat-value {
-  font-size: clamp(1.20rem, 2vw, 1.50rem);
-  font-weight: 700;
-  margin: 0;
-}
-
-.stat-value.text-green { color: var(--green-700); }
-.stat-value.text-orange { color: var(--orange-700); }
-
-/* Tarjeta 3: Clima */
-.weather-hero {
+.status-banner {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
-  position: relative;
-}
-
-.weather-hero svg.sun {
-  width: 6rem;
-  height: 6rem;
-  color: var(--yellow-400);
-}
-
-.weather-hero svg.cloud {
-  width: 3rem;
-  height: 3rem;
-  color: var(--gray-300);
-  position: absolute;
-  bottom: -8px;
-  right: calc(50% - 40px);
-}
-
-.weather-temp-container {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.weather-temp {
-  font-size: clamp(2.40rem, 2vw, 3.00rem);
-  font-weight: 700;
-  color: var(--gray-800);
-  margin: 0;
-}
-
-.weather-desc {
-  color: var(--gray-600);
-  margin: 0.5rem 0 0 0;
-}
-
-.weather-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.weather-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.weather-row.bg-blue { background: var(--blue-50); }
-.weather-row.bg-orange { background: var(--orange-50); }
-
-.weather-row-left {
-  display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
-}
-
-.weather-row-label {
-  font-weight: 500;
-  color: var(--gray-700);
-}
-
-.weather-row-value {
-  font-weight: 700;
-}
-
-.weather-row-value.text-blue { color: var(--blue-700); }
-.weather-row-value.text-orange { color: var(--orange-700); }
-
-.optimal-conditions {
   padding: 1rem;
-  background: var(--green-50);
-  border: 2px solid var(--green-200);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
 }
 
-.optimal-title {
+.status-banner i {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.status-banner h4 {
   font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--green-800);
+  font-weight: 600;
+  color: var(--text);
   margin: 0 0 0.25rem 0;
 }
 
-.optimal-desc {
-  font-size: 0.875rem;
-  color: var(--green-700);
+.status-banner p {
+  font-size: 0.8125rem;
+  color: var(--text-soft);
   margin: 0;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
+/* Animaciones */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
+/* Responsividad extra para móviles muy pequeños */
+@media (max-width: 640px) {
+  .page-wrapper {
+    padding: 1rem;
+  }
+}

@@ -104,26 +104,204 @@
                 <div id="dashboard" class="section active">
                     <h2>Dashboard de Exportaciones</h2>
                     <p class="section-desc">Resumen general de pedidos de exportación.</p>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number" id="total-pedidos">0</div>
-                            <div class="stat-label">Total Pedidos</div>
+                    <div class="erp-kpi-grid">
+                        <div class="erp-kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon-wrapper bg-primary-soft text-primary">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+                                </div>
+                                <span class="kpi-trend text-success"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> +5.2%</span>
+                            </div>
+                            <div class="kpi-body">
+                                <div class="stat-number" id="total-pedidos">0</div>
+                                <div class="stat-label">Total Exportaciones</div>
+                            </div>
+                            <div class="kpi-footer">vs mes anterior</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="pedidos-pendientes">0</div>
-                            <div class="stat-label">Pendientes</div>
+                        
+                        <div class="erp-kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon-wrapper bg-warning-soft text-warning">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </div>
+                                <span class="kpi-trend text-text-soft"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="5" x2="19" y1="12" y2="12"/></svg> 0.0%</span>
+                            </div>
+                            <div class="kpi-body">
+                                <div class="stat-number" id="pedidos-pendientes">0</div>
+                                <div class="stat-label">Pendientes</div>
+                            </div>
+                            <div class="kpi-footer">Requieren atención</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="pedidos-enviados">0</div>
-                            <div class="stat-label">Enviados</div>
+
+                        <div class="erp-kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon-wrapper bg-info-soft text-info">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+                                </div>
+                                <span class="kpi-trend text-success"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> +12%</span>
+                            </div>
+                            <div class="kpi-body">
+                                <div class="stat-number" id="pedidos-enviados">0</div>
+                                <div class="stat-label">En Tránsito</div>
+                            </div>
+                            <div class="kpi-footer">Ruta internacional</div>
                         </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="pedidos-entregados">0</div>
-                            <div class="stat-label">Entregados</div>
+
+                        <div class="erp-kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon-wrapper bg-success-soft text-success">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                                </div>
+                                <span class="kpi-trend text-success"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> +8.1%</span>
+                            </div>
+                            <div class="kpi-body">
+                                <div class="stat-number" id="pedidos-entregados">0</div>
+                                <div class="stat-label">Entregadas</div>
+                            </div>
+                            <div class="kpi-footer">Cierre exitoso</div>
+                        </div>
+
+                        <!-- KPI Simulados -->
+                        <div class="erp-kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon-wrapper bg-primary-soft text-primary">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                </div>
+                                <span class="kpi-trend text-success"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> +15%</span>
+                            </div>
+                            <div class="kpi-body">
+                                <div class="stat-number" id="kpi-valor-total">--</div>
+                                <div class="stat-label">Valor Total Exportado</div>
+                            </div>
+                            <div class="kpi-footer">Estimación mensual</div>
+                        </div>
+
+                        <div class="erp-kpi-card">
+                            <div class="kpi-header">
+                                <div class="kpi-icon-wrapper bg-success-soft text-success">
+                                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                                </div>
+                                <span class="kpi-trend text-success"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg> +2.4%</span>
+                            </div>
+                            <div class="kpi-body">
+                                <div class="stat-number" id="kpi-tasa-cumplimiento">--</div>
+                                <div class="stat-label">Tasa de Cumplimiento</div>
+                            </div>
+                            <div class="kpi-footer">Órdenes sin retrasos</div>
                         </div>
                     </div>
-                    <h3>Pedidos Recientes</h3>
+
+                    <div class="erp-analytics-panel">
+                        <div class="erp-chart-card erp-col-span-2">
+                            <div class="card-header-flex">
+                                <h3>Evolución de Ingresos y Exportaciones</h3>
+                                <select class="erp-select">
+                                    <option>Últimos 6 meses</option>
+                                    <option>Este año</option>
+                                </select>
+                            </div>
+                            <div class="chart-container-tall">
+                                <canvas id="chart-exportaciones"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="erp-chart-card erp-col-span-1">
+                            <div class="card-header-flex">
+                                <h3>Top Países Compradores</h3>
+                                <button class="btn-icon-only"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+                            </div>
+                            <div class="top-countries-list" id="top-countries-list"></div>
+                        </div>
+                    </div>
+
+                    <div class="erp-recent-header">
+                        <h3>Pedidos Recientes</h3>
+                        <button class="btn-secondary" onclick="showSection('pedidos')">Ver Todos</button>
+                    </div>
                     <div id="recent-orders" class="orders-grid"></div>
+
+                    <!-- Configuración y Render de Analítica -->
+                    <script src="../js/lib/chart.js"></script>
+                    <script>
+                        // Configuración única de datos preparados para backend
+                        const kpiData = {
+                            valorTotalExportado: "$1.2M",
+                            tasaCumplimiento: "98.5%",
+                            tiempoPromedioEntrega: "14 días",
+                            evolucionIngresos: {
+                                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                                dataIngresos: [150000, 180000, 160000, 210000, 190000, 240000]
+                            },
+                            topPaises: [
+                                { pais: "Estados Unidos", porcentaje: 45, color: "var(--primary)" },
+                                { pais: "Unión Europea", porcentaje: 30, color: "var(--info)" },
+                                { pais: "Japón", porcentaje: 15, color: "var(--success)" },
+                                { pais: "China", porcentaje: 10, color: "var(--warning)" }
+                            ]
+                        };
+
+                        document.addEventListener("DOMContentLoaded", () => {
+                            // Inyectar datos mockeados en la UI
+                            document.getElementById("kpi-valor-total").textContent = kpiData.valorTotalExportado;
+                            document.getElementById("kpi-tasa-cumplimiento").textContent = kpiData.tasaCumplimiento;
+                            
+                            const listContainer = document.getElementById("top-countries-list");
+                            kpiData.topPaises.forEach(item => {
+                                listContainer.innerHTML += `
+                                    <div class="country-item">
+                                        <div class="country-info">
+                                            <span class="country-name">${item.pais}</span>
+                                            <span class="country-value">${item.porcentaje}%</span>
+                                        </div>
+                                        <div class="country-bar-bg">
+                                            <div class="country-bar-fill" style="width: ${item.porcentaje}%; background-color: ${item.color};"></div>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+
+                            // Renderizar Chart
+                            const ctx = document.getElementById("chart-exportaciones");
+                            if(ctx && typeof Chart !== 'undefined') {
+                                const gradient = ctx.getContext('2d').createLinearGradient(0, 0, 0, 300);
+                                gradient.addColorStop(0, 'rgba(15, 23, 42, 0.2)'); 
+                                gradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
+
+                                new Chart(ctx, {
+                                    type: 'line',
+                                    data: {
+                                        labels: kpiData.evolucionIngresos.labels,
+                                        datasets: [{
+                                            label: 'Ingresos (USD)',
+                                            data: kpiData.evolucionIngresos.dataIngresos,
+                                            borderColor: '#0f172a',
+                                            backgroundColor: gradient,
+                                            fill: true,
+                                            tension: 0.4,
+                                            borderWidth: 3,
+                                            pointRadius: 4,
+                                            pointBackgroundColor: '#ffffff',
+                                            pointBorderColor: '#0f172a',
+                                            pointBorderWidth: 2
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: { legend: { display: false } },
+                                        scales: {
+                                            x: { grid: { display: false } },
+                                            y: { 
+                                                beginAtZero: true,
+                                                grid: { borderDash: [4, 4], color: 'rgba(0,0,0,0.05)' },
+                                                ticks: { callback: (value) => '$' + (value/1000) + 'k' }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    </script>
                 </div>
 
                 <!-- Nuevo Pedido Section -->

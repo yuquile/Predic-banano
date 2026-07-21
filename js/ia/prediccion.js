@@ -1,6 +1,12 @@
-// prediccion.js
+// js/ia/prediccion.js
 const form = document.getElementById("formPrediccion");
-const resultado = document.getElementById("resultado");
+const emptyState = document.getElementById("chart-empty-state");
+
+// KPIs
+const kpiProduccion = document.getElementById("kpi-produccion");
+const kpiRendimiento = document.getElementById("kpi-rendimiento");
+const kpiConfianza = document.getElementById("kpi-confianza");
+
 let chartInstance = null;
 
 form.addEventListener("submit", (e) => {
@@ -21,8 +27,18 @@ form.addEventListener("submit", (e) => {
   const ajusteHum  = (data.humedad - faseData.hum) * 0.3;
 
   const rendimiento = faseData.rendimiento + ajusteTemp + ajusteHum;
+  const produccionTotal = rendimiento * 38; // 38 Hectáreas activas estimadas
+  
+  // Calcular confianza (basado en cuán lejos están los datos de los parámetros ideales)
+  const desviacion = Math.abs(ajusteTemp) + Math.abs(ajusteHum);
+  let confianza = 95 - desviacion; 
+  if (confianza > 99) confianza = 98;
+  if (confianza < 60) confianza = 65;
 
-  resultado.textContent = `🌟 Cosecha estimada: ${rendimiento.toFixed(2)} toneladas por hectárea`;
+  // Actualizar KPIs en la UI
+  kpiRendimiento.innerHTML = `${rendimiento.toFixed(2)} <span class="kpi-unit">Tn/Ha</span>`;
+  kpiProduccion.innerHTML = `${Math.round(produccionTotal)} <span class="kpi-unit">Tn</span>`;
+  kpiConfianza.innerHTML = `${confianza.toFixed(1)}<span class="kpi-unit">%</span>`;
 
   // Guardar para mostrar en dashboard
   localStorage.setItem("ultimaPrediccion", JSON.stringify({
@@ -31,7 +47,7 @@ form.addEventListener("submit", (e) => {
     fase: data.fase
   }));
 
-  // Curva de predicción según comportamiento
+  // Curva de predicción según comportamiento (4 semanas)
   let curva = [];
   if (data.temperatura >= 30 && data.humedad >= 70) {
     curva = [rendimiento * 0.6, rendimiento * 0.85, rendimiento * 0.95, rendimiento];
@@ -47,48 +63,77 @@ form.addEventListener("submit", (e) => {
     fase: data.fase
   }));
 
+  // Ocultar Empty State
+  if(emptyState) emptyState.style.display = 'none';
+
+  // Destruir instancia anterior si existe
   if (chartInstance) chartInstance.destroy();
 
   const ctx = document.getElementById("graficoPrediccion").getContext("2d");
+  
+  // Crear gradiente para el Area Chart
+  const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+  gradient.addColorStop(0, 'rgba(34, 197, 94, 0.4)'); // var(--success) con opacidad
+  gradient.addColorStop(1, 'rgba(34, 197, 94, 0.0)');
+
   chartInstance = new Chart(ctx, {
     type: 'line',
     data: {
       labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
       datasets: [{
-        label: '📈 Predicción de cosecha (Tn/Ha)',
+        label: 'Proyección (Tn/Ha)',
         data: curva,
-        borderColor: '#43a047',
-        backgroundColor: 'rgba(67, 160, 71, 0.2)',
+        borderColor: '#10b981', // var(--success)
+        backgroundColor: gradient,
         fill: true,
-        tension: 0.4,
-        pointRadius: 5,
-        pointHoverRadius: 7
+        tension: 0.4, // Curva suave
+        borderWidth: 3,
+        pointBackgroundColor: '#ffffff',
+        pointBorderColor: '#10b981',
+        pointBorderWidth: 2,
+        pointRadius: 4,
+        pointHoverRadius: 6
       }]
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false,
       animation: {
-        duration: 1200,
-        easing: 'easeInOutQuart'
+        duration: 1000,
+        easing: 'easeOutQuart'
       },
       plugins: {
         legend: {
-          labels: { color: '#2e7d32', font: { size: 14, weight: 'bold' } }
+          display: false // Oculto para que sea más limpio
         },
         tooltip: {
+          backgroundColor: '#0f172a',
+          titleFont: { size: 13, family: 'Inter' },
+          bodyFont: { size: 14, weight: 'bold', family: 'Inter' },
+          padding: 12,
+          cornerRadius: 8,
+          displayColors: false,
           callbacks: {
-            label: ctx => `🍌 ${ctx.parsed.y.toFixed(2)} Tn/Ha`
+            label: ctx => `${ctx.parsed.y.toFixed(2)} Tn/Ha`
           }
         }
       },
       scales: {
+        x: {
+          grid: { display: false },
+          ticks: { font: { family: 'Inter', size: 12 }, color: '#64748b' }
+        },
         y: {
           beginAtZero: true,
-          title: {
-            display: true,
-            text: 'Toneladas por Hectárea',
-            color: '#2e7d32',
-            font: { weight: 'bold' }
+          grid: { 
+            color: 'rgba(15, 23, 42, 0.05)',
+            drawBorder: false,
+            borderDash: [5, 5] // Grid punteada
+          },
+          ticks: { 
+            font: { family: 'Inter', size: 12 }, 
+            color: '#64748b',
+            padding: 10
           }
         }
       }
