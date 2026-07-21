@@ -315,44 +315,48 @@
               <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--text);">Acciones Rápidas</h2>
             </div>
             
-            <div style="display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; padding-bottom: 4px;">
+            <div style="
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+              gap: 12px;
+            ">
               
-              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text); border-color: var(--text); min-width: 140px;">
+              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text); border-color: var(--text); width: 100%;">
                 <i data-lucide="package-check" class="icon-fixed" style="color: var(--accent); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text-inverse);">Nueva Exportación</div>
               </div>
 
-              <div onclick="window.location.href='calendario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='calendario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="sprout" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Registrar Cosecha</div>
               </div>
 
-              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="truck" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Asignar Transporte</div>
               </div>
 
-              <div onclick="window.location.href='analisis.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='analisis.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="bar-chart-3" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Ver Reportes</div>
               </div>
               
-              <div onclick="window.location.href='control-plagas.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='control-plagas.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="shield-check" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Control Calidad</div>
               </div>
               
-              <div onclick="window.location.href='costo.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='costo.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="calculator" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Calcular Costos</div>
               </div>
               
-              <div onclick="window.location.href='inventario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='inventario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="map" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Mapa de Parcelas</div>
               </div>
               
-              <div onclick="window.location.href='prediccion.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
+              <div onclick="window.location.href='prediccion.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); width: 100%;">
                 <i data-lucide="cpu" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">IA Predicciones</div>
               </div>
