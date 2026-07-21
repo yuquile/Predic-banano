@@ -100,106 +100,26 @@
 </head>
 <body class="bg-base">
   
-  <div class="flex flex-col md:flex-row min-h-[100dvh] w-full box-border" >
+  <div class="flex flex-col min-h-[100dvh] w-full box-border">
     
-    <!-- ===== SIDEBAR ===== -->
-    <aside class="flex flex-col w-full md:w-[320px] shrink-0 md:min-h-[100dvh] transition-all duration-300 bg-primary">
-      <div class="flex items-center gap-2.5 px-6 py-5 border-b" style="border-color: rgba(255,255,255,0.08);">
-        <div class="flex items-center justify-center w-8 h-8 rounded">
-          <i data-lucide="layers" class="icon-fixed" color="var(--accent)" stroke-width="2" style="width:16px; height:16px;"></i>
-        </div>
-        <div>
-          <span style="color: var(--accent); font-size: 15px; font-weight: 600; letter-spacing: 0.04em;">BananoSys</span>
-          <div style="color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">AGRO INTELLIGENCE</div>
+    <!-- Topbar Simple -->
+    <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
+      <div class="flex-1" style="min-width: 280px;">
+        <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text); letter-spacing: -0.02em; line-height: 1.3;">
+          Análisis de Inteligencia Artificial
+        </h1>
+        <div style="font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
+          Llama 3 Local — Análisis de Cultivos
         </div>
       </div>
 
-      <div class="px-6 py-4 border-b" style="border-color: rgba(255,255,255,0.08);">
-        <div style="color: rgba(255,255,255,0.5); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px;">Sesión activa</div>
-        <div id="userNameDisplay" style="color: #ffffff; font-size: 15px; font-weight: 500;">Cargando...</div>
-      </div>
-
-      <nav class="flex-1 px-3 py-4 overflow-y-auto">
-        <a href="prediccion.html" class="menu-link">
-          <i data-lucide="trending-up" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Predicción</span>
-        </a>
-        <a href="exportaciones.html" class="menu-link">
-          <i data-lucide="package" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Gestión de Exportaciones</span>
-        </a>
-        <a href="inventario.html" class="menu-link">
-          <i data-lucide="bar-chart-2" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Inventario y Postcosecha</span>
-        </a>
-        <a href="analisis.html" class="menu-link">
-          <i data-lucide="flask-conical" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Análisis Estadístico de Producción</span>
-        </a>
-        <a href="control-plagas.html" class="menu-link">
-          <i data-lucide="bug" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Control de Plagas y Calidad</span>
-        </a>
-        <a href="calendario.html" class="menu-link">
-          <i data-lucide="calendar" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Calendario Agrícola</span>
-        </a>
-        <a href="recomendaciones-ia.html" class="menu-link active">
-          <i data-lucide="cpu" class="icon-fixed" style="width:14px; height:14px;" stroke-width="2"></i>
-          <span class="flex-1 leading-snug min-w-0">Recomendaciones Inteligentes (IA)</span>
-          <i data-lucide="chevron-right" class="icon-fixed" style="width:12px; height:12px;"></i>
-        </a>
-        <a href="costo.html" class="menu-link">
-          <i data-lucide="dollar-sign" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Gestión de Costos y Rentabilidad</span>
-        </a>
-        <button id="logoutBtn" class="menu-link mt-2" style="border: none; cursor: pointer; text-align: left; color: rgba(253,247,240,0.45);">
-          <i data-lucide="log-out" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
-          <span class="flex-1 leading-snug min-w-0">Cerrar sesión</span>
+      <div class="flex items-center gap-3 shrink-0">
+        <button onclick="window.location.href='dashboard.html'" class="flex items-center gap-2 px-4 py-2 rounded" style="background-color: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-size: 14px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.backgroundColor='var(--border)'" onmouseout="this.style.backgroundColor='var(--surface)'">
+          <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
+          Volver al Dashboard
         </button>
-      </nav>
-    </aside>
-
-    <!-- ===== MAIN CONTENT ===== -->
-    <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden relative">
-      
-      <!-- Topbar -->
-      <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
-        <div class="flex-1" style="min-width: 280px;">
-          <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text); letter-spacing: -0.02em; line-height: 1.3;">
-            Análisis de Inteligencia Artificial
-          </h1>
-          <div style="font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
-            Llama 3 Local — Análisis de Cultivos
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3 shrink-0 flex-1 justify-start md:justify-end" style="min-width: 320px;">
-          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-size: 14px; width: 250px;">
-            <i data-lucide="search" class="icon-fixed" stroke-width="1.5" style="width: 13px; height: 13px;"></i>
-            <span>Buscar historial de IA...</span>
-          </div>
-
-          <div class="relative">
-            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s;">
-              <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
-            </button>
-            <div id="notifDropdown" class="notification-dropdown">
-              <div class="p-3 border-b" style="border-color: var(--border);">
-                <h4 style="font-size: 14px; font-weight: 600; color: var(--text); margin: 0;">Notificaciones</h4>
-              </div>
-              <div class="p-4 text-center text-sm text-gray-500">No hay notificaciones nuevas.</div>
-            </div>
-          </div>
-
-          <div class="flex items-center gap-2 px-3 py-1.5 rounded cursor-pointer" style="background-color: var(--surface); border: 1px solid var(--border); transition: all 0.2s;">
-            <div class="w-6 h-6 rounded-full flex items-center justify-center" style="background-color: var(--text);">
-              <span style="font-size: 12px; color: #ffffff; font-weight: 600;">AJ</span>
-            </div>
-            <span style="font-size: 14px; color: var(--text); font-weight: 500;">Abel José</span>
-          </div>
-        </div>
-      </header>
+      </div>
+    </header>
 
       <main class="flex-1 px-4 md:px-8 py-6 flex flex-col gap-6">
         
@@ -237,7 +157,6 @@
         </section>
 
       </main>
-    </div>
   </div>
 
   <script>
@@ -246,40 +165,14 @@
   <script type="module" src="../js/core/firebase.js"></script>
   <script type="module">
     import { auth } from '../js/core/firebase.js';
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     document.addEventListener('DOMContentLoaded', function() {
-      const logoutBtn = document.getElementById('logoutBtn');
-      const userNameDisplay = document.getElementById('userNameDisplay');
-      const userProfileImg = document.getElementById('userProfileImg');
-
       onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const displayName = user.displayName || user.email || 'Usuario';
-          if (userNameDisplay) userNameDisplay.textContent = displayName;
-          
-          if (userProfileImg && user.photoURL) {
-            userProfileImg.src = user.photoURL;
-            userProfileImg.onerror = function() {
-              this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
-            };
-          } else if (userProfileImg) {
-             userProfileImg.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
-          }
-        } else {
+        if (!user) {
           window.location.href = 'login.html';
         }
       });
-
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-          signOut(auth).then(() => {
-            window.location.href = 'login.html';
-          }).catch((error) => {
-            console.error('Error al cerrar sesión:', error);
-          });
-        });
-      }
     });
   </script>
   <script type="module" src="../js/ia/recomendaciones-ia-ui.js"></script>

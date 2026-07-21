@@ -16,7 +16,7 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+      background: var(--bg);
       min-height: 100dvh;
       display: flex;
       justify-content: center;
@@ -44,15 +44,15 @@
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.95);
+      background: var(--surface);
       backdrop-filter: blur(10px);
       padding: 3rem 2.5rem;
       border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
       width: 100%;
       max-width: 100%; max-width: 420px;
       position: relative;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid var(--border);
     }
 
     .logo-section {
@@ -64,7 +64,7 @@
       font-size: 3rem;
       margin-bottom: 0.5rem;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-      animation: bounce 2s infinite;
+      animation: bounce 1.2s ease-out forwards;
     }
 
     @keyframes bounce {
@@ -76,13 +76,13 @@
     .app-title {
       font-size: 1.8rem;
       font-weight: 700;
-      color: #2E7D32;
+      color: var(--primary);
       margin-bottom: 0.5rem;
     }
 
     .app-subtitle {
       font-size: 0.9rem;
-      color: #666;
+      color: var(--text-soft);
       font-weight: 300;
     }
 
@@ -97,7 +97,7 @@
       top: 50%;
       transform: translateY(-50%);
       font-size: 1.1rem;
-      color: #4CAF50;
+      color: var(--text-soft);
       z-index: 1;
       width: 20px;
       height: 20px;
@@ -109,23 +109,23 @@
     input {
       width: 100%;
       padding: 16px 16px 16px 50px;
-      border: 2px solid #e0e0e0;
+      border: 2px solid var(--border);
       border-radius: 12px;
       font-size: 14px;
-      background: rgba(255,255,255,0.9);
+      background: var(--surface);
       transition: all 0.3s ease;
-      color: #333;
+      color: var(--text);
     }
 
     input:focus {
-      border-color: #4CAF50;
+      border-color: var(--primary);
       outline: none;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px var(--border-primary);
     }
 
     input::placeholder {
-      color: #999;
+      color: var(--text-soft);
     }
 
     button {
@@ -158,32 +158,33 @@
     }
 
     #loginBtn {
-      background: linear-gradient(135deg, #4CAF50, #2E7D32);
-      color: white;
-      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+      background: var(--primary);
+      color: var(--text-inverse);
+      box-shadow: 0 4px 15px var(--border-primary);
     }
 
     #loginBtn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+      box-shadow: 0 6px 25px var(--border-primary);
     }
 
     #googleLoginBtn {
-      background: linear-gradient(135deg, #FFC107, #FF8F00);
-      color: white;
-      box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     }
 
     #googleLoginBtn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .divider {
       text-align: center;
       margin: 1.5rem 0;
       position: relative;
-      color: #666;
+      color: var(--text-soft);
       font-size: 0.9rem;
     }
 
@@ -194,11 +195,11 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, #ddd, transparent);
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
     }
 
     .divider span {
-      background: rgba(255,255,255,0.9);
+      background: var(--surface);
       padding: 0 1rem;
       position: relative;
       z-index: 1;
@@ -208,18 +209,18 @@
       text-align: center;
       margin-top: 2rem;
       font-size: 14px;
-      color: #666;
+      color: var(--text-soft);
     }
 
     .footer-text a {
-      color: #4CAF50;
+      color: var(--primary);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       transition: color 0.3s ease;
     }
 
     .footer-text a:hover {
-      color: #2E7D32;
+      color: var(--text);
       text-decoration: underline;
     }
 
@@ -228,7 +229,7 @@
       justify-content: space-around;
       margin-top: 2rem;
       padding-top: 1.5rem;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      border-top: 1px solid var(--border);
     }
 
     .feature {
@@ -243,8 +244,9 @@
     }
 
     .feature-text {
-      font-size: 0.75rem;
-      color: #666;
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      font-weight: 500;
       line-height: 1.3;
     }
 
@@ -373,9 +375,9 @@
   emailInput.addEventListener('input', () => {
     const email = emailInput.value;
     if (email && !validateEmail(email)) {
-      emailInput.style.borderColor = '#f44336';
+      emailInput.style.borderColor = 'var(--error)';
     } else {
-      emailInput.style.borderColor = '#4CAF50';
+      emailInput.style.borderColor = 'var(--primary)';
     }
   });
 
@@ -389,7 +391,7 @@
         icon: 'warning',
         title: 'Campos requeridos',
         text: 'Por favor completa todos los campos',
-        confirmButtonColor: '#4CAF50'
+        confirmButtonColor: 'var(--primary)'
       });
       return;
     }
@@ -399,7 +401,7 @@
         icon: 'error',
         title: 'Email inválido',
         text: 'Por favor ingresa un email válido',
-        confirmButtonColor: '#4CAF50'
+        confirmButtonColor: 'var(--primary)'
       });
       return;
     }
@@ -444,7 +446,7 @@
         icon: 'error',
         title: 'Error',
         text: errorMessage,
-        confirmButtonColor: '#4CAF50'
+        confirmButtonColor: 'var(--primary)'
       });
     }
   });
@@ -471,7 +473,7 @@
         icon: 'error',
         title: 'Error',
         text: 'Error al iniciar sesión con Google',
-        confirmButtonColor: '#4CAF50'
+        confirmButtonColor: 'var(--primary)'
       });
     }
   });

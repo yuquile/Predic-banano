@@ -17,36 +17,40 @@
   <!-- Tema Global -->
   <link rel="stylesheet" href="../css/theme-variables.css">
   <script src="../js/theme-manager.js"></script>
+
 </head>
-<body class="bg-base">
+<body class="bg-base" data-page-title="Panel de Control de Banano">
   
   <div class="flex flex-col md:flex-row md:h-[100dvh] w-full box-border md:overflow-hidden" >
     
     <!-- ===== SIDEBAR ===== -->
     <aside class="flex flex-col w-full md:w-[320px] shrink-0 md:h-[100dvh] md:overflow-y-auto transition-all duration-300 bg-primary">
-      
       <!-- Logo -->
-      <div class="flex items-center gap-2.5 px-6 py-5 border-b" style="border-color: rgba(255,255,255,0.08);">
+      <div class="flex items-center gap-2.5 px-6 py-5 border-b" style="border-color: var(--border-inverse);">
         <div class="flex items-center justify-center w-8 h-8 rounded">
           <i data-lucide="layers" class="icon-fixed" color="var(--accent)" stroke-width="2" style="width:16px; height:16px;"></i>
         </div>
         <div>
           <span style="color: var(--accent); font-size: 15px; font-weight: 600; letter-spacing: 0.04em;">BananoSys</span>
-          <div style="color: rgba(255,255,255,0.7); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">AGRO INTELLIGENCE</div>
+          <div style="color: var(--text-inverse-soft); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">AGRO INTELLIGENCE</div>
         </div>
       </div>
 
       <!-- User -->
-      <div class="px-6 py-4 border-b flex items-center gap-3" style="border-color: rgba(255,255,255,0.08);">
+      <div class="px-6 py-4 border-b flex items-center gap-3" style="border-color: var(--border-inverse);">
         <img src="../assets/img/usuario.png" alt="Perfil" id="userProfileImg" class="w-10 h-10 rounded-full object-cover" onerror="this.src='https://ui-avatars.com/api/?name=Camila+Almdia&background=random'" />
         <div>
-          <div id="userNameDisplay" style="color: #ffffff; font-size: 15px; font-weight: 600;">camila almdia</div>
-          <div style="color: rgba(255,255,255,0.7); font-size: 12px;">Administrador</div>
+          <div id="userNameDisplay" style="color: var(--text-inverse); font-size: 15px; font-weight: 600;">Cargando...</div>
+          <div style="color: var(--text-inverse-soft); font-size: 13px; font-weight: 500;">Productor</div>
         </div>
       </div>
 
       <!-- Navigation -->
       <nav class="flex-1 px-3 py-4 overflow-y-auto">
+        <a href="dashboard.html" class="menu-link active">
+          <i data-lucide="layout-dashboard" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Dashboard</span>
+        </a>
         <a href="prediccion.html" class="menu-link">
           <i data-lucide="trending-up" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
           <span class="flex-1 leading-snug min-w-0">Predicción</span>
@@ -79,19 +83,22 @@
           <i data-lucide="dollar-sign" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
           <span class="flex-1 leading-snug min-w-0">Gestión de Costos y Rentabilidad</span>
         </a>
-        <button id="logoutBtn" class="menu-link mt-2" style="border: none; cursor: pointer; text-align: left; color: rgba(253,247,240,0.45);">
+        <a href="configuracion.html" class="menu-link">
+          <i data-lucide="settings" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
+          <span class="flex-1 leading-snug min-w-0">Configuración</span>
+        </a>
+        <button id="logoutBtn" class="menu-link mt-2" style="border: none; cursor: pointer; text-align: left; color: var(--text-inverse-soft);">
           <i data-lucide="log-out" class="icon-fixed" style="width:14px; height:14px;" stroke-width="1.5"></i>
           <span class="flex-1 leading-snug min-w-0">Cerrar sesión</span>
         </button>
       </nav>
-
     </aside>
 
     <!-- ===== MAIN CONTENT ===== -->
     <div class="flex-1 flex flex-col min-w-0 overflow-x-hidden relative md:h-[100dvh] md:overflow-y-auto [overflow-anchor:none]">
       
       <!-- Topbar -->
-      <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
+      <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: var(--text-inverse); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;">
         <div class="flex-1" style="min-width: 280px;">
           <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text); letter-spacing: -0.02em; line-height: 1.3;">
             Panel de Control de Banano
@@ -101,16 +108,11 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-3 shrink-0 flex-1 justify-start md:justify-end" style="min-width: 320px;">
-          <div class="flex items-center gap-2 px-3 py-2 rounded" style="background-color: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-size: 14px; width: 250px;">
-            <i data-lucide="search" class="icon-fixed" stroke-width="1.5" style="width: 13px; height: 13px;"></i>
-            <span>Buscar pedidos, parcelas...</span>
-          </div>
-
+        <div class="flex items-center gap-3 shrink-0 flex-1 justify-end" style="min-width: auto;">
           <div class="relative">
-            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" class="relative flex items-center justify-center w-8 h-8 rounded" style="background-color: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s;">
-              <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width: 14px; height: 14px;"></i>
-              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: #ef4444; border: 1.5px solid #fff;"></span>
+            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" aria-label="Notificaciones" class="relative flex items-center justify-center w-11 h-11 rounded" style="background-color: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s;">
+              <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="var(--text-soft)" style="width: 14px; height: 14px;"></i>
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: var(--error); border: 1.5px solid var(--surface);"></span>
             </button>
             <!-- Dropdown -->
             <div id="notifDropdown" class="notification-dropdown">
@@ -118,7 +120,7 @@
                 <h4 style="font-size: 14px; font-weight: 600; color: var(--text); margin: 0;">Notificaciones</h4>
               </div>
               <div class="notification-item">
-                <div class="w-2 h-2 mt-1.5 rounded-full bg-red-500" style="background-color: #ef4444; flex-shrink: 0;"></div>
+                <div class="w-2 h-2 mt-1.5 rounded-full bg-error" style="background-color: var(--error); flex-shrink: 0;"></div>
                 <div>
                   <p style="font-size: 13px; font-weight: 500; color: var(--text); margin: 0 0 4px 0;">Alerta de Clima</p>
                   <p style="font-size: 12px; color: var(--text-soft); margin: 0;">Posible exceso de humedad en el sector 4.</p>
@@ -136,58 +138,56 @@
               </div>
             </div>
           </div>
-
-
         </div>
       </header>
 
-      <main id="contenido" class="flex-1 px-4 md:px-8 py-6 flex flex-col gap-6">
+      <main id="contenido" class="flex-1 px-4 md:px-8 py-6 flex flex-col" style="gap: 1.5rem;">
         
         <!-- Indicadores Clave -->
         <section class="min-w-0">
-          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-soft); font-weight: 500; margin-bottom: 10px;">
+          <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 500; color: var(--text-soft); margin-bottom: 12px;">
             Indicadores Clave
           </div>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
             
             <div class="flex flex-col justify-between p-4 rounded" style="background-color: var(--text); min-height: 96px;">
-              <div class="flex items-center justify-between">
-                <i data-lucide="shopping-cart" class="icon-fixed" stroke-width="1.5" color="rgba(255,255,255,0.7)" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-weight: 400;">Total Pedidos</span>
+              <div class="flex items-center gap-2">
+                <i data-lucide="shopping-cart" class="icon-fixed" stroke-width="1.5" color="var(--text-inverse-soft)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-inverse-soft); font-family: 'Inter', sans-serif; font-weight: 400;">Total Pedidos</span>
               </div>
-              <div id="totalPedidos" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1;">0</div>
+              <div id="totalPedidos" style="font-size: 32px; font-weight: 600; font-family: 'Inter', sans-serif; color: var(--text-inverse); line-height: 1;">0</div>
             </div>
 
             <div class="flex flex-col justify-between p-4 rounded bg-primary" style="min-height: 96px;">
-              <div class="flex items-center justify-between">
-                <i data-lucide="truck" class="icon-fixed" stroke-width="1.5" color="rgba(255,255,255,0.7)" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-weight: 400;">Transporte</span>
+              <div class="flex items-center gap-2">
+                <i data-lucide="truck" class="icon-fixed" stroke-width="1.5" color="var(--text-inverse-soft)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-inverse-soft); font-family: 'Inter', sans-serif; font-weight: 400;">Transporte</span>
               </div>
-              <div id="pedidosPendientes" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1;">0</div>
+              <div id="pedidosPendientes" style="font-size: 32px; font-weight: 600; font-family: 'Inter', sans-serif; color: var(--text-inverse); line-height: 1;">0</div>
             </div>
 
             <div class="flex flex-col justify-between p-4 rounded bg-primary" style="min-height: 96px;">
-              <div class="flex items-center justify-between">
-                <i data-lucide="refresh-cw" class="icon-fixed" stroke-width="1.5" color="rgba(255,255,255,0.7)" style="width:14px; height:14px;"></i>
-                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; font-weight: 400;">En Proceso</span>
+              <div class="flex items-center gap-2">
+                <i data-lucide="refresh-cw" class="icon-fixed" stroke-width="1.5" color="var(--text-inverse-soft)" style="width:14px; height:14px;"></i>
+                <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-inverse-soft); font-family: 'Inter', sans-serif; font-weight: 400;">En Proceso</span>
               </div>
-              <div id="pedidosProceso" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: #ffffff; line-height: 1;">0</div>
+              <div id="pedidosProceso" style="font-size: 32px; font-weight: 600; font-family: 'Inter', sans-serif; color: var(--text-inverse); line-height: 1;">0</div>
             </div>
 
             <div class="flex flex-col justify-between p-4 rounded bg-card border-accent" style="border: 1px solid var(--accent); min-height: 96px;">
-              <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
                 <i data-lucide="send" class="icon-fixed" stroke-width="1.5" color="var(--primary)" style="width:14px; height:14px;"></i>
                 <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 400;">Enviados</span>
               </div>
-              <div id="pedidosEnviados" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: var(--primary); line-height: 1;">0</div>
+              <div id="pedidosEnviados" style="font-size: 32px; font-weight: 600; font-family: 'Inter', sans-serif; color: var(--primary); line-height: 1;">0</div>
             </div>
 
             <div class="flex flex-col justify-between p-4 rounded bg-card border-accent" style="border: 1px solid var(--accent); min-height: 96px;">
-              <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
                 <i data-lucide="check-circle" class="icon-fixed" stroke-width="1.5" color="var(--primary)" style="width:14px; height:14px;"></i>
                 <span style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--primary); font-family: 'Inter', sans-serif; font-weight: 400;">Completados</span>
               </div>
-              <div id="pedidosEntregados" style="font-size: 32px; font-weight: 300; font-family: 'Inter', sans-serif; color: var(--primary); line-height: 1;">0</div>
+              <div id="pedidosEntregados" style="font-size: 32px; font-weight: 600; font-family: 'Inter', sans-serif; color: var(--primary); line-height: 1;">0</div>
             </div>
 
           </div>
@@ -195,7 +195,7 @@
 
         <!-- Condiciones Operativas -->
         <section class="min-w-0">
-          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-soft); font-weight: 500; margin-bottom: 10px;">
+          <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 500; color: var(--text-soft); margin-bottom: 12px;">
             Condiciones Operativas
           </div>
           
@@ -224,35 +224,35 @@
               </div>
 
               <div class="grid grid-cols-2 gap-2">
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
-                  <i data-lucide="droplets" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
-                  <div>
-                    <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em;">Humedad</div>
-                    <div id="humidity" style="font-size: 14px; font-weight: 500; color: var(--text);">--%</div>
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                  <i data-lucide="droplets" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
+                  <div class="flex flex-col">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">Humedad</span>
+                    <span id="humidity" style="font-size: 16px; font-weight: 600; color: var(--text);">--%</span>
                   </div>
                 </div>
                 
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
-                  <i data-lucide="wind" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
-                  <div>
-                    <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em;">Viento</div>
-                    <div id="windSpeed" style="font-size: 14px; font-weight: 500; color: var(--text);">-- km/h</div>
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                  <i data-lucide="wind" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
+                  <div class="flex flex-col">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">Viento</span>
+                    <span id="windSpeed" style="font-size: 16px; font-weight: 600; color: var(--text);">-- km/h</span>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
-                  <i data-lucide="eye" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
-                  <div>
-                    <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em;">UV</div>
-                    <div id="uvIndex" style="font-size: 14px; font-weight: 500; color: var(--text);">--</div>
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                  <i data-lucide="eye" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
+                  <div class="flex flex-col">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">UV</span>
+                    <span id="uvIndex" style="font-size: 16px; font-weight: 600; color: var(--text);">--</span>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 p-2 rounded" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
-                  <i data-lucide="thermometer" class="icon-fixed" stroke-width="1.5" color="#8B7355" style="width:12px; height:12px;"></i>
-                  <div>
-                    <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.06em;">Visibilidad</div>
-                    <div id="visibility" style="font-size: 14px; font-weight: 500; color: var(--text);">-- km</div>
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                  <i data-lucide="thermometer" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
+                  <div class="flex flex-col">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">Visibilidad</span>
+                    <span id="visibility" style="font-size: 16px; font-weight: 600; color: var(--text);">-- km</span>
                   </div>
                 </div>
               </div>
@@ -269,7 +269,7 @@
                     Fecha: --
                   </div>
                 </div>
-                <i data-lucide="trending-up" class="icon-fixed" stroke-width="1.5" color="#D4A373" style="width:16px; height:16px;"></i>
+                <i data-lucide="trending-up" class="icon-fixed" stroke-width="1.5" color="var(--accent)" style="width:16px; height:16px;"></i>
               </div>
 
               <div class="flex items-end gap-2 mb-5">
@@ -277,12 +277,12 @@
               </div>
 
               <div class="grid grid-cols-2 gap-2 mb-3">
-                <div class="p-3 rounded" style="background-color: rgba(64,145,108,0.06); border: 1px solid rgba(64,145,108,0.15);">
+                <div class="p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
                   <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-soft);">Variación</div>
                   <div id="expectedGrowth" style="font-size: 20px; font-weight: 500; color: var(--primary);">--%</div>
                   <div style="font-size: 12px; color: var(--text-soft);">vs sem. anterior</div>
                 </div>
-                <div class="p-3 rounded" style="background-color: rgba(27,67,50,0.04); border: 1px solid #EDE7DC;">
+                <div class="p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
                   <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-soft);">Confianza</div>
                   <div id="qualityScore" style="font-size: 20px; font-weight: 500; color: var(--text);">--%</div>
                   <div style="font-size: 12px; color: var(--text-soft);">modelo ML</div>
@@ -290,15 +290,15 @@
               </div>
 
               <div class="grid grid-cols-3 gap-2">
-                <div class="p-2 rounded text-center" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
+                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid var(--border);">
                   <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em;">Parcelas activas</div>
                   <div style="font-size: 15px; font-weight: 600; color: var(--text);">38</div>
                 </div>
-                <div class="p-2 rounded text-center" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
+                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid var(--border);">
                   <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em;">Riesgo climático</div>
                   <div id="riskLevel" style="font-size: 15px; font-weight: 600; color: var(--accent);">--</div>
                 </div>
-                <div class="p-2 rounded text-center" style="background-color: #ffffff; border: 1px solid #EDE7DC;">
+                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid var(--border);">
                   <div style="font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.05em;">Días cosecha</div>
                   <div id="harvestDays" style="font-size: 15px; font-weight: 600; color: var(--text);">--</div>
                 </div>
@@ -315,44 +315,44 @@
               <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--text);">Acciones Rápidas</h2>
             </div>
             
-            <div class="modules-grid">
+            <div style="display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 12px; padding-bottom: 4px;">
               
-              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text); border-color: var(--text);">
+              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text); border-color: var(--text); min-width: 140px;">
                 <i data-lucide="package-check" class="icon-fixed" style="color: var(--accent); width:20px; height:20px;"></i>
-                <div style="font-size: 13px; font-weight: 500; color: #ffffff;">Nueva Exportación</div>
+                <div style="font-size: 13px; font-weight: 500; color: var(--text-inverse);">Nueva Exportación</div>
               </div>
 
-              <div onclick="window.location.href='calendario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='calendario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="sprout" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Registrar Cosecha</div>
               </div>
 
-              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='exportaciones.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="truck" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Asignar Transporte</div>
               </div>
 
-              <div onclick="window.location.href='analisis.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='analisis.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="bar-chart-3" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Ver Reportes</div>
               </div>
               
-              <div onclick="window.location.href='control-plagas.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='control-plagas.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="shield-check" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Control Calidad</div>
               </div>
               
-              <div onclick="window.location.href='costo.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='costo.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="calculator" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Calcular Costos</div>
               </div>
               
-              <div onclick="window.location.href='inventario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='inventario.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="map" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">Mapa de Parcelas</div>
               </div>
               
-              <div onclick="window.location.href='prediccion.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: #ffffff; border-color: #EDE7DC;">
+              <div onclick="window.location.href='prediccion.html'" class="p-4 rounded border flex flex-col items-center justify-center gap-3 text-center cursor-pointer transition-colors" style="background-color: var(--text-inverse); border-color: var(--border); min-width: 140px;">
                 <i data-lucide="cpu" class="icon-fixed" style="color: var(--primary); width:20px; height:20px;"></i>
                 <div style="font-size: 13px; font-weight: 500; color: var(--text);">IA Predicciones</div>
               </div>
@@ -363,7 +363,7 @@
 
         <!-- Charts (Análisis y Visualización) -->
         <section class="min-w-0">
-          <div style="font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-soft); font-weight: 500; margin-bottom: 10px;">
+          <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 500; color: var(--text-soft); margin-bottom: 12px;">
             Análisis y Visualización
           </div>
           
@@ -392,16 +392,16 @@
         <section class="pb-8 min-w-0">
           <div class="rounded w-full overflow-x-auto" style="background-color: var(--surface); border: 1px solid var(--border); font-family: 'Inter', sans-serif;">
             
-            <div class="flex items-center justify-between px-5 py-4" style="border-bottom: 1px solid #EDE7DC;">
+            <div class="flex items-center justify-between px-5 py-4" style="border-bottom: 1px solid var(--border);">
               <h3 style="font-family: 'Merriweather', Georgia, serif; font-size: 17px; font-weight: 400; color: var(--text);">Exportaciones Recientes</h3>
-              <button onclick="window.location.href='exportaciones.html'" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #2D6A4F; border: 1px solid rgba(45,106,79,0.3); padding: 4px 12px; border-radius: 2px; background-color: transparent; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+              <button onclick="window.location.href='exportaciones.html'" style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); border: 1px solid var(--border-primary); padding: 4px 12px; border-radius: 2px; background-color: transparent; cursor: pointer; display: flex; align-items: center; gap: 4px;">
                 Ver todo <i data-lucide="arrow-up-right" class="icon-fixed" style="width:10px; height:10px;"></i>
               </button>
             </div>
             
             <div class="w-full">
               <!-- Encabezado de la tabla -->
-              <div class="flex px-5 py-2.5" style="border-bottom: 1px solid #EDE7DC; background: #fff;">
+              <div class="flex px-5 py-2.5" style="border-bottom: 1px solid var(--border); background: var(--surface);">
                 <div style="flex:1; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); font-weight: 500;">Ref. / Detalles</div>
                 <div style="width:100px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-soft); font-weight: 500; text-align: right;">Estado</div>
               </div>
@@ -430,11 +430,8 @@
   <script type="module" src="../js/core/firebase.js"></script>
   <script type="module">
     import { auth } from '../js/core/firebase.js';
-    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
     document.addEventListener('DOMContentLoaded', function() {
-      const logoutBtn = document.getElementById('logoutBtn');
-      const userNameDisplay = document.getElementById('userNameDisplay');
 
       // Función para obtener el clima
       async function getWeatherData() {
@@ -476,43 +473,7 @@
       getWeatherData();
       updateTime();
       setInterval(updateTime, 60000); 
-      setInterval(getWeatherData, 600000); 
-
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          const displayName = user.displayName || user.email;
-          userNameDisplay.textContent = displayName;
-          
-          const userProfileImg = document.getElementById('userProfileImg');
-          if (userProfileImg && user.photoURL) {
-            userProfileImg.src = user.photoURL;
-            userProfileImg.onerror = function() {
-              this.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random`;
-            };
-          }
-        } else {
-          window.location.href = 'login.html';
-        }
-      });
-
-      if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-          Swal.fire({
-            title: '¿Está seguro?',
-            text: '¿Desea cerrar sesión?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, cerrar sesión',
-            cancelButtonText: 'Cancelar'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              signOut(auth).then(() => {
-                window.location.href = 'login.html';
-              });
-            }
-          });
-        });
-      }
+      setInterval(getWeatherData, 600000);
 
       const prediccion = localStorage.getItem("ultimaPrediccion");
       if (prediccion) {
@@ -712,6 +673,36 @@
       });
       resizeObserver.observe(document.getElementById('estadosChart'));
       resizeObserver.observe(document.getElementById('destinosChart'));
+    });
+  </script>
+
+  <!-- Firebase Auth Scripts Locales -->
+  <script type="module" src="../js/core/firebase.js"></script>
+  <script type="module">
+    import { auth } from '../js/core/firebase.js';
+    import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+    document.addEventListener('DOMContentLoaded', () => {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const userNameDisplay = document.getElementById('userNameDisplay');
+          const userProfileImg = document.getElementById('userProfileImg');
+          
+          if (userNameDisplay) userNameDisplay.textContent = user.displayName || user.email.split('@')[0] || 'Productor';
+          if (userProfileImg && user.photoURL) userProfileImg.src = user.photoURL;
+        } else {
+          window.location.href = 'login.html';
+        }
+      });
+
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          signOut(auth).then(() => {
+            window.location.href = 'login.html';
+          });
+        });
+      }
     });
   </script>
 </body>

@@ -32,7 +32,7 @@
                     <p>Sistema de inspección y control de calidad para productos de exportación</p>
                 </div>
             </div>
-            <a href="#" class="back-to-dashboard" onclick="goToDashboard(event)">
+            <a href="dashboard.html" class="back-to-dashboard">
                 <i class="fas fa-arrow-left"></i> Regresar al Dashboard
             </a>
         </div>
@@ -232,5 +232,20 @@
     </div>
 
     <script src="../js/pages/control-plagas.js"></script>
+
+    <!-- Firebase Auth Scripts Locales -->
+    <script type="module" src="../js/core/firebase.js"></script>
+    <script type="module">
+        import { auth } from '../js/core/firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

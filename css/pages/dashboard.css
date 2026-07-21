@@ -192,7 +192,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   margin-bottom: 0.125rem;
   transition: all 0.2s;
   background-color: transparent;
-  color: rgba(255,255,255,0.7);
+  color: var(--text-inverse-soft);
   font-size: 0.9063rem;
   font-weight: 400;
   border-left: 3px solid transparent;

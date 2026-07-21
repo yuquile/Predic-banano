@@ -124,5 +124,20 @@
     </div>
 
     <script src="../js/pages/calendario.js"></script>
+
+    <!-- Firebase Auth Scripts Locales -->
+    <script type="module" src="../js/core/firebase.js"></script>
+    <script type="module">
+        import { auth } from '../js/core/firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            onAuthStateChanged(auth, (user) => {
+                if (!user) {
+                    window.location.href = 'login.html';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

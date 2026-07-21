@@ -17,53 +17,12 @@
   <link rel="stylesheet" href="../css/theme-variables.css">
   <script src="../js/theme-manager.js"></script>
 </head>
-<body>
+<body class="bg-base">
     <div class="dashboard-layout">
-        <!-- Checkbox y Botón para menú en móviles (CSS Puro) -->
-        <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle">
-        <label for="mobile-menu-toggle" class="mobile-menu-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </label>
-
-        <!-- Sidebar -->
-        <aside class="sidebar-dark">
-            <div class="sidebar-logo">
-                AgroExport
-            </div>
-            <nav class="sidebar-nav">
-                <button class="nav-btn active" onclick="showSection('dashboard')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
-                    <span>Pedidos (Dashboard)</span>
-                </button>
-                <button class="nav-btn" onclick="showSection('nuevo-pedido')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-                    <span>Nuevo Pedido</span>
-                </button>
-                <button class="nav-btn" onclick="showSection('pedidos')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
-                    <span>Gestionar Pedidos</span>
-                </button>
-                <button class="nav-btn" onclick="showSection('seguimiento')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    <span>Seguimiento</span>
-                </button>
-                <button class="nav-btn" onclick="showSection('documentos')">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-                    <span>Documentos</span>
-                </button>
-            </nav>
-            <div class="sidebar-footer">
-                <div class="user-avatar">JD</div>
-                <div class="user-info">
-                    <span class="user-name">Juan Díaz</span>
-                    <span class="user-role">Administrador</span>
-                </div>
-            </div>
-        </aside>
 
         <!-- Main Content Wrapper -->
         <main class="main-wrapper">
-            <!-- Top Header -->
+            <!-- Top Header Original -->
             <header class="top-header">
                 <div class="header-titles">
                     <h1>Sistema de Gestión de Exportaciones</h1>
@@ -292,29 +251,20 @@
     </div>
 
     <script src="../js/pages/exportaciones.js"></script>
-    <!-- Firebase Auth Profile Sync -->
+
+    <!-- Firebase Auth Scripts Locales -->
+    <script type="module" src="../js/core/firebase.js"></script>
     <script type="module">
-        import { auth } from '../js/core/firebase.js';
-        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+      import { auth } from '../js/core/firebase.js';
+      import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const userNameDisplay = document.querySelector('.user-name');
-            const userAvatar = document.querySelector('.user-avatar');
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    const displayName = user.displayName || user.email.split('@')[0];
-                    userNameDisplay.textContent = displayName;
-                    
-                    if (user.photoURL) {
-                        userAvatar.innerHTML = `<img src="${user.photoURL}" alt="Perfil" style="width:100%; height:100%; border-radius:50%; object-fit:cover; display:block;">`;
-                        userAvatar.style.padding = '0';
-                    } else {
-                        userAvatar.textContent = displayName.substring(0, 2).toUpperCase();
-                    }
-                }
-            });
+      document.addEventListener('DOMContentLoaded', () => {
+        onAuthStateChanged(auth, (user) => {
+          if (!user) {
+            window.location.href = 'login.html';
+          }
         });
+      });
     </script>
 </body>
 </html>
