@@ -37,15 +37,19 @@
     <div class="controls-bar">
         <div class="controls-container">
             <div class="view-controls">
-                <button class="view-btn active" id="monthView">Vista Mensual</button>
-                <button class="view-btn" id="weekView">Vista Semanal</button>
+                <button class="view-btn active" id="monthView"><i class="fas fa-calendar-alt"></i> Vista Mensual</button>
+                <button class="view-btn" id="weekView"><i class="fas fa-list"></i> Vista Semanal</button>
             </div>
             <div class="nav-controls">
                 <button class="nav-btn" id="prevPeriod"><i class="fas fa-chevron-left"></i></button>
                 <div class="current-date" id="currentDate"></div>
                 <button class="nav-btn" id="nextPeriod"><i class="fas fa-chevron-right"></i></button>
             </div>
-            <div class="spacer"></div>
+            <div class="spacer">
+                <button id="btnToday" class="btn-today">
+                    <i class="fas fa-calendar-day"></i> Hoy
+                </button>
+            </div>
         </div>
     </div>
 
@@ -53,7 +57,7 @@
             <div class="sidebar">
                 <div class="add-event-form panel-card">
                     <div class="panel-header">
-                        <div class="panel-icon"><i class="fas fa-pen"></i></div>
+                        <div class="panel-icon"><i class="fas fa-leaf"></i></div>
                         <h3>Agregar Actividad</h3>
                     </div>
                     <form id="eventForm" class="panel-body">
@@ -80,7 +84,7 @@
                             <textarea class="form-control" id="eventDescription" placeholder="Detalles de la actividad..."></textarea>
                             <label for="eventDescription">Descripción</label>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Agregar Actividad</button>
+                        <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Agregar Actividad</button>
                     </form>
                 </div>
 
@@ -89,7 +93,9 @@
                         <div class="panel-icon"><i class="fas fa-clock"></i></div>
                         <h3>Próximas Actividades</h3>
                     </div>
-                    <div id="upcomingList" class="panel-body"></div>
+                    <div id="upcomingList" class="panel-body">
+                        <!-- El estado vacío se manejará via JS (actualmente ya inyecta un texto si está vacío, pero podemos complementar con CSS) -->
+                    </div>
                 </div>
             </div>
 
@@ -124,6 +130,15 @@
     </div>
 
     <script src="../js/pages/calendario.js"></script>
+    <script>
+        // Funcionalidad para el botón "Hoy" sin tocar la lógica existente
+        document.getElementById('btnToday').addEventListener('click', function() {
+            if (window.calendario) {
+                window.calendario.currentDate = new Date();
+                window.calendario.render();
+            }
+        });
+    </script>
 
     <!-- Firebase Auth Scripts Locales -->
     <script type="module" src="../js/core/firebase.js"></script>
