@@ -7,7 +7,7 @@
 ## ✨ Características Principales
 
 *   **🔐 Autenticación Segura:** Sistema de login robusto implementado con Firebase (soporte para Google Sign-In).
-*   **🧠 Motor de IA Local:** Recomendaciones *on-device* utilizando un motor de inteligencia artificial con Ollama y el modelo Llama 3.1, garantizando privacidad y rapidez.
+*   **🧠 Motor de Recomendaciones:** Recomendaciones rápidas y automáticas generadas a partir de reglas y del estado actual de la finca.
 *   **📊 Visualización de Datos Avanzada:** Gráficos y análisis detallados generados con ECharts para facilitar la interpretación del rendimiento, exportaciones y costos.
 *   **🎨 Diseño "BananoSys Soft Green":** Interfaz de usuario moderna y premium que emplea técnicas de *glassmorphism*. La paleta de colores destaca con tonos verdes elegantes (#164e3b y #5eead4) y tipografía "Outfit" para una legibilidad y estética superiores.
 *   **📅 Gestión Integral:** Módulos dedicados para inventario, costos, exportaciones, control de plagas y calendario agrícola.
@@ -17,7 +17,7 @@
 *   **Frontend:** HTML5, CSS3 (Vanilla con diseño Soft Green/Glassmorphism), JavaScript (ES6+).
 *   **Librerías de Visualización:** [ECharts](https://echarts.apache.org/) para gráficos interactivos.
 *   **Backend & Cloud Services:** [Firebase](https://firebase.google.com/) (Authentication, Hosting/Configuración).
-*   **Inteligencia Artificial:** [Ollama](https://ollama.ai/) corriendo localmente con el modelo **Llama 3.1** para generar predicciones y recomendaciones inteligentes.
+*   **Lógica de Recomendaciones:** Reglas internas para generar predicciones y recomendaciones.
 
 ## 📂 Estructura del Proyecto
 
@@ -32,7 +32,7 @@ El proyecto sigue una arquitectura modular y organizada:
  ┃ ┗ 📂 pages/             # Estilos específicos para cada vista (ej. costo.css, dashboard.css)
  ┣ 📂 js/                  # Lógica de la aplicación
  ┃ ┣ 📂 core/              # Configuración principal (firebase.js, auth.js)
- ┃ ┣ 📂 ia/                # Módulo de Inteligencia Artificial (ollama-service.js, recomendaciones.js)
+ ┃ ┣ 📂 ia/                # Módulo de Recomendaciones (contexto-finca.js, reglas-motor.js, recomendaciones-ia-ui.js)
  ┃ ┣ 📂 pages/             # Controladores para cada página HTML
  ┃ ┗ 📂 services/          # Servicios adicionales y conexión a APIs
  ┣ 📂 pages/               # Vistas principales de la aplicación (HTML)
@@ -52,8 +52,7 @@ Para ejecutar este proyecto en tu entorno local, asegúrate de contar con:
 
 1.  **Node.js y npm** instalados (opcional para herramientas de desarrollo locales, aunque el frontend es estático).
 2.  **Cuenta de Firebase:** Necesaria para configurar la autenticación.
-3.  **Ollama:** Instalado en tu máquina para correr el motor de IA localmente.
-4.  **Servidor Web Local:** Como *Live Server* (extensión de VS Code) o `http-server` de npm.
+3.  **Servidor Web Local:** Como *Live Server* (extensión de VS Code) o `http-server` de npm.
 
 ## 🚀 Instalación y Configuración
 
@@ -85,20 +84,7 @@ const firebaseConfig = {
 };
 ```
 
-### 3. Instalación y Configuración de Ollama (IA Local)
-
-BananoSys utiliza **Llama 3.1** vía Ollama para las recomendaciones del cultivo.
-
-1. Descarga e instala Ollama desde [ollama.com](https://ollama.com/).
-2. Una vez instalado, abre tu terminal e inicia la descarga del modelo ejecutando:
-
-```bash
-ollama run llama3.1
-```
-3. Asegúrate de que el servicio de Ollama se esté ejecutando en segundo plano en el puerto por defecto (usualmente `http://localhost:11434`), ya que `js/ia/ollama-service.js` realizará peticiones a esta dirección.
-4. **CORS:** Si experimentas problemas de CORS al hacer peticiones desde el navegador hacia Ollama, es posible que necesites configurar las variables de entorno de Ollama (`OLLAMA_ORIGINS="*"`) dependiendo de tu sistema operativo.
-
-### 4. Levantar el Proyecto Localmente
+### 3. Levantar el Proyecto Localmente
 
 Al ser una aplicación basada fuertemente en HTML/JS/CSS estáticos de lado del cliente, puedes servirla fácilmente:
 
@@ -119,7 +105,7 @@ Luego, abre tu navegador en `http://localhost:8080`.
 *Vista del Dashboard Principal*
 
 <!-- Agregar screenshot aquí -->
-*Módulo de Predicción y Recomendaciones IA*
+*Módulo de Recomendaciones*
 
 ## 🗺️ Roadmap (Funcionalidades Futuras)
 

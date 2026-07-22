@@ -1,180 +1,188 @@
-import { buildCropContext, streamOllamaChat } from './ollama-service.js';
+import { buildCropContext } from './contexto-finca.js';
+import { evaluarRecomendaciones } from './reglas-motor.js';
 
-let messagesHistory = [];
-let isGenerating = false;
+// ── Elementos del DOM ─────────────────────────────────────────────────────────
+const grid       = document.getElementById('chatMessages');
+const btnRefresh = document.getElementById('btnNewChat');
 
-// Elementos del DOM
-const chatMessages = document.getElementById('chatMessages');
-const chatForm = document.getElementById('chatForm');
-const chatInput = document.getElementById('chatInput');
-const btnSend = document.getElementById('btnSend');
-const btnNewChat = document.getElementById('btnNewChat');
-const errorAlert = document.getElementById('errorAlert');
-const errorText = document.getElementById('errorText');
+// KPI spans
+const kpiHigh    = document.getElementById('kpiHigh');
+const kpiMedium  = document.getElementById('kpiMedium');
+const kpiOk      = document.getElementById('kpiOk');
 
-/**
- * Añade una burbuja de mensaje al chat y scrollea hacia abajo
- */
-function appendMessage(role, text) {
-    const wrapper = document.createElement('div');
-    wrapper.className = `message-bubble ${role === 'user' ? 'message-user' : 'message-ai'}`;
-    
-    // Si es IA, usar Marked.js para renderizar Markdown (si está disponible), si no, texto plano
-    if (role === 'ai') {
-        if (typeof marked !== 'undefined') {
-            wrapper.innerHTML = marked.parse(text);
-        } else {
-            wrapper.innerText = text;
-        }
+// Chip counts
+const countAll       = document.getElementById('countAll');
+const countPlagas    = document.getElementById('countPlagas');
+const countInventario= document.getElementById('countInventario');
+const countHighChip  = document.getElementById('countHigh');
+
+// ── Estado global ─────────────────────────────────────────────────────────────
+let _allRecs  = [];           // todas las recomendaciones del ciclo actual
+let _activeFilter = 'all';   // filtro activo
+
+// ── Utilidades ────────────────────────────────────────────────────────────────
+
+/** Devuelve la antigüedad de una fecha como texto en español */
+function relativeDate(dateStr) {
+    if (!dateStr) return '—';
+    const past = new Date(dateStr);
+    if (isNaN(past.getTime())) return '—';
+    const diffMs   = Date.now() - past.getTime();
+    const diffDays = Math.floor(diffMs / 86_400_000);
+    if (diffDays === 0) return 'Hoy';
+    if (diffDays === 1) return 'Hace 1 día';
+    return `Hace ${diffDays} días`;
+}
+
+/** Renderiza una tarjeta en el grid */
+function appendCard(rec) {
+    const priorityClass = rec.prioridad === 'alta'  ? 'priority-high'
+                        : rec.prioridad === 'media' ? 'priority-medium'
+                        :                             'priority-low';
+
+    const badgeLabel = rec.prioridad === 'alta'  ? 'Alta'
+                     : rec.prioridad === 'media' ? 'Media'
+                     :                             'Baja';
+
+    const origenIcon  = rec.origen === 'plagas' ? 'bug' : 'package';
+    const dateText    = relativeDate(rec.fecha);
+
+    const article = document.createElement('article');
+    article.className = `rec-card ${priorityClass}`;
+    article.dataset.origen    = rec.origen;
+    article.dataset.prioridad = rec.prioridad;
+
+    article.innerHTML = `
+        <div class="priority-strip"></div>
+        <div class="rec-content">
+            <div class="rec-header">
+                <div class="rec-icon">
+                    <i data-lucide="${origenIcon}" style="width:18px;height:18px;"></i>
+                </div>
+                <span class="rec-title">${rec.lote}</span>
+                <span class="rec-badge">${badgeLabel}</span>
+            </div>
+            <p class="rec-message">${rec.mensaje}</p>
+            <div class="rec-footer">
+                <span class="rec-meta">
+                    <span class="dot"></span> ${dateText}
+                </span>
+                <button class="btn-attend" aria-label="Marcar como atendido">
+                    <i data-lucide="check" style="width:14px;height:14px;"></i>
+                    Marcar como atendido
+                </button>
+            </div>
+        </div>
+    `;
+
+    grid.appendChild(article);
+}
+
+/** Renderiza el estado vacío */
+function renderEmpty() {
+    grid.innerHTML = `
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i data-lucide="circle-check-big" style="width:48px;height:48px;"></i>
+            </div>
+            <h2 class="empty-title">Sin alertas activas</h2>
+            <p class="empty-message">
+                Todos los lotes están en condiciones normales.
+                El monitoreo continúa sin novedades que requieran atención.
+            </p>
+        </div>
+    `;
+}
+
+/** Actualiza los contadores de los chips de filtro */
+function updateCounts(recs) {
+    const total     = recs.length;
+    const plagas    = recs.filter(r => r.origen === 'plagas').length;
+    const inventario= recs.filter(r => r.origen === 'inventario').length;
+    const high      = recs.filter(r => r.prioridad === 'alta').length;
+    const medium    = recs.filter(r => r.prioridad === 'media').length;
+
+    if (countAll)        countAll.textContent        = total;
+    if (countPlagas)     countPlagas.textContent     = plagas;
+    if (countInventario) countInventario.textContent = inventario;
+    if (countHighChip)   countHighChip.textContent   = high;
+
+    // KPIs
+    if (kpiHigh)   kpiHigh.textContent   = high;
+    if (kpiMedium) kpiMedium.textContent = medium;
+    if (kpiOk)     kpiOk.textContent     = '—';   // sería calculado con datos reales de lotes
+}
+
+/** Aplica el filtro activo y re-renderiza */
+function applyFilter(filter) {
+    _activeFilter = filter;
+    grid.innerHTML = '';
+
+    const filtered = _allRecs.filter(rec => {
+        if (filter === 'all')        return true;
+        if (filter === 'plagas')     return rec.origen === 'plagas';
+        if (filter === 'inventario') return rec.origen === 'inventario';
+        if (filter === 'high')       return rec.prioridad === 'alta';
+        return true;
+    });
+
+    if (filtered.length === 0) {
+        renderEmpty();
     } else {
-        wrapper.innerText = text;
+        filtered.forEach(rec => appendCard(rec));
     }
 
-    chatMessages.appendChild(wrapper);
-    scrollToBottom();
-    return wrapper;
+    // Re-inicializar Lucide para los nuevos iconos inyectados
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
-/**
- * Muestra u oculta el indicador de escribiendo
- */
-let typingIndicatorObj = null;
-function toggleTypingIndicator(show) {
-    if (show && !typingIndicatorObj) {
-        typingIndicatorObj = document.createElement('div');
-        typingIndicatorObj.className = 'message-bubble message-ai typing-indicator';
-        typingIndicatorObj.innerHTML = `
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-        `;
-        chatMessages.appendChild(typingIndicatorObj);
-        scrollToBottom();
-    } else if (!show && typingIndicatorObj) {
-        typingIndicatorObj.remove();
-        typingIndicatorObj = null;
-    }
+// ── Motor principal ───────────────────────────────────────────────────────────
+
+function initRulesEngine() {
+    const context = buildCropContext();
+    _allRecs = evaluarRecomendaciones(context.plagasData, context.inventarioData);
+
+    updateCounts(_allRecs);
+    applyFilter(_activeFilter);   // respeta el filtro activo al refrescar
+
+    // Actualizar chips del DOM con estado activo
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        const isActive = chip.dataset.filter === _activeFilter;
+        chip.classList.toggle('active', isActive);
+        chip.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
 }
 
-function scrollToBottom() {
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
+// ── Interactividad de chips ────────────────────────────────────────────────────
 
-function setInputState(disabled) {
-    chatInput.disabled = disabled;
-    btnSend.disabled = disabled;
-    if (!disabled) chatInput.focus();
-}
+document.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', function () {
+        document.querySelectorAll('.filter-chip').forEach(c => {
+            c.classList.remove('active');
+            c.setAttribute('aria-pressed', 'false');
+        });
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+        applyFilter(this.dataset.filter);
+    });
 
-function showError(msg) {
-    errorText.innerText = msg;
-    errorAlert.classList.remove('hidden');
-    setTimeout(() => errorAlert.classList.add('hidden'), 8000);
-}
-
-/**
- * Inicia una nueva conversación con el contexto actual de la finca
- */
-async function initChat() {
-    chatMessages.innerHTML = '';
-    messagesHistory = [];
-    setInputState(true);
-    
-    toggleTypingIndicator(true);
-    const cropContext = await buildCropContext();
-    
-    // Mensaje automático inicial del usuario (oculto en UI, pero se envía a IA)
-    const initPrompt = `${cropContext}`;
-    messagesHistory.push({ role: 'user', content: initPrompt });
-
-    // Enviar primer contexto para que la IA dé su reporte inicial
-    let aiFullResponse = "";
-    let currentBubble = null;
-
-    await streamOllamaChat(
-        messagesHistory,
-        (chunk) => {
-            if (!currentBubble) {
-                toggleTypingIndicator(false);
-                currentBubble = appendMessage('ai', '');
-            }
-            aiFullResponse += chunk;
-            if (typeof marked !== 'undefined') {
-                currentBubble.innerHTML = marked.parse(aiFullResponse);
-            } else {
-                currentBubble.innerText = aiFullResponse;
-            }
-            scrollToBottom();
-        },
-        (errorMsg) => {
-            toggleTypingIndicator(false);
-            showError(errorMsg);
-            appendMessage('ai', '❌ No se pudo generar el reporte inicial debido a un error de conexión con Ollama.');
+    chip.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
         }
-    );
-
-    if (aiFullResponse) {
-        messagesHistory.push({ role: 'assistant', content: aiFullResponse });
-    }
-    
-    setInputState(false);
-}
-
-// Event Listeners
-chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (isGenerating || !chatInput.value.trim()) return;
-
-    const userText = chatInput.value.trim();
-    chatInput.value = '';
-    
-    appendMessage('user', userText);
-    messagesHistory.push({ role: 'user', content: userText });
-    
-    isGenerating = true;
-    setInputState(true);
-    toggleTypingIndicator(true);
-
-    let aiFullResponse = "";
-    let currentBubble = null;
-
-    await streamOllamaChat(
-        messagesHistory,
-        (chunk) => {
-            if (!currentBubble) {
-                toggleTypingIndicator(false);
-                currentBubble = appendMessage('ai', '');
-            }
-            aiFullResponse += chunk;
-            if (typeof marked !== 'undefined') {
-                currentBubble.innerHTML = marked.parse(aiFullResponse);
-            } else {
-                currentBubble.innerText = aiFullResponse;
-            }
-            scrollToBottom();
-        },
-        (errorMsg) => {
-            toggleTypingIndicator(false);
-            showError(errorMsg);
-            appendMessage('ai', '❌ Error de conexión al generar la respuesta.');
-        }
-    );
-
-    if (aiFullResponse) {
-        messagesHistory.push({ role: 'assistant', content: aiFullResponse });
-    }
-    
-    isGenerating = false;
-    setInputState(false);
+    });
 });
 
-btnNewChat.addEventListener('click', () => {
-    if (!isGenerating) {
-        initChat();
-    }
-});
+// ── Botón refresh ─────────────────────────────────────────────────────────────
+if (btnRefresh) {
+    btnRefresh.addEventListener('click', () => {
+        _activeFilter = 'all';
+        initRulesEngine();
+    });
+}
 
-// Inicializar
+// ── Arranque ──────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    initChat();
+    initRulesEngine();
 });
