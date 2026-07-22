@@ -3,178 +3,724 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recomendaciones IA - BananoSys</title>
+  <title>Recomendaciones - BananoSys</title>
 
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons via UMD (debe cargar ANTES del JS de la app) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-  <!-- Lucide Icons via CDN -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  
-  <!-- Marked.js para renderizar Markdown -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Custom Base Styles -->
-  <link rel="stylesheet" href="../css/pages/dashboard.css?v=6.0" />
   <style>
-    /* Estilos específicos para el Chat IA */
-    .chat-container {
-      display: flex;
-      flex-direction: column;
-      height: calc(100dvh - 220px);
-      min-height: 400px;
-    }
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .message-bubble {
-      max-width: 85%;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-    .message-user {
-      align-self: flex-end;
-      background-color: var(--primary);
-      color: white;
-      border-bottom-right-radius: 0;
-    }
-    .message-ai {
-      align-self: flex-start;
-      background-color: #f1f5f9;
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 0;
-    }
-    
-    /* Markdown Styles */
-    .message-ai h1, .message-ai h2, .message-ai h3 {
-      font-weight: 600;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-    .message-ai p { margin-bottom: 0.75rem; }
-    .message-ai p:last-child { margin-bottom: 0; }
-    .message-ai ul, .message-ai ol { margin-left: 1.5rem; margin-bottom: 0.75rem; }
-    .message-ai li { margin-bottom: 0.25rem; list-style-type: disc; }
-    .message-ai strong { font-weight: 600; color: #000; }
+    :root {
+      /* === Paleta base === */
+      --color-bg:           #f0ede8;
+      --color-bg-deep:      #e4e0d8;
+      --color-accent:       #5eead4;
+      --color-accent-soft:  #5eead433;
+      --color-accent-glow:  #5eead466;
 
-    .typing-indicator {
+      /* === Prioridades === */
+      --color-high:         #f58787;
+      --color-high-bg:      #f5878722;
+      --color-high-border:  #f5878744;
+      --color-medium:       #f0c060;
+      --color-medium-bg:    #f0c06022;
+      --color-medium-border:#f0c06044;
+
+      /* === Glassmorphism === */
+      --glass-bg:           rgba(255, 255, 255, 0.65);
+      --glass-bg-hover:     rgba(255, 255, 255, 0.85);
+      --glass-border:       rgba(0, 0, 0, 0.08);
+      --glass-border-bright:rgba(0, 0, 0, 0.15);
+      --glass-blur:         blur(16px);
+      --glass-shadow:       0 8px 32px rgba(0, 0, 0, 0.08);
+
+      /* === Texto === */
+      --text-primary:       #1a2e26;
+      --text-secondary:     #3d5248;
+      --text-muted:         #718176;
+      --text-on-accent:     #0a2b1f;
+
+      /* === Bordes y radios === */
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  20px;
+      --radius-pill:999px;
+
+      /* === Espaciado === */
+      --space-xs: 6px;
+      --space-sm: 10px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+
+      /* === Fuente === */
+      --font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-size-sm:   0.8rem;
+      --font-size-base: 0.95rem;
+      --font-size-md:   1.05rem;
+      --font-size-lg:   1.25rem;
+      --font-size-xl:   1.6rem;
+      --font-size-2xl:  2rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--color-bg);
+      color: var(--text-primary);
+      min-height: 100vh;
       display: flex;
-      gap: 4px;
-      padding: 4px 8px;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--space-lg);
+      background-image:
+        radial-gradient(ellipse at 15% 20%, rgba(94,234,212,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 70%, rgba(94,234,212,0.04) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, rgba(240,237,232,0.95) 0%, var(--color-bg) 100%);
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 30% 35%, rgba(94,234,212,0.03) 0%, transparent 40%),
+        radial-gradient(circle at 70% 65%, rgba(13,148,136,0.03) 0%, transparent 40%);
+      z-index: 0;
+    }
+
+    /* Lucide icon base size */
+    [data-lucide] {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    /* === Contenedor principal === */
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    /* === Cabecera === */
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .dashboard-title {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .title-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #d4ede6;
+      border-radius: var(--radius-sm);
+      border: 1px solid #a8d5c7;
+    }
+
+    .dashboard-subtitle {
+      font-size: var(--font-size-base);
+      color: var(--text-secondary);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .btn-back:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-bright);
+      color: var(--text-primary);
+    }
+
+    /* === KPI Bar === */
+    .kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .kpi-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      box-shadow: var(--glass-shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255,255,255,0.15) 30%,
+        rgba(255,255,255,0.25) 50%,
+        rgba(255,255,255,0.15) 70%,
+        transparent 100%);
+      pointer-events: none;
+    }
+
+    .kpi-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+
+    .kpi-card.high-priority   { border-left: 3px solid var(--color-high); }
+    .kpi-card.medium-priority { border-left: 3px solid var(--color-medium); }
+    .kpi-card.status-ok       { border-left: 3px solid var(--color-accent); }
+
+    .kpi-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .kpi-card.high-priority   .kpi-icon { background: var(--color-high-bg); color: var(--color-high); }
+    .kpi-card.medium-priority .kpi-icon { background: var(--color-medium-bg); color: var(--color-medium); }
+    .kpi-card.status-ok       .kpi-icon { background: var(--color-accent-soft); color: var(--color-accent); }
+
+    .kpi-info { display: flex; flex-direction: column; gap: 2px; }
+
+    .kpi-value {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .kpi-label {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    /* === Barra de filtros === */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
       align-items: center;
     }
-    .typing-dot {
-      width: 6px;
-      height: 6px;
-      background-color: #94a3b8;
+
+    .filter-label {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-right: var(--space-xs);
+    }
+
+    .filter-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      border: 1px solid var(--glass-border);
+      background: var(--glass-bg);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--text-secondary);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    .filter-chip:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-bright);
+      color: var(--text-primary);
+    }
+
+    .filter-chip.active {
+      background: var(--color-accent);
+      color: var(--text-on-accent);
+      border-color: var(--color-accent);
+      font-weight: 600;
+      box-shadow: 0 4px 16px var(--color-accent-glow);
+    }
+
+    .chip-count {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(0,0,0,0.2);
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      color: inherit;
+    }
+
+    /* === Grid de recomendaciones === */
+    .recommendations-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    @media (min-width: 720px) {
+      .recommendations-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* === Tarjeta de recomendación === */
+    .rec-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      box-shadow: var(--glass-shadow);
+      transition: all 0.3s ease;
+      position: relative;
+      min-height: 130px;
+    }
+
+    .rec-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 44px rgba(0,0,0,0.35);
+    }
+
+    .priority-strip {
+      width: 5px;
+      flex-shrink: 0;
+      transition: width 0.3s ease;
+    }
+
+    .rec-card.priority-high .priority-strip {
+      background: var(--color-high);
+      box-shadow: 0 0 18px var(--color-high-border);
+    }
+
+    .rec-card.priority-medium .priority-strip {
+      background: var(--color-medium);
+      box-shadow: 0 0 14px var(--color-medium-border);
+    }
+
+    .rec-card.priority-low .priority-strip {
+      background: var(--color-accent);
+      box-shadow: 0 0 10px var(--color-accent-soft);
+    }
+
+    .rec-card:hover .priority-strip { width: 7px; }
+
+    .rec-content {
+      flex: 1;
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      min-width: 0;
+    }
+
+    .rec-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .rec-icon {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+
+    .rec-card.priority-high   .rec-icon { background: var(--color-high-bg);   color: var(--color-high); }
+    .rec-card.priority-medium .rec-icon { background: var(--color-medium-bg); color: var(--color-medium); }
+    .rec-card.priority-low    .rec-icon { background: var(--color-accent-soft); color: var(--color-accent); }
+
+    .rec-title {
+      font-weight: 700;
+      font-size: var(--font-size-md);
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+      flex: 1;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rec-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .rec-card.priority-high   .rec-badge { background: var(--color-high-bg);   color: var(--color-high);   border: 1px solid var(--color-high-border); }
+    .rec-card.priority-medium .rec-badge { background: var(--color-medium-bg); color: var(--color-medium); border: 1px solid var(--color-medium-border); }
+    .rec-card.priority-low    .rec-badge { background: var(--color-accent-soft); color: var(--color-accent); border: 1px solid var(--color-accent-glow); }
+
+    .rec-message {
+      font-size: var(--font-size-base);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .rec-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .rec-meta {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .rec-meta .dot {
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      animation: typing 1.4s infinite ease-in-out both;
+      background: var(--text-muted);
+      opacity: 0.5;
+      flex-shrink: 0;
     }
-    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-    @keyframes typing {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1); }
+
+    .btn-attend {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.03);
+      color: var(--text-secondary);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      flex-shrink: 0;
     }
-    
-    .chat-input-area {
-      padding: 1rem;
-      border-top: 1px solid var(--border);
-      background-color: white;
-      border-radius: 0 0 0.5rem 0.5rem;
+
+    .btn-attend:hover {
+      background: rgba(94,234,212,0.1);
+      border-color: var(--color-accent-soft);
+      color: var(--color-accent);
+      box-shadow: 0 0 16px rgba(94,234,212,0.15);
+    }
+
+    .btn-attend:active { transform: scale(0.96); transition: transform 0.1s ease; }
+
+    /* === Botón Nuevo Análisis === */
+    .btn-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: var(--color-accent);
+      color: var(--text-on-accent);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px var(--color-accent-glow);
+    }
+
+    .btn-refresh:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--color-accent-glow);
+    }
+
+    /* === Barra superior del panel === */
+    .panel-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .results-count {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* === Estado vacío === */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 30px;
+      gap: var(--space-lg);
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--glass-shadow);
+      min-height: 300px;
+      grid-column: 1 / -1;
+    }
+
+    .empty-icon {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--color-accent-soft);
+      border: 2px solid rgba(94,234,212,0.3);
+      color: var(--color-accent);
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(94,234,212,0.2); }
+      50%       { box-shadow: 0 0 45px rgba(94,234,212,0.4); }
+    }
+
+    .empty-title {
+      font-size: var(--font-size-lg);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .empty-message {
+      font-size: var(--font-size-base);
+      color: var(--text-secondary);
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    /* === Responsive === */
+    @media (max-width: 600px) {
+      .kpi-bar { grid-template-columns: 1fr; gap: var(--space-sm); }
+      .kpi-card { padding: var(--space-sm) var(--space-md); }
+      .kpi-value { font-size: var(--font-size-lg); }
+      .dashboard-title { font-size: var(--font-size-xl); }
+      .rec-content { padding: var(--space-sm) var(--space-md); }
+      .rec-footer { flex-direction: column; align-items: flex-start; gap: var(--space-xs); }
+      .btn-attend { align-self: flex-end; }
+      .filter-chip { padding: 7px 13px; font-size: 0.75rem; }
+    }
+
+    @media (max-width: 380px) {
+      body { padding: var(--space-sm); }
+      .rec-title { font-size: var(--font-size-base); }
     }
   </style>
-
-  <!-- Tema Global -->
-  <link rel="stylesheet" href="../css/theme-variables.css">
-  <script src="../js/theme-manager.js"></script>
 </head>
-<body class="bg-base">
-  
-  <div class="flex flex-col min-h-[100dvh] w-full box-border">
-    
-    <!-- Topbar Simple -->
-    <header class="flex flex-wrap items-center justify-between gap-4 px-4 md:px-8 py-4 shrink-0" style="background-color: #ffffff; border-bottom: 1px solid #E8E0D5; position: sticky; top: 0; z-index: 10;">
-      <div class="flex-1" style="min-width: 280px;">
-        <h1 style="font-family: 'Merriweather', Georgia, serif; font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 400; color: var(--text); letter-spacing: -0.02em; line-height: 1.3;">
-          Análisis de Inteligencia Artificial
-        </h1>
-        <div style="font-size: 12px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px;">
-          Llama 3 Local — Análisis de Cultivos
-        </div>
-      </div>
+<body>
 
-      <div class="flex items-center gap-3 shrink-0">
-        <button onclick="window.location.href='dashboard.html'" class="flex items-center gap-2 px-4 py-2 rounded" style="background-color: var(--surface); border: 1px solid var(--border); color: var(--text-soft); font-size: 14px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.backgroundColor='var(--border)'" onmouseout="this.style.backgroundColor='var(--surface)'">
-          <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i>
-          Volver al Dashboard
-        </button>
+  <div class="dashboard">
+
+    <!-- ===== Cabecera ===== -->
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1 class="dashboard-title">
+          <span class="title-icon">
+            <i data-lucide="sprout" style="width:24px;height:24px;color:#164e3b;"></i>
+          </span>
+          Alertas de Finca
+        </h1>
+        <p class="dashboard-subtitle">Panel de recomendaciones agrícolas · Sistema de reglas para plagas e inventario</p>
       </div>
+      <a href="dashboard.html" class="btn-back">
+        <i data-lucide="arrow-left" style="width:16px;height:16px;"></i>
+        Volver al Dashboard
+      </a>
     </header>
 
-      <main class="flex-1 px-4 md:px-8 py-6 flex flex-col gap-6">
-        
-        <!-- Header Section -->
-        <section class="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 style="font-family: 'Merriweather', Georgia, serif; font-size: 18px; color: var(--text);">Asistente Agrónomo Local</h2>
-            <p class="text-sm text-muted mt-1">Chat interactivo impulsado por Ollama para análisis de plagas, inventario y recomendaciones.</p>
-          </div>
-          <button id="btnNewChat" class="flex items-center gap-2 px-4 py-2 rounded bg-primary text-white font-medium hover:bg-primary-light transition-colors text-sm">
-            <i data-lucide="refresh-cw" style="width: 16px; height: 16px;"></i>
-            Nuevo Análisis
-          </button>
-        </section>
+    <!-- ===== KPI Bar ===== -->
+    <section class="kpi-bar" aria-label="Indicadores clave">
+      <div class="kpi-card high-priority">
+        <div class="kpi-icon">
+          <i data-lucide="alert-triangle" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-value" id="kpiHigh">—</span>
+          <span class="kpi-label">Alertas Alta Prioridad</span>
+        </div>
+      </div>
+      <div class="kpi-card medium-priority">
+        <div class="kpi-icon">
+          <i data-lucide="alert-circle" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-value" id="kpiMedium">—</span>
+          <span class="kpi-label">Alertas Media Prioridad</span>
+        </div>
+      </div>
+      <div class="kpi-card status-ok">
+        <div class="kpi-icon">
+          <i data-lucide="circle-check-big" style="width:24px;height:24px;"></i>
+        </div>
+        <div class="kpi-info">
+          <span class="kpi-value" id="kpiOk">—</span>
+          <span class="kpi-label">Sin alertas activas</span>
+        </div>
+      </div>
+    </section>
 
-        <!-- Chat Panel -->
-        <section class="card flex flex-col chat-container">
-          <div id="chatMessages" class="chat-messages">
-            <!-- Messages will be injected here -->
-          </div>
-          
-          <div class="chat-input-area">
-            <div id="errorAlert" class="hidden mb-3 p-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded flex items-start gap-2">
-              <i data-lucide="alert-circle" style="width:16px; height:16px; flex-shrink: 0; margin-top: 2px;"></i>
-              <span id="errorText"></span>
-            </div>
-            
-            <form id="chatForm" class="flex gap-3">
-              <input type="text" id="chatInput" placeholder="Pregúntale algo sobre el estado de la finca..." class="flex-1 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:border-primary transition-colors text-sm" autocomplete="off" disabled>
-              <button type="submit" id="btnSend" class="flex items-center justify-center px-4 py-2 rounded bg-primary text-white hover:bg-primary-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                <i data-lucide="send" style="width: 18px; height: 18px;"></i>
-              </button>
-            </form>
-          </div>
-        </section>
+    <!-- ===== Barra de filtros + botón Nuevo análisis ===== -->
+    <div class="panel-bar">
+      <nav class="filter-bar" aria-label="Filtros de recomendaciones">
+        <span class="filter-label">Filtrar:</span>
+        <span class="filter-chip active" data-filter="all" tabindex="0" role="button" aria-pressed="true">
+          <i data-lucide="layout-list" style="width:14px;height:14px;"></i>
+          Todas
+          <span class="chip-count" id="countAll">0</span>
+        </span>
+        <span class="filter-chip" data-filter="plagas" tabindex="0" role="button" aria-pressed="false">
+          <i data-lucide="bug" style="width:14px;height:14px;"></i>
+          Plagas
+          <span class="chip-count" id="countPlagas">0</span>
+        </span>
+        <span class="filter-chip" data-filter="inventario" tabindex="0" role="button" aria-pressed="false">
+          <i data-lucide="package" style="width:14px;height:14px;"></i>
+          Inventario
+          <span class="chip-count" id="countInventario">0</span>
+        </span>
+        <span class="filter-chip" data-filter="high" tabindex="0" role="button" aria-pressed="false">
+          <i data-lucide="flame" style="width:14px;height:14px;"></i>
+          Alta prioridad
+          <span class="chip-count" id="countHigh">0</span>
+        </span>
+      </nav>
+      <button class="btn-refresh" id="btnNewChat">
+        <i data-lucide="refresh-cw" style="width:16px;height:16px;"></i>
+        Nuevo análisis
+      </button>
+    </div>
 
-      </main>
+    <!-- ===== Grid de recomendaciones ===== -->
+    <section class="recommendations-grid" id="chatMessages" aria-label="Lista de recomendaciones">
+      <!-- Tarjetas inyectadas dinámicamente por recomendaciones-ia-ui.js -->
+    </section>
+
   </div>
 
+  <!-- Lucide init (para iconos estáticos del HTML) -->
   <script>
-    lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
   </script>
+
+  <!-- Firebase Auth guard -->
   <script type="module" src="../js/core/firebase.js"></script>
   <script type="module">
     import { auth } from '../js/core/firebase.js';
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-
-    document.addEventListener('DOMContentLoaded', function() {
-      onAuthStateChanged(auth, (user) => {
-        if (!user) {
-          window.location.href = 'login.html';
-        }
-      });
+    onAuthStateChanged(auth, (user) => {
+      if (!user) window.location.href = 'login.html';
     });
   </script>
+
+  <!-- Motor de recomendaciones -->
   <script type="module" src="../js/ia/recomendaciones-ia-ui.js"></script>
+
 </body>
 </html>
