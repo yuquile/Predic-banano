@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Open Sans: 400/600/700 + latin-ext para ñ, á, é, í, ó, ú, ü -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap&subset=latin,latin-ext" rel="stylesheet">
-    <link rel="stylesheet" href="../css/pages/exportaciones.css">
+    <link rel="stylesheet" href="../css/pages/exportaciones.css?v=2">
     <!-- SweetAlert CSS y JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -21,44 +21,169 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <style>
+    /* ============================================================
+       VARIABLES UNIFICADAS — consistencia con recomendaciones-ia
+       ============================================================ */
+    :root {
+      --color-bg:           #f0ede8;
+      --color-bg-deep:      #e4e0d8;
+      --color-accent:       #0d9488;
+      --color-accent-soft:  #0d948822;
+      --color-accent-glow:  #0d948855;
+      --glass-bg:           rgba(255, 255, 255, 0.55);
+      --glass-bg-hover:     rgba(255, 255, 255, 0.75);
+      --glass-border:       rgba(20, 40, 30, 0.08);
+      --glass-border-bright:rgba(20, 40, 30, 0.16);
+      --glass-blur:         blur(16px);
+      --glass-shadow:       0 8px 32px rgba(20, 40, 30, 0.08);
+      --text-primary:       #1c2b24;
+      --text-secondary:     #45564c;
+      --text-muted:         #718176;
+      --text-on-accent:     #f3fbf8;
+      --radius-sm:  10px;
+      --radius-md:  16px;
+      --radius-lg:  20px;
+      --radius-pill:999px;
+    }
+
+    /* ============================================================
+       TABS — estilo píldora unificado
+       ============================================================ */
     .export-tabs {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        border-bottom: 1px solid var(--border);
-        padding: 0 clamp(1rem, 3vw, 2rem);
-        background-color: var(--surface);
-        overflow-x: auto;
-        scrollbar-width: none;
+      display: flex;
+      justify-content: center;
+      padding: 14px clamp(1rem, 3vw, 2rem);
+      background: transparent;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    .export-tabs::-webkit-scrollbar {
-        display: none;
+    .export-tabs::-webkit-scrollbar { display: none; }
+
+    .tabs-pill-wrap {
+      display: flex;
+      gap: 4px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-pill);
+      padding: 5px;
+      box-shadow: var(--glass-shadow);
     }
+
     .export-tabs .nav-btn {
-        position: relative;
-        background: transparent !important;
-        color: var(--text-soft) !important;
-        padding: 1rem 0 !important;
-        border: none !important;
-        border-bottom: 2px solid transparent !important;
-        border-radius: 0 !important;
-        font-weight: 500 !important;
-        white-space: nowrap;
-        width: auto !important;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none !important;
+      background: transparent !important;
+      white-space: nowrap;
     }
     .export-tabs .nav-btn:hover {
-        color: var(--primary) !important;
+      background: var(--glass-bg-hover) !important;
+      color: var(--text-primary) !important;
     }
     .export-tabs .nav-btn.active {
-        color: var(--primary) !important;
-        border-bottom-color: var(--primary) !important;
-        font-weight: 600 !important;
+      background: var(--color-accent) !important;
+      color: var(--text-on-accent) !important;
+      box-shadow: 0 4px 14px var(--color-accent-glow);
+      font-weight: 600 !important;
     }
-    .export-tabs .nav-btn.active::before {
-        display: none !important; /* overrides sidebar style */
+    .export-tabs .nav-btn.active::before { display: none !important; }
+
+    /* ============================================================
+       SECCIÓN NUEVO PEDIDO — glassmorphism
+       ============================================================ */
+    .np-card {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--glass-shadow);
+      padding: 28px 30px;
+    }
+
+    .np-section-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .np-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .np-field { display: flex; flex-direction: column; gap: 6px; }
+
+    .np-field label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    .np-field input,
+    .np-field select,
+    .np-field textarea {
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--glass-border-bright);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      outline: none;
+      width: 100%;
+    }
+    .np-field input:focus,
+    .np-field select:focus,
+    .np-field textarea:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-soft);
+      background: #fff;
+    }
+
+    .np-section-gap { margin-bottom: 28px; }
+
+    .btn-np-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      background: var(--color-accent);
+      color: var(--text-on-accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 18px var(--color-accent-glow);
+      transition: filter 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .btn-np-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -79,23 +204,25 @@
                 </button>
             </header>
 
-            <!-- Opciones de Navegación (Tabs) -->
+            <!-- Opciones de Navegación (Tabs) —— estilo píldora unificado -->
             <nav class="export-tabs">
+              <div class="tabs-pill-wrap">
                 <button class="nav-btn active" onclick="showSection('dashboard')">
-                    <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i> Resumen
+                  <i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i> Resumen
                 </button>
                 <button class="nav-btn" onclick="showSection('nuevo-pedido')">
-                    <i data-lucide="plus-circle" style="width: 18px; height: 18px;"></i> Nuevo Pedido
+                  <i data-lucide="plus" style="width:16px;height:16px;"></i> Nuevo Pedido
                 </button>
                 <button class="nav-btn" onclick="showSection('pedidos')">
-                    <i data-lucide="list" style="width: 18px; height: 18px;"></i> Gestión de Pedidos
+                  <i data-lucide="list" style="width:16px;height:16px;"></i> Gestión de Pedidos
                 </button>
                 <button class="nav-btn" onclick="showSection('seguimiento')">
-                    <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i> Seguimiento
+                  <i data-lucide="map-pin" style="width:16px;height:16px;"></i> Seguimiento
                 </button>
                 <button class="nav-btn" onclick="showSection('documentos')">
-                    <i data-lucide="file-text" style="width: 18px; height: 18px;"></i> Documentos
+                  <i data-lucide="file-text" style="width:16px;height:16px;"></i> Documentos
                 </button>
+              </div>
             </nav>
 
             <!-- Scrollable Content Area -->
@@ -308,55 +435,84 @@
                 <div id="nuevo-pedido" class="section">
                     <h2>Registrar Nuevo Pedido de Exportación</h2>
                     <p class="section-desc">Crea un nuevo pedido de banano u otros productos para tus clientes.</p>
-                    <div class="panel-box">
+
+                    <div class="np-card">
                         <form id="pedido-form">
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="cliente">Cliente</label>
-                                    <input type="text" id="cliente" required placeholder="Nombre del cliente o empresa">
+
+                            <!-- ── Sección 1: Información del cliente ── -->
+                            <div class="np-section-gap">
+                                <div class="np-section-title">
+                                    <i data-lucide="user" style="width:14px;height:14px;"></i>
+                                    Información del cliente
                                 </div>
-                                <div class="form-group">
-                                    <label for="pais-destino">País de Destino</label>
-                                    <select id="pais-destino" required>
-                                        <option value="">Seleccionar país</option>
-                                        <option value="Estados Unidos">Estados Unidos</option>
-                                        <option value="México">México</option>
-                                        <option value="Colombia">Colombia</option>
-                                        <option value="España">España</option>
-                                        <option value="Japón">Japón</option>
-                                        <option value="China">China</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="variedad">Variedad del Producto</label>
-                                    <select id="variedad" required>
-                                        <option value="">Seleccionar variedad</option>
-                                        <option value="Banano Cavendish">Banano Cavendish</option>
-                                        <option value="Banano Orgánico">Banano Orgánico</option>
-                                        <option value="Plátano Verde">Plátano Verde</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="cantidad">Cantidad (cajas/kg)</label>
-                                    <input type="number" id="cantidad" required min="1" placeholder="Ej: 1000">
-                                </div>
-                                <div class="form-group">
-                                    <label for="fecha-envio">Fecha Programada de Envío</label>
-                                    <input type="date" id="fecha-envio" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="precio-unitario">Precio Unitario (USD)</label>
-                                    <input type="number" id="precio-unitario" step="0.01" required min="0" placeholder="Ej: 15.50">
+                                <div class="np-grid">
+                                    <div class="np-field">
+                                        <label for="cliente">Cliente</label>
+                                        <input type="text" id="cliente" required placeholder="Nombre del cliente o empresa">
+                                    </div>
+                                    <div class="np-field">
+                                        <label for="pais-destino">País de Destino</label>
+                                        <select id="pais-destino" required>
+                                            <option value="">Seleccionar país</option>
+                                            <option value="Estados Unidos">Estados Unidos</option>
+                                            <option value="México">México</option>
+                                            <option value="Colombia">Colombia</option>
+                                            <option value="España">España</option>
+                                            <option value="Japón">Japón</option>
+                                            <option value="China">China</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="notas">Notas Adicionales</label>
-                                <textarea id="notas" rows="3" placeholder="Información extra relevante..."></textarea>
+
+                            <!-- ── Sección 2: Detalles del pedido ── -->
+                            <div class="np-section-gap">
+                                <div class="np-section-title">
+                                    <i data-lucide="package" style="width:14px;height:14px;"></i>
+                                    Detalles del pedido
+                                </div>
+                                <div class="np-grid">
+                                    <div class="np-field">
+                                        <label for="variedad">Variedad del Producto</label>
+                                        <select id="variedad" required>
+                                            <option value="">Seleccionar variedad</option>
+                                            <option value="Banano Cavendish">Banano Cavendish</option>
+                                            <option value="Banano Orgánico">Banano Orgánico</option>
+                                            <option value="Plátano Verde">Plátano Verde</option>
+                                        </select>
+                                    </div>
+                                    <div class="np-field">
+                                        <label for="cantidad">Cantidad (cajas/kg)</label>
+                                        <input type="number" id="cantidad" required min="1" placeholder="Ej: 1000">
+                                    </div>
+                                    <div class="np-field">
+                                        <label for="precio-unitario">Precio Unitario (USD)</label>
+                                        <input type="number" id="precio-unitario" step="0.01" required min="0" placeholder="Ej: 15.50">
+                                    </div>
+                                    <div class="np-field">
+                                        <label for="fecha-envio">Fecha Programada de Envío</label>
+                                        <input type="date" id="fecha-envio" required>
+                                    </div>
+                                </div>
                             </div>
-                            <button type="submit" class="btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+
+                            <!-- ── Sección 3: Notas ── -->
+                            <div class="np-section-gap">
+                                <div class="np-section-title">
+                                    <i data-lucide="file-text" style="width:14px;height:14px;"></i>
+                                    Notas
+                                </div>
+                                <div class="np-field">
+                                    <label for="notas">Notas Adicionales</label>
+                                    <textarea id="notas" rows="3" placeholder="Información extra relevante..."></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-np-primary">
+                                <i data-lucide="plus" style="width:18px;height:18px;"></i>
                                 Registrar Pedido
                             </button>
+
                         </form>
                     </div>
                 </div>
