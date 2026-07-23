@@ -1,4 +1,4 @@
-/* FASE 2: Contención Global y Textos Largos */
+/* FASE 2: ContenciÃ³n Global y Textos Largos */
 html {
   overflow-x: hidden;
 }
@@ -6,7 +6,7 @@ html {
   box-sizing: border-box;
 }
 
-/* Selectores específicos para textos dinámicos o largos */
+/* Selectores especÃ­ficos para textos dinÃ¡micos o largos */
 .export-details, .user-name, .card-title, .product-description, h1, h2, h3, h4, h5, h6, p, a, li, th, td {
   overflow-wrap: break-word;
   word-break: break-word;
@@ -19,7 +19,7 @@ span {
 }
 
 
-/* Contención estricta para iconos e imágenes (Fase 1) */
+/* ContenciÃ³n estricta para iconos e imÃ¡genes (Fase 1) */
 .icon-fixed {
   flex-shrink: 0 !important;
 }
@@ -32,7 +32,7 @@ span {
 
 
 
-/* Clases de utilidad semánticas (colores y fondos) */
+/* Clases de utilidad semÃ¡nticas (colores y fondos) */
 .bg-primary { background-color: var(--primary); }
 .bg-primary-light { background-color: var(--secondary); }
 .bg-accent { background-color: var(--accent); }
@@ -64,14 +64,14 @@ body {
   overflow-x: hidden;
 }
 
-/* Tipografía de títulos */
+/* TipografÃ­a de tÃ­tulos */
 h1, h2, h3, h4, .card-title {
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
-/* Badges de Estado rediseñados (AGRO INTELLIGENCE) */
+/* Badges de Estado rediseÃ±ados (AGRO INTELLIGENCE) */
 .badge-pill {
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
@@ -212,7 +212,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   border-radius: 0 4px 4px 0;
 }
 
-/* Grillas Customizadas para Módulos Responsivas */
+/* Grillas Customizadas para MÃ³dulos Responsivas */
 .modules-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -297,10 +297,10 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 }
 
 /* ==========================================================================
-   GRILLAS DE UTILIDAD — reemplazo de clases Tailwind no cargadas
+   GRILLAS DE UTILIDAD â€” reemplazo de clases Tailwind no cargadas
    ========================================================================== */
 
-/* Indicadores Clave: siempre 5 columnas en escritorio, menos en móvil */
+/* Indicadores Clave: siempre 5 columnas en escritorio, menos en mÃ³vil */
 .grid {
   display: grid;
   gap: 0.75rem;
@@ -311,14 +311,14 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* md:grid-cols-3 — tablet ≥ 768px */
+/* md:grid-cols-3 â€” tablet â‰¥ 768px */
 @media (min-width: 768px) {
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* lg:grid-cols-5 — escritorio ≥ 1024px */
+/* lg:grid-cols-5 â€” escritorio â‰¥ 1024px */
 @media (min-width: 1024px) {
   .lg\:grid-cols-5 {
     grid-template-columns: repeat(5, 1fr);
@@ -360,7 +360,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 }
 
 /* ==========================================================================
-   MEJORAS DE JERARQUÍA VISUAL (Dashboard)
+   MEJORAS DE JERARQUÃA VISUAL (Dashboard)
    ========================================================================== */
 
 /* 1. Fondo General del Dashboard */
@@ -387,12 +387,12 @@ main#contenido section .grid > div.p-4.rounded.border[style*="background-color: 
   border-color: rgba(44, 85, 48, 0.25) !important;
 }
 
-/* 3. Separación entre secciones */
+/* 3. SeparaciÃ³n entre secciones */
 main#contenido section {
   margin-bottom: 2.5rem !important;
 }
 
-/* 4. Jerarquía Tipográfica */
+/* 4. JerarquÃ­a TipogrÃ¡fica */
 main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   font-size: 0.85rem !important;
   background-color: rgba(255,255,255,0.05);
@@ -407,7 +407,7 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   border-radius: 0 4px 4px 0;
 }
 
-/* Grillas Customizadas para Módulos Responsivas */
+/* Grillas Customizadas para MÃ³dulos Responsivas */
 .modules-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -492,10 +492,10 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
 }
 
 /* ==========================================================================
-   GRILLAS DE UTILIDAD — reemplazo de clases Tailwind no cargadas
+   GRILLAS DE UTILIDAD â€” reemplazo de clases Tailwind no cargadas
    ========================================================================== */
 
-/* Indicadores Clave: siempre 5 columnas en escritorio, menos en móvil */
+/* Indicadores Clave: siempre 5 columnas en escritorio, menos en mÃ³vil */
 .grid {
   display: grid;
   gap: 0.75rem;
@@ -506,14 +506,14 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* md:grid-cols-3 — tablet ≥ 768px */
+/* md:grid-cols-3 â€” tablet â‰¥ 768px */
 @media (min-width: 768px) {
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* lg:grid-cols-5 — escritorio ≥ 1024px */
+/* lg:grid-cols-5 â€” escritorio â‰¥ 1024px */
 @media (min-width: 1024px) {
   .lg\:grid-cols-5 {
     grid-template-columns: repeat(5, 1fr);
@@ -555,7 +555,7 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
 }
 
 /* ==========================================================================
-   MEJORAS DE JERARQUÍA VISUAL (Dashboard)
+   MEJORAS DE JERARQUÃA VISUAL (Dashboard)
    ========================================================================== */
 
 /* 1. Fondo General del Dashboard */
@@ -582,12 +582,12 @@ main#contenido section .grid > div.p-4.rounded.border[style*="background-color: 
   border-color: rgba(44, 85, 48, 0.25) !important;
 }
 
-/* 3. Separación entre secciones */
+/* 3. SeparaciÃ³n entre secciones */
 main#contenido section {
   margin-bottom: 2.5rem !important;
 }
 
-/* 4. Jerarquía Tipográfica */
+/* 4. JerarquÃ­a TipogrÃ¡fica */
 main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   font-size: 0.85rem !important;
   font-weight: 700 !important;
@@ -604,49 +604,49 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
 
 @media (min-width: 1025px) {
   
-  /* 1. Etiquetas en mayúsculas (clamp) */
-  /* Indicadores Clave y títulos pequeños */
+  /* 1. Etiquetas en mayÃºsculas (clamp) */
+  /* Indicadores Clave y tÃ­tulos pequeÃ±os */
   main#contenido span[style*="text-transform: uppercase"],
   main#contenido div[style*="text-transform: uppercase"] {
     font-size: clamp(0.75rem, 0.9vw, 0.95rem) !important; /* Escala de 12px a ~15px */
   }
 
-  /* Etiquetas de Acciones Rápidas */
+  /* Etiquetas de Acciones RÃ¡pidas */
   main#contenido .modules-grid div[style*="font-size: 13px"] {
     font-size: clamp(0.8125rem, 1vw, 0.95rem) !important; /* Escala de 13px a ~15px */
   }
 
-  /* 2. Íconos escalados */
-  /* Íconos de indicadores (14px) */
+  /* 2. Ãconos escalados */
+  /* Ãconos de indicadores (14px) */
   main#contenido i.icon-fixed[style*="width:14px"] {
     width: clamp(14px, 1.2vw, 18px) !important;
     height: clamp(14px, 1.2vw, 18px) !important;
   }
   
-  /* Íconos de clima (12px) */
+  /* Ãconos de clima (12px) */
   main#contenido i.icon-fixed[style*="width:12px"] {
     width: clamp(12px, 1.1vw, 16px) !important;
     height: clamp(12px, 1.1vw, 16px) !important;
   }
   
-  /* Íconos de Acciones Rápidas (20px) */
+  /* Ãconos de Acciones RÃ¡pidas (20px) */
   main#contenido i.icon-fixed[style*="width:20px"] {
     width: clamp(20px, 1.5vw, 24px) !important;
     height: clamp(20px, 1.5vw, 24px) !important;
   }
   
-  /* 4. Padding interno de tarjetas y 5. Espaciado de íconos en Acciones Rápidas */
+  /* 4. Padding interno de tarjetas y 5. Espaciado de Ã­conos en Acciones RÃ¡pidas */
   /* Indicadores (original p-4 = 1rem) -> aumentamos a 1.5rem */
   main#contenido section > div.grid > div.p-4 {
     padding: 1.5rem !important;
   }
   
-  /* Clima y Gráficos (original p-5 = 1.25rem) -> aumentamos a 2rem */
+  /* Clima y GrÃ¡ficos (original p-5 = 1.25rem) -> aumentamos a 2rem */
   main#contenido .card.p-5 {
     padding: 2rem !important;
   }
   
-  /* Acciones Rápidas (original p-4) -> aumentamos padding y gap (original gap-3 = 0.75rem) */
+  /* Acciones RÃ¡pidas (original p-4) -> aumentamos padding y gap (original gap-3 = 0.75rem) */
   main#contenido .modules-grid > div.p-4 {
     padding: 1.5rem !important;
     gap: 1.25rem !important;
@@ -663,7 +663,7 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
    FASE 5: Tabla de Exportaciones Recientes
    ========================================================================== */
 
-/* 1. Título cortado: Forzar padding horizontal universal (corrige fallo de CDN) */
+/* 1. TÃ­tulo cortado: Forzar padding horizontal universal (corrige fallo de CDN) */
 main#contenido section > div.rounded.w-full.overflow-x-auto > div.flex.items-center,
 main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.flex {
   padding-left: 1.25rem !important;
@@ -691,4 +691,382 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
     padding-top: 1.15rem !important;
     padding-bottom: 1.15rem !important;
   }
+}
+
+/* ==========================================================================
+   Acciones Rápidas - Diseño y Hover Mejorado
+   ========================================================================== */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 16px;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  cursor: pointer;
+  padding: 20px 12px;
+  border-radius: 12px;
+  width: 100%;
+  min-width: 0;
+  transition: all 0.3s ease;
+}
+
+.action-card.primary {
+  background-color: var(--primary);
+  color: var(--surface);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.action-card.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.action-card.primary .icon-box {
+  background-color: rgba(255,255,255,0.15);
+  border-radius: 50%;
+}
+
+.action-card.primary .card-title {
+  color: var(--surface);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+.action-card.secondary {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.action-card.secondary .icon-box {
+  background-color: var(--bg);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.action-card.secondary .icon-box i {
+  color: var(--text-soft);
+  transition: color 0.3s ease;
+}
+
+.action-card.secondary .card-title {
+  color: var(--text);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+/* Hover para las tarjetas secundarias: Adoptan estilo primario */
+.action-card.secondary:hover {
+  transform: translateY(-3px);
+  background-color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.action-card.secondary:hover .card-title {
+  color: var(--surface);
+}
+
+.action-card .icon-box {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==========================================================================
+   PREMIUM RECENT EXPORTS SECTION
+   ========================================================================== */
+.premium-exports-container {
+  background: linear-gradient(180deg, #FAFAFA 0%, #F2F3F5 100%);
+  border-radius: 18px;
+  border: 1px solid #D9DDE3;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  padding: 28px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 2rem;
+}
+
+.premium-exports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.premium-exports-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 4px 0;
+}
+
+.premium-exports-subtitle {
+  font-size: 14px;
+  color: #6B7280;
+  margin: 0;
+}
+
+.premium-exports-btn {
+  background-color: #FFFFFF;
+  border: 1px solid #D9DDE3;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.premium-exports-btn:hover {
+  background-color: #F4F5F7;
+  border-color: #D9DDE3;
+}
+
+.premium-exports-table-header {
+  display: flex;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E5E7EB;
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.premium-exports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.premium-export-row {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  padding: 20px;
+  border-radius: 14px;
+  position: relative;
+  transition: all 0.25s ease;
+  border: 1px solid transparent;
+}
+
+.premium-export-row:hover {
+  background-color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+  border-color: #E5E7EB;
+}
+
+.indicator-line {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  bottom: 20px;
+  width: 4px;
+  background-color: #0F5A46;
+  border-radius: 0 4px 4px 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.premium-export-row:hover .indicator-line {
+  opacity: 1;
+}
+
+.col-ref { flex: 2; min-width: 0; }
+.col-date { flex: 1; text-align: left; }
+.col-status { width: 140px; text-align: right; display: flex; justify-content: flex-end; }
+
+.premium-export-col {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.premium-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #EAF7F2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.premium-export-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.premium-export-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.premium-export-id {
+  background-color: #EAF7F2;
+  color: #0F5A46;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.premium-export-company {
+  color: #111827;
+  font-weight: 600;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.premium-export-meta {
+  color: #6B7280;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dot-separator {
+  margin: 0 8px;
+  color: #D9DDE3;
+}
+
+.premium-export-date {
+  color: #4B5563;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.premium-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: capitalize;
+  transition: transform 0.25s ease;
+}
+
+.premium-export-row:hover .premium-badge {
+  transform: scale(1.02);
+}
+
+.premium-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .premium-export-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+  }
+  .indicator-line {
+    top: 16px; bottom: 16px;
+  }
+  .premium-exports-table-header {
+    display: none;
+  }
+  .col-ref, .col-date, .col-status {
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .premium-export-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+/* ==========================================================================
+   KPI CARDS INTERACTIVE
+   ========================================================================== */
+.kpi-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 96px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.kpi-card .kpi-icon {
+  color: var(--text-soft);
+  transition: color 0.3s ease;
+}
+
+.kpi-card .kpi-title {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.kpi-card .kpi-value {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+/* Hover Effect */
+.kpi-card:hover {
+  transform: translateY(-3px);
+  background-color: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-card:hover .kpi-icon {
+  color: var(--surface) !important;
+}
+
+.kpi-card:hover .kpi-title {
+  color: var(--surface);
+}
+
+.kpi-card:hover .kpi-value {
+  color: var(--surface);
 }

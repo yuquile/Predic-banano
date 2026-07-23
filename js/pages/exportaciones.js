@@ -294,10 +294,21 @@
         renderSeguimientoList();
     }
 
+    window.currentSeguimientoFilter = 'todos';
+    window.setSeguimientoFilter = function(estado) {
+        window.currentSeguimientoFilter = estado;
+        renderSeguimientoList();
+    };
+
     // Renderizar lista de pedidos para seguimiento
     function renderSeguimientoList(ordersToRender = orders) {
         const listContainer = document.getElementById('seguimiento-orders-list');
         if (!listContainer) return;
+        
+        let filteredOrders = ordersToRender;
+        if (window.currentSeguimientoFilter && window.currentSeguimientoFilter !== 'todos') {
+            filteredOrders = filteredOrders.filter(o => o.estado === window.currentSeguimientoFilter);
+        }
         
         const html = `
         <div class="seguimiento-table-container">
@@ -307,10 +318,20 @@
                 <div>Variedad</div>
                 <div>Tracking</div>
                 <div>Cantidad</div>
-                <div>Estado</div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    Estado
+                    <select onchange="window.setSeguimientoFilter(this.value)" onclick="event.stopPropagation()" style="background: transparent; border: 1px solid var(--border); border-radius: 4px; padding: 2px 4px; font-size: 11px; cursor: pointer; color: var(--text-soft); font-weight: 500; outline: none;">
+                        <option value="todos" ${window.currentSeguimientoFilter === 'todos' ? 'selected' : ''}>Todos</option>
+                        <option value="pendiente" ${window.currentSeguimientoFilter === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                        <option value="proceso" ${window.currentSeguimientoFilter === 'proceso' ? 'selected' : ''}>En Preparación</option>
+                        <option value="enviado" ${window.currentSeguimientoFilter === 'enviado' ? 'selected' : ''}>En Tránsito</option>
+                        <option value="entregado" ${window.currentSeguimientoFilter === 'entregado' ? 'selected' : ''}>Entregado</option>
+                        <option value="cancelado" ${window.currentSeguimientoFilter === 'cancelado' ? 'selected' : ''}>Cancelado</option>
+                    </select>
+                </div>
             </div>
             <div class="seguimiento-table-body">
-                ${ordersToRender.map(order => {
+                ${filteredOrders.length > 0 ? filteredOrders.map(order => {
                     let statusClass = 'st-status-amber';
                     let statusText = 'Pendiente';
                     if (order.estado === 'proceso') { statusClass = 'st-status-purple'; statusText = 'En Preparación'; }
@@ -329,7 +350,7 @@
                         </div>
                     </div>
                     `;
-                }).join('')}
+                }).join('') : '<div style="padding: 20px; text-align: center; color: var(--text-soft); grid-column: 1 / -1;">No se encontraron pedidos con este estado.</div>'}
             </div>
         </div>
         `;
