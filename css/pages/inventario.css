@@ -51,6 +51,14 @@ i.fas, i.fa-solid, i[class*="fa-"] {
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
     --transition: all 0.2s ease;
+    
+    /* Umbrales Días Almacenado */
+    --dias-ok: #16a34a;
+    --dias-ok-bg: #dcfce7;
+    --dias-alerta: #d97706;
+    --dias-alerta-bg: #fef3c7;
+    --dias-critico: #dc2626;
+    --dias-critico-bg: #fee2e2;
 }
 
 /* --- Fase 6: Animación de entrada --- */
@@ -285,14 +293,15 @@ body {
 }
 
 .stat-card {
-    background: var(--surface);
-    padding: 1.25rem;
-    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 16px;
+    border-radius: 12px;
     box-shadow: var(--shadow-sm);
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition: var(--transition);
+    transition: transform 0.15s ease;
     border: 1px solid var(--border);
     border-left: 4px solid var(--border);
     animation: fadeInUp 0.3s ease-out;
@@ -308,7 +317,6 @@ body {
 .stat-card:nth-child(5) { animation-delay: 320ms; }
 
 .stat-card:hover {
-    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
 
@@ -328,13 +336,12 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.625rem;
-    height: 2.625rem;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    flex-shrink: 0;
-    background: var(--bg);
-    color: var(--text);
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: rgba(22, 78, 59, 0.05);
+    color: var(--border);
+    font-size: 1.5rem;
 }
 
 .stat-card.disponible i {
@@ -391,8 +398,9 @@ body {
 .tabla-lotes th {
     background: var(--bg);
     color: var(--text-soft);
-    padding: 0.875rem 1rem;
+    padding: 12px 16px;
     text-align: left;
+    vertical-align: middle;
     font-family: var(--font-base);
     font-weight: 600;
     font-size: 0.6875rem;
@@ -402,11 +410,21 @@ body {
 }
 
 .tabla-lotes td {
-    padding: 0.875rem 1rem;
-    border-bottom: 1px solid var(--bg);
+    padding: 12px 16px;
+    text-align: left;
     vertical-align: middle;
+    border-bottom: 1px solid var(--bg);
     color: var(--text);
     font-size: 0.8125rem;
+}
+
+.tabla-lotes th:nth-child(5),
+.tabla-lotes td:nth-child(5) {
+    border-left: 1px solid rgba(22, 78, 59, 0.15);
+}
+
+.col-badge {
+    text-align: center !important;
 }
 
 .tabla-lotes td strong {
@@ -448,18 +466,18 @@ body {
 }
 
 .estado-disponible {
-    background: color-mix(in srgb, var(--success) 15%, transparent);
-    color: var(--text);
+    background: #dcfce7;
+    color: #166534;
 }
 
 .estado-reservado {
-    background: color-mix(in srgb, var(--warning) 15%, transparent);
-    color: var(--text);
+    background: #fef3c7;
+    color: #92400e;
 }
 
 .estado-exportado {
-    background: color-mix(in srgb, var(--info) 15%, transparent);
-    color: var(--info);
+    background: #dbeafe;
+    color: #1e3a8a;
 }
 
 /* --- Badges de Calidad --- */
@@ -945,4 +963,64 @@ body {
 
 .swal2-cancel:hover {
     background: #5a6268 !important;
+}
+
+/* --- Badges de Días Almacenado --- */
+.dias-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    display: inline-block;
+}
+.dias-badge[data-nivel="ok"]      { color: var(--dias-ok); background: var(--dias-ok-bg); }
+.dias-badge[data-nivel="alerta"]  { color: var(--dias-alerta); background: var(--dias-alerta-bg); }
+.dias-badge[data-nivel="critico"] { color: var(--dias-critico); background: var(--dias-critico-bg); }
+
+/* --- Botones de Acción --- */
+.accion-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #f1f5f9;
+    color: #475569;
+    transition: all 0.2s ease;
+}
+.accion-btn:hover {
+    background: #e2e8f0;
+}
+.accion-btn.accion-danger {
+    background: #fee2e2;
+    color: #dc2626;
+}
+.accion-btn.accion-danger:hover {
+    background: #fca5a5;
+}
+.accion-btn.accion-success {
+    background: #dcfce7;
+    color: #16a34a;
+}
+.accion-btn.accion-warning {
+    background: #fef3c7;
+    color: #d97706;
+}
+.accion-btn[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #164e3b;
+    color: white;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
 }

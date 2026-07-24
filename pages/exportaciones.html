@@ -20,6 +20,10 @@
   <!-- Lucide Icons via CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- jsPDF and autoTable via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
   <style>
     /* ============================================================
        VARIABLES UNIFICADAS — consistencia con recomendaciones-ia
@@ -229,8 +233,7 @@
             <div class="content-area">
                 <!-- Dashboard Section -->
                 <div id="dashboard" class="section active">
-                    <h2>Dashboard de Exportaciones</h2>
-                    <p class="section-desc">Resumen general de pedidos de exportación.</p>
+
                     <div class="erp-kpi-grid">
                         <div class="erp-kpi-card">
                             <div class="kpi-header">
@@ -322,9 +325,11 @@
                         <div class="erp-chart-card erp-col-span-2">
                             <div class="card-header-flex">
                                 <h3>Evolución de Ingresos y Exportaciones</h3>
-                                <select class="erp-select">
-                                    <option>Últimos 6 meses</option>
-                                    <option>Este año</option>
+                                <select id="chart-filter" class="erp-select">
+                                    <option value="esteAno" selected>Este año</option>
+                                    <option value="anoPasado">Año pasado</option>
+                                    <option value="ultimos12">Últimos 12 meses</option>
+                                    <option value="ultimos6">Últimos 6 meses</option>
                                 </select>
                             </div>
                             <div class="chart-container-tall">
@@ -356,8 +361,22 @@
                             tasaCumplimiento: "98.5%",
                             tiempoPromedioEntrega: "14 días",
                             evolucionIngresos: {
-                                labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-                                dataIngresos: [150000, 180000, 160000, 210000, 190000, 240000]
+                                esteAno: {
+                                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'],
+                                    dataIngresos: [150000, 180000, 160000, 210000, 190000, 240000, 220000, 250000]
+                                },
+                                anoPasado: {
+                                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                                    dataIngresos: [120000, 140000, 130000, 170000, 160000, 190000, 200000, 180000, 210000, 230000, 220000, 260000]
+                                },
+                                ultimos12: {
+                                    labels: ['Sep', 'Oct', 'Nov', 'Dic', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'],
+                                    dataIngresos: [180000, 210000, 230000, 220000, 260000, 150000, 180000, 160000, 210000, 190000, 240000, 220000]
+                                },
+                                ultimos6: {
+                                    labels: ['Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago'],
+                                    dataIngresos: [160000, 210000, 190000, 240000, 220000, 250000]
+                                }
                             },
                             topPaises: [
                                 { pais: "Estados Unidos", porcentaje: 45, color: "var(--primary)" },
@@ -394,13 +413,13 @@
                                 gradient.addColorStop(0, 'rgba(15, 23, 42, 0.2)'); 
                                 gradient.addColorStop(1, 'rgba(15, 23, 42, 0)');
 
-                                new Chart(ctx, {
+                                let exportChart = new Chart(ctx, {
                                     type: 'line',
                                     data: {
-                                        labels: kpiData.evolucionIngresos.labels,
+                                        labels: kpiData.evolucionIngresos.esteAno.labels,
                                         datasets: [{
                                             label: 'Ingresos (USD)',
-                                            data: kpiData.evolucionIngresos.dataIngresos,
+                                            data: kpiData.evolucionIngresos.esteAno.dataIngresos,
                                             borderColor: '#0f172a',
                                             backgroundColor: gradient,
                                             fill: true,
@@ -426,6 +445,18 @@
                                         }
                                     }
                                 });
+
+                                // Event listener para el filtro del gráfico
+                                document.getElementById("chart-filter").addEventListener("change", function(e) {
+                                    const selectedFilter = e.target.value;
+                                    const newData = kpiData.evolucionIngresos[selectedFilter];
+                                    
+                                    if(newData && exportChart) {
+                                        exportChart.data.labels = newData.labels;
+                                        exportChart.data.datasets[0].data = newData.dataIngresos;
+                                        exportChart.update();
+                                    }
+                                });
                             }
                         });
                     </script>
@@ -436,7 +467,8 @@
                     <h2>Registrar Nuevo Pedido de Exportación</h2>
                     <p class="section-desc">Crea un nuevo pedido de banano u otros productos para tus clientes.</p>
 
-                    <div class="np-card">
+                    <div class="np-layout-grid">
+                        <div class="np-card">
                         <form id="pedido-form">
 
                             <!-- ── Sección 1: Información del cliente ── -->
@@ -508,12 +540,23 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn-np-primary">
-                                <i data-lucide="plus" style="width:18px;height:18px;"></i>
-                                Registrar Pedido
-                            </button>
-
+                                <button type="submit" class="btn-np-primary">
+                                    <i data-lucide="plus" style="width:18px;height:18px;"></i>
+                                    Registrar Pedido
+                                </button>
                         </form>
+                    </div>
+
+                    <!-- Right Column: Recent Orders -->
+                    <div class="np-recent-orders-card">
+                        <div class="np-recent-header">
+                            <i data-lucide="clock" style="width:14px;height:14px;"></i>
+                            Últimos Pedidos
+                        </div>
+                        <div id="np-recent-orders-list" class="np-recent-list">
+                            <!-- Inyectado por JS -->
+                        </div>
+                    </div>
                     </div>
                 </div>
 
@@ -580,34 +623,40 @@
 
                         <!-- Document Cards Section -->
                         <div class="doc-cards-container">
-                            <button class="doc-card" onclick="generateDocument('guia')">
-                                <div class="doc-card-overlay"></div>
-                                <div class="doc-card-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <button class="doc-card card-guia" onclick="generateDocument('guia')">
+                                <div class="doc-card-icon-wrapper">
+                                    <div class="doc-card-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                    </div>
                                 </div>
-                                <div class="doc-card-title">GENERAR GUÍA DE EXPORTACIÓN</div>
-                                <div class="doc-card-desc">Crear guía de carga detallada (HBL/MBL)</div>
-                                <div class="doc-card-border"></div>
+                                <div class="doc-card-text">
+                                    <div class="doc-card-title">Generar Guía de Exportación</div>
+                                    <div class="doc-card-desc">Crear guía de carga detallada (HBL/MBL)</div>
+                                </div>
                             </button>
 
-                            <button class="doc-card" onclick="generateDocument('factura')">
-                                <div class="doc-card-overlay"></div>
-                                <div class="doc-card-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5v-11"></path></svg>
+                            <button class="doc-card card-factura" onclick="generateDocument('factura')">
+                                <div class="doc-card-icon-wrapper">
+                                    <div class="doc-card-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5v-11"></path></svg>
+                                    </div>
                                 </div>
-                                <div class="doc-card-title">GENERAR FACTURA COMERCIAL</div>
-                                <div class="doc-card-desc">Factura comercial detallada con desglose de ítems</div>
-                                <div class="doc-card-border"></div>
+                                <div class="doc-card-text">
+                                    <div class="doc-card-title">Generar Factura Comercial</div>
+                                    <div class="doc-card-desc">Factura comercial detallada con desglose de ítems</div>
+                                </div>
                             </button>
 
-                            <button class="doc-card" onclick="generateDocument('packing')">
-                                <div class="doc-card-overlay"></div>
-                                <div class="doc-card-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            <button class="doc-card card-packing" onclick="generateDocument('packing')">
+                                <div class="doc-card-icon-wrapper">
+                                    <div class="doc-card-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                                    </div>
                                 </div>
-                                <div class="doc-card-title">GENERAR PACKING LIST</div>
-                                <div class="doc-card-desc">Lista de empaque y detalles de peso completos</div>
-                                <div class="doc-card-border"></div>
+                                <div class="doc-card-text">
+                                    <div class="doc-card-title">Generar Packing List</div>
+                                    <div class="doc-card-desc">Lista de empaque y detalles de peso completos</div>
+                                </div>
                             </button>
                         </div>
                         <div id="document-preview"></div>

@@ -1,4 +1,6 @@
 // Sistema de Gestión de Inventario y Postcosecha con SweetAlert2
+const iconoEstado = { disponible: 'fa-check', reservado: 'fa-clock', exportado: 'fa-truck' };
+
 class SistemaInventario {
     constructor() {
         this.lotes = this.cargarDatos() || [];
@@ -366,22 +368,22 @@ class SistemaInventario {
                 <td><strong>${lote.codigoLote}</strong></td>
                 <td>${lote.finca}</td>
                 <td>${this.formatearFecha(lote.fechaCosecha)}</td>
-                <td>${lote.peso.toFixed(1)} kg</td>
-                <td><span class="estado-badge estado-${lote.estado}">${this.formatearEstado(lote.estado)}</span></td>
-                <td><span class="calidad-badge calidad-${lote.calidad}">${this.formatearCalidad(lote.calidad)}</span></td>
-                <td><span class="color-badge">${this.formatearColor(lote.color)}</span></td>
+                <td>${lote.peso.toFixed(1)}</td>
+                <td class="col-badge"><span class="estado-badge estado-${lote.estado}">${this.formatearEstado(lote.estado)}</span></td>
+                <td class="col-badge"><span class="calidad-badge calidad-${lote.calidad}">${this.formatearCalidad(lote.calidad)}</span></td>
+                <td class="col-badge"><span class="color-badge">${this.formatearColor(lote.color)}</span></td>
                 <td>${this.formatearTamano(lote.tamano)}</td>
-                <td><span class="plagas-badge plagas-${lote.plagas}">${this.formatearPlagas(lote)}</span></td>
-                <td><span class="dias-almacenado ${this.obtenerClaseDias(lote.fechaCosecha)}">${this.calcularDiasAlmacenado(lote.fechaCosecha)} días</span></td>
+                <td class="col-badge"><span class="plagas-badge plagas-${lote.plagas}">${this.formatearPlagas(lote)}</span></td>
+                <td class="col-badge"><span class="dias-badge" data-nivel="${getNivelDias(this.calcularDiasAlmacenado(lote.fechaCosecha))}">${this.calcularDiasAlmacenado(lote.fechaCosecha)} días</span></td>
                 <td>
                     <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-                        <button class="btn btn-small btn-secondary" onclick="sistemaInventario.abrirModal(${JSON.stringify(lote).replace(/"/g, '&quot;')})">
+                        <button class="accion-btn" data-tooltip="Editar lote" aria-label="Editar lote" onclick="sistemaInventario.abrirModal(${JSON.stringify(lote).replace(/"/g, '&quot;')})">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-small ${lote.estado === 'disponible' ? 'btn-warning' : 'btn-success'}" onclick="sistemaInventario.cambiarEstado('${lote.id}')">
-                            <i class="fas ${lote.estado === 'disponible' ? 'fa-clock' : 'fa-check'}"></i>
+                        <button class="accion-btn ${lote.estado === 'disponible' ? 'accion-warning' : 'accion-success'}" data-tooltip="Marcar estado" aria-label="Marcar estado" onclick="sistemaInventario.cambiarEstado('${lote.id}')">
+                            <i class="fas ${iconoEstado[lote.estado] || 'fa-check'}"></i>
                         </button>
-                        <button class="btn btn-small btn-danger" onclick="sistemaInventario.eliminarLote('${lote.id}')">
+                        <button class="accion-btn accion-danger" data-tooltip="Eliminar lote" aria-label="Eliminar lote" onclick="sistemaInventario.eliminarLote('${lote.id}')">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -817,6 +819,12 @@ function limpiarDatos() {
     if (sistemaInventario) {
         sistemaInventario.limpiarTodosLosDatos();
     }
+}
+
+function getNivelDias(dias) {
+  if (dias <= 180) return 'ok';
+  if (dias <= 365) return 'alerta';
+  return 'critico';
 }
 
 // Inicializar el sistema cuando se carga la página

@@ -11,6 +11,10 @@
   <!-- Lucide Icons via CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- jsPDF and autoTable via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
   <!-- Custom Base Styles -->
   <link rel="stylesheet" href="../css/pages/dashboard.css?v=6.0" />
 
@@ -146,10 +150,16 @@
               <p style="font-size: 0.9375rem; color: var(--text-soft); max-width: 32rem; line-height: 1.7; margin: 0;">
                 Descarga un archivo JSON con todos los registros de lotes, configuraciones personales y datos exportados desde que creaste tu cuenta.
               </p>
-              <button onclick="window.downloadData()" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.25rem; background-color: transparent; border: 1px solid var(--border); color: var(--text); font-weight: 500; border-radius: 0.75rem; cursor: pointer; transition: 0.2s ease; flex-shrink: 0;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text)'">
-                <i data-lucide="download" style="width: 16px; height: 16px;"></i>
-                Descargar mis datos
-              </button>
+              <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; min-width: max-content;">
+                <button onclick="window.downloadData()" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; gap: 0.5rem; padding: 0.625rem 1.25rem; background-color: transparent; border: 1px solid var(--primary); color: var(--primary); font-weight: 500; border-radius: 0.75rem; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;" onmouseover="this.style.backgroundColor='var(--primary)'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--primary)'">
+                  <i data-lucide="file-json" style="width: 16px; height: 16px;"></i>
+                  Descargar JSON
+                </button>
+                <button onclick="window.downloadPDF(this)" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; gap: 0.5rem; padding: 0.625rem 1.25rem; background-color: transparent; border: 1px solid var(--primary); color: var(--primary); font-weight: 500; border-radius: 0.75rem; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;" onmouseover="this.style.backgroundColor='var(--primary)'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--primary)'">
+                  <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+                  <span>Descargar PDF</span>
+                </button>
+              </div>
             </div>
           </section>
 
@@ -169,12 +179,18 @@
               </div>
               <div class="p-6 pt-8 flex flex-col sm:flex-row gap-5 justify-between items-start sm:items-center">
                 <p style="font-size: 0.9375rem; color: var(--text); max-width: 32rem; line-height: 1.7; margin: 0;">
-                  Una vez que elimines tu cuenta, no hay vuelta atrás. Por favor, asegúrate de haber descargado tus datos si los necesitas.
+                  Puedes eliminar los datos de tu proyecto (lotes, predicciones, configuraciones) o eliminar permanentemente tu cuenta. Estas acciones no se pueden deshacer.
                 </p>
-                <button onclick="window.deleteAccount()" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.25rem; background-color: var(--error); border: none; color: #ffffff; font-weight: 500; border-radius: 0.75rem; cursor: pointer; transition: 0.2s ease; flex-shrink: 0;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                  <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
-                  Eliminar cuenta y datos
-                </button>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; min-width: max-content;">
+                  <button onclick="window.deleteData()" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; gap: 0.5rem; padding: 0.625rem 1.25rem; background-color: transparent; border: 1px solid var(--error); color: var(--error); font-weight: 500; border-radius: 0.75rem; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;" onmouseover="this.style.backgroundColor='var(--error)'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--error)'">
+                    <i data-lucide="trash" style="width: 16px; height: 16px;"></i>
+                    Eliminar datos
+                  </button>
+                  <button onclick="window.deleteAccount()" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; gap: 0.5rem; padding: 0.625rem 1.25rem; background-color: transparent; border: 1px solid var(--error); color: var(--error); font-weight: 500; border-radius: 0.75rem; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;" onmouseover="this.style.backgroundColor='var(--error)'; this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--error)'">
+                    <i data-lucide="user-x" style="width: 16px; height: 16px;"></i>
+                    Eliminar cuenta
+                  </button>
+                </div>
               </div>
             </div>
           </section>
@@ -196,6 +212,7 @@
   <script type="module">
     import { auth } from '../js/core/firebase.js';
     import { onAuthStateChanged, signOut, updateProfile, deleteUser } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    import { exportarDatosPDF } from '../js/utils/pdfExporter.js';
 
     // 1. Temas
     const palettes = {
@@ -320,7 +337,96 @@
       URL.revokeObjectURL(url);
     };
 
-    // 4. Eliminar Cuenta
+    window.downloadPDF = async (btn) => {
+      if (btn.disabled) return;
+      
+      const originalText = btn.querySelector('span').textContent;
+      btn.disabled = true;
+      btn.querySelector('span').textContent = 'Generando...';
+      btn.style.opacity = '0.7';
+
+      try {
+        const parseLocal = (key, defaultVal = '[]') => {
+          try {
+            const item = localStorage.getItem(key);
+            if (!item || item === 'undefined' || item === 'null') return JSON.parse(defaultVal);
+            return JSON.parse(item);
+          } catch(e) {
+            console.warn(`Error al leer ${key} de localStorage:`, e);
+            return JSON.parse(defaultVal);
+          }
+        };
+
+        const datos = {
+          pedidos: parseLocal('exportOrders'),
+          inventario: parseLocal('inventario_postcosecha'),
+          alertas: parseLocal('banano_alertas'),
+          eventos: parseLocal('agriculturalEvents'),
+          prediccion: parseLocal('ultimaPrediccion', '{}'),
+          curvaPrediccion: parseLocal('graficoUltimaPrediccion', '{}'),
+          costosRutas: parseLocal('registrosCostosRutas'),
+        };
+        
+        // Simular un pequeño delay para que se vea el estado de carga
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        exportarDatosPDF(datos);
+      } catch (error) {
+        Swal.fire('Error', 'Hubo un problema al generar el PDF: ' + error.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.querySelector('span').textContent = originalText;
+        btn.style.opacity = '1';
+      }
+    };
+
+    // 4. Eliminar Datos
+    window.deleteData = async () => {
+      const { value: text } = await Swal.fire({
+        title: 'Eliminar datos',
+        text: 'Esto borrará todos los datos almacenados localmente de tus lotes y predicciones. Escribe BORRAR para confirmar.',
+        input: 'text',
+        inputPlaceholder: 'BORRAR',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'var(--error)',
+        cancelButtonColor: 'var(--border)',
+        confirmButtonText: 'Sí, borrar datos',
+        cancelButtonText: '<span style="color:var(--text)">Cancelar</span>',
+        background: 'var(--surface)',
+        color: 'var(--text)'
+      });
+
+      if (text === 'BORRAR') {
+        try {
+          const theme = localStorage.getItem('theme');
+          localStorage.clear();
+          if(theme) localStorage.setItem('theme', theme);
+          
+          Swal.fire({
+            title: 'Datos eliminados', 
+            text: 'Tus datos locales han sido borrados exitosamente.', 
+            icon: 'success',
+            background: 'var(--surface)',
+            color: 'var(--text)'
+          }).then(() => {
+            window.location.reload();
+          });
+        } catch (error) {
+          Swal.fire('Error', 'No se pudieron eliminar los datos: ' + error.message, 'error');
+        }
+      } else if (text !== undefined) {
+        Swal.fire({
+          title: 'Error', 
+          text: 'El texto no coincide. No se eliminaron los datos.', 
+          icon: 'error',
+          background: 'var(--surface)',
+          color: 'var(--text)'
+        });
+      }
+    };
+
+    // 5. Eliminar Cuenta
     window.deleteAccount = async () => {
       const { value: text } = await Swal.fire({
         title: 'Eliminar cuenta',
@@ -339,7 +445,6 @@
 
       if (text === 'ELIMINAR') {
         try {
-          localStorage.clear();
           await deleteUser(currentUser);
           Swal.fire({
             title: 'Cuenta eliminada', 

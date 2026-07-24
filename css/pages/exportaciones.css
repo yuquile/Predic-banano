@@ -1275,7 +1275,7 @@ body {
 
 .tracking-dark-right {
     width: 100%;
-    background-color: #252525;
+    background-color: #f3f4f6;
     border-radius: 12px;
     padding: 1.5rem;
 }
@@ -1296,7 +1296,7 @@ body {
     position: absolute;
     top: 0; bottom: 0; left: 11px;
     width: 0.125rem;
-    background-color: #374151;
+    background-color: #d1d5db;
     transform: translateX(-1px);
 }
 
@@ -1320,7 +1320,7 @@ body {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
-    box-shadow: 0 0 0 4px #252525;
+    box-shadow: 0 0 0 4px #f3f4f6;
     flex-shrink: 0;
 }
 
@@ -1332,18 +1332,18 @@ body {
 .dark-timeline-icon.active {
     background-color: #10b981;
     color: var(--surface);
-    box-shadow: 0 0 0 4px #252525, 0 0 0 2px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 0 4px #f3f4f6, 0 0 0 2px rgba(16, 185, 129, 0.3);
 }
 
 .dark-timeline-icon.pending {
-    background-color: #374151;
+    background-color: #e5e7eb;
     color: #9ca3af;
 }
 
 .dark-timeline-content h4 {
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--surface);
+    color: #111827;
     margin-bottom: 0.25rem;
 }
 
@@ -1357,11 +1357,12 @@ body {
 
 .dark-timeline-content p {
     font-size: 0.75rem;
-    color: #9ca3af;
+    color: #4b5563;
+    line-height: 1.5;
 }
 
 .dark-timeline-content.active p {
-    color: rgba(52, 211, 153, 0.8);
+    color: rgba(5, 150, 105, 0.8);
 }
 
 .dark-timeline-content.pending p {
@@ -1517,98 +1518,224 @@ body {
 }
 
 .doc-cards-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* =========================================
+   NUEVO PEDIDO: 2-COLUMN LAYOUT
+   ========================================= */
+.np-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+@media (min-width: 1024px) {
+    .np-layout-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .np-recent-orders-card {
+        height: 230px; /* Altura aproximada del bloque "Información del cliente" */
+        overflow-y: auto;
+    }
+}
+
+.np-recent-orders-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.np-recent-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-soft);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.np-recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.compact-order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--background);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.compact-order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.compact-order-id {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.compact-order-client {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+}
+
+.compact-order-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.compact-order-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.badge-status-compact {
+    font-size: 0.65rem;
+    margin-left: 4px;
+    text-transform: capitalize;
+    padding: 3px 10px;
+    border-radius: 999px;
+    line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+    .doc-cards-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 .doc-card {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    max-width: 200px;
-    aspect-ratio: 1;
-    min-width: 0;
-    word-break: break-word;
-    background: linear-gradient(to bottom right, #1a5f5f, #0d4545);
+    background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 1.25rem 1rem;
+    gap: 1rem;
+    text-align: left;
 }
 
 .doc-card:hover {
-    transform: scale(1.02) translateY(-4px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
 }
 
 .doc-card:active {
-    transform: scale(0.98);
+    transform: translateY(0) scale(0.99);
 }
 
-.doc-card-overlay {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
+.doc-card-icon-wrapper {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
 }
 
-.doc-card:hover .doc-card-overlay {
-    opacity: 1;
+.doc-card:hover .doc-card-icon-wrapper {
+    transform: scale(1.05);
 }
 
 .doc-card-icon {
-    position: relative;
-    z-index: 10;
-    margin-bottom: 1rem;
-    color: #6dd5c3;
-    transition: transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.doc-card:hover .doc-card-icon {
-    transform: scale(1.1);
+.doc-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .doc-card-title {
-    position: relative;
-    z-index: 10;
-    color: var(--surface);
+    color: #111827;
     font-weight: 600;
-    text-align: center;
-    padding: 0 1rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.025em;
-    font-size: 0.875rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
 }
 
 .doc-card-desc {
-    position: relative;
-    z-index: 10;
-    color: #a8d8d0;
+    color: #6b7280;
     font-size: 0.75rem;
-    text-align: center;
-    padding: 0 1rem;
-    line-height: 1.625;
+    line-height: 1.4;
 }
 
-.doc-card-border {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    border: 2px solid transparent;
-    border-radius: 8px;
-    transition: border-color 0.3s;
+/* Estilos específicos por tarjeta */
+
+/* Guía de Exportación */
+.doc-card.card-guia {
+    border-left: 4px solid #2563eb;
+}
+.doc-card.card-guia .doc-card-icon-wrapper {
+    background-color: #eff6ff; /* blue-50 */
+}
+.doc-card.card-guia .doc-card-icon {
+    color: #2563eb; /* blue-600 */
 }
 
-.doc-card:hover .doc-card-border {
-    border-color: rgba(109, 213, 195, 0.3);
+/* Factura Comercial */
+.doc-card.card-factura {
+    border-left: 4px solid #0d9488;
+}
+.doc-card.card-factura .doc-card-icon-wrapper {
+    background-color: #f0fdfa; /* teal-50 */
+}
+.doc-card.card-factura .doc-card-icon {
+    color: #0d9488; /* teal-600 */
+}
+
+/* Packing List */
+.doc-card.card-packing {
+    border-left: 4px solid #8b5cf6;
+}
+.doc-card.card-packing .doc-card-icon-wrapper {
+    background-color: #f5f3ff; /* violet-50 */
+}
+.doc-card.card-packing .doc-card-icon {
+    color: #8b5cf6; /* violet-500 */
 }
 
 /* ==========================================================================
@@ -1779,6 +1906,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    margin-top: 1.5rem; /* Compensate for the removed title */
     margin-bottom: 2rem;
     align-items: stretch; /* todas las tarjetas igualan la altura de la más alta */
 }

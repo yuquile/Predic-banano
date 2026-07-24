@@ -116,12 +116,12 @@
                         <th>Finca</th>
                         <th>Fecha Cosecha</th>
                         <th>Peso (kg)</th>
-                        <th>Estado</th>
-                        <th>Calidad</th>
-                        <th>Color</th>
+                        <th class="col-badge">Estado</th>
+                        <th class="col-badge">Calidad</th>
+                        <th class="col-badge">Color</th>
                         <th>Tamaño</th>
-                        <th>Plagas</th>
-                        <th>Días Almacenado</th>
+                        <th class="col-badge">Plagas</th>
+                        <th class="col-badge">Días Almacenado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -317,6 +317,8 @@
                 paginacionInfo.textContent = 'Sin resultados';
                 paginaActual.textContent = '';
             }
+            
+            document.querySelector('.pagination-controls').style.display = totalPages <= 1 ? 'none' : 'flex';
         }
 
         btnAnterior.addEventListener('click', function() {

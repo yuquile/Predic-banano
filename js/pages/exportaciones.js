@@ -68,6 +68,10 @@
         if (activeBtn) {
             activeBtn.classList.add('active');
         }
+
+        if (sectionId === 'nuevo-pedido') {
+            renderRecentOrdersPanel();
+        }
     }
 
     // Generar ID único
@@ -122,6 +126,7 @@
         updateDashboard();
         updateOrdersList();
         populateDocumentSelect();
+        renderRecentOrdersPanel();
         
         Swal.fire({
             title: '¡Pedido registrado!',
@@ -160,6 +165,49 @@
         document.getElementById('recent-orders').innerHTML = recentOrdersHtml;
     }
 
+    // Actualizar panel de últimos pedidos (sección Nuevo Pedido)
+    function renderRecentOrdersPanel() {
+        const listContainer = document.getElementById('np-recent-orders-list');
+        if (!listContainer) return;
+
+        // Ordenar explícitamente por fechaCreacion (más reciente primero)
+        // En caso de empate, por ID descendente
+        const sortedOrders = [...orders].sort((a, b) => {
+            const dateA = new Date(a.fechaCreacion || a.fechaEnvio || 0);
+            const dateB = new Date(b.fechaCreacion || b.fechaEnvio || 0);
+            if (dateB.getTime() !== dateA.getTime()) {
+                return dateB - dateA;
+            }
+            return b.id.localeCompare(a.id);
+        });
+
+        // Tomar los primeros 10 (los más recientes debido al sort)
+        const top10 = sortedOrders.slice(0, 10);
+
+        listContainer.innerHTML = top10.map(order => {
+            const val = (order.cantidad * order.precioUnitario).toLocaleString('en-US', {
+                style: 'currency', currency: 'USD'
+            });
+            return `
+                <div class="compact-order-item">
+                    <div class="compact-order-info">
+                        <div class="compact-order-id">
+                            ${order.id} 
+                            <span class="badge-status-compact badge-${order.estado}">
+                                ${order.estado === 'procesa' ? 'proceso' : order.estado}
+                            </span>
+                        </div>
+                        <div class="compact-order-client">${order.cliente}</div>
+                    </div>
+                    <div class="compact-order-meta">
+                        <div class="compact-order-val">${val}</div>
+                        <div style="font-size: 0.7rem; color: var(--text-soft);">${order.fechaEnvio}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
     // Crear tarjeta de pedido
     function createOrderCard(order, isRecent = false) {
         const totalValue = (order.cantidad * order.precioUnitario).toLocaleString('en-US', {
@@ -172,7 +220,7 @@
                 <!-- Encabezado: ID + Badge de estado -->
                 <div class="card-header">
                     <div class="export-id">
-                        <span class="export-id-icon">
+                        <span class="export-id-icon" onclick="copyOrderId('${order.id}', this)" style="cursor: pointer;" title="Copiar ID">
                             <svg class="icon" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6"/><path d="M9 16h6"/></svg>
                         </span>
                         ${order.id}
@@ -287,6 +335,36 @@
             </div>
         `;
     }
+
+    // Copiar ID del pedido al portapapeles
+    window.copyOrderId = function(text, element) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalColor = element.style.color;
+            const originalBackground = element.style.background;
+            
+            element.style.color = '#10b981';
+            element.style.background = '#d1fae5';
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'ID copiado: ' + text,
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                background: 'var(--surface)',
+                color: 'var(--text)'
+            });
+            
+            setTimeout(() => {
+                element.style.color = originalColor;
+                element.style.background = originalBackground;
+            }, 1500);
+        }).catch(err => {
+            console.error('Error al copiar:', err);
+        });
+    };
+
     // Actualizar lista de pedidos
     function updateOrdersList() {
         const ordersHtml = orders.map(order => createOrderCard(order, false)).join('');
@@ -630,10 +708,10 @@
                         </div>
                         <div class="tracking-dark-right">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <h3 style="font-size: 18px; font-weight: 700; color: #ffffff;">Estado: ${order.estado.charAt(0).toUpperCase() + order.estado.slice(1)}</h3>
-                                <span style="background-color: rgba(16, 185, 129, 0.2); color: #34d399; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">${order.estado}</span>
+                                <h3 style="font-size: 18px; font-weight: 700; color: #111827;">Estado: ${order.estado.charAt(0).toUpperCase() + order.estado.slice(1)}</h3>
+                                <span style="background-color: rgba(16, 185, 129, 0.15); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">${order.estado}</span>
                             </div>
-                            <div style="font-size: 14px; color: #9ca3af; margin-bottom: 32px;">Última actualización: hace unos momentos</div>
+                            <div style="font-size: 14px; color: #6b7280; margin-bottom: 32px;">Última actualización: hace unos momentos</div>
                             <div class="tracking-timeline-dark">
                                 ${timelineHtml}
                             </div>
@@ -885,15 +963,103 @@
         });
     }
 
-    // Descargar documento (simulado)
+    // Descargar documento (PDF)
     function downloadDocument(type, orderId) {
-        const fileName = `${type}_${orderId}_${new Date().toISOString().split('T')[0]}.pdf`;
-        Swal.fire({
-            title: 'Descarga simulada',
-            html: `Se generaría el archivo: <b>${fileName}</b><br><br>En una implementación real, aquí se generaría y descargaría el archivo PDF.`,
-            icon: 'info',
-            confirmButtonText: 'Entendido'
-        });
+        try {
+            if (!window.jspdf || !window.jspdf.jsPDF) {
+                Swal.fire({
+                    title: 'Servicio no disponible',
+                    text: 'No se pudo cargar la herramienta para generar PDFs. Por favor, verifica tu conexión a internet o intenta recargar la página.',
+                    icon: 'warning',
+                    confirmButtonText: 'Entendido'
+                });
+                return;
+            }
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'pt', 'a4');
+            const order = orders.find(o => o.id === orderId);
+            
+            if (!order) {
+                Swal.fire('Error', 'Pedido no encontrado.', 'error');
+                return;
+            }
+
+            const fileName = `${type}_${orderId}_${new Date().toISOString().split('T')[0]}.pdf`;
+            
+            doc.setFontSize(18);
+            doc.setTextColor(15, 23, 42); // primary color
+            
+            let title = '';
+            let bodyData = [];
+            
+            if (type === 'guia') {
+                title = 'GUÍA DE EXPORTACIÓN (HBL/MBL)';
+                const boxes = order.cantidad || 0;
+                bodyData = [
+                    ['Shipper / Exportador', 'AgroExport S.A.\\nGuayaquil, Ecuador'],
+                    ['Consignee / Cliente', `${order.cliente || '-'}\\n${order.paisDestino || '-'}`],
+                    ['Puerto de Origen', 'Guayaquil (GYE)'],
+                    ['Puerto de Destino', order.paisDestino || '-'],
+                    ['Descripción de la Carga', `Banano Fresco - Variedad ${order.variedad || '-'}\\nCantidad: ${boxes} cajas`]
+                ];
+            } else if (type === 'factura') {
+                title = 'FACTURA COMERCIAL';
+                const cant = order.cantidad || 0;
+                const prec = order.precioUnitario || 0;
+                bodyData = [
+                    ['Factura No.', `INV-${orderId}-${Math.floor(Math.random()*1000)}`],
+                    ['Fecha', new Date().toLocaleDateString()],
+                    ['Cliente', order.cliente || '-'],
+                    ['Destino', order.paisDestino || '-'],
+                    ['Producto', `Banano ${order.variedad || '-'}`],
+                    ['Cantidad', `${cant} cajas`],
+                    ['Precio Unitario', `$${prec}`],
+                    ['Total a Pagar', `$${(cant * prec).toLocaleString()}`]
+                ];
+            } else if (type === 'packing') {
+                title = 'PACKING LIST';
+                const boxes = order.cantidad || 0;
+                const totalWeight = boxes * 18.14; // kg
+                bodyData = [
+                    ['Exportador', 'AgroExport S.A.'],
+                    ['Cliente', order.cliente || '-'],
+                    ['Variedad', order.variedad || '-'],
+                    ['Cajas Totales', `${boxes} unidades`],
+                    ['Peso Neto Total', `${totalWeight.toLocaleString()} kg`],
+                    ['Origen', 'ECUADOR'],
+                    ['Cajas numeradas', `1 a ${boxes}`]
+                ];
+            }
+
+            doc.text(title, 40, 60);
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(`ID de Pedido: ${orderId}`, 40, 80);
+            doc.text(`Generado: ${new Date().toLocaleString()}`, 40, 95);
+
+            if (doc.autoTable) {
+                doc.autoTable({
+                    startY: 120,
+                    body: bodyData,
+                    theme: 'grid',
+                    styles: { fontSize: 10, cellPadding: 8 },
+                    columnStyles: {
+                        0: { fontStyle: 'bold', fillColor: [248, 250, 252], textColor: [15, 23, 42], cellWidth: 150 }
+                    }
+                });
+            } else {
+                // Fallback si no carga autoTable
+                let currentY = 130;
+                bodyData.forEach(row => {
+                    doc.text(`${row[0]}: ${row[1].replace(/\\n/g, ', ')}`, 40, currentY);
+                    currentY += 20;
+                });
+            }
+
+            doc.save(fileName);
+        } catch (error) {
+            Swal.fire('Error', 'Hubo un problema al generar el PDF: ' + error.message, 'error');
+        }
     }
 
     // Exportar a CSV

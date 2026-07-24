@@ -512,8 +512,42 @@
                 <div class="table-header">
                     <h3 class="table-title">Tabla de Datos Detallados</h3>
                     <div style="display: flex; gap: 8px;">
-                        <button class="table-action-btn">Filtrar</button>
+                        <button class="table-action-btn" onclick="toggleFiltrosTabla()">Filtrar</button>
                         <button class="table-action-btn">Opciones</button>
+                    </div>
+                </div>
+                
+                <!-- Panel de Filtros de Tabla (oculto por defecto) -->
+                <div id="panel-filtros-tabla" style="display: none; padding: 16px 24px; background: #f8fafc; border-bottom: 1px solid var(--border);">
+                    <div class="filters-section" style="gap: 16px; margin-bottom: 0;">
+                        <div class="filter-group">
+                            <span class="filter-label">Mes</span>
+                            <select id="filtro-mes-tabla">
+                                <option value="all">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">Año</span>
+                            <select id="filtro-anio-tabla">
+                                <option value="all">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">Finca</span>
+                            <select id="filtro-finca-tabla">
+                                <option value="all">Todas</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <span class="filter-label">Tipo Banano</span>
+                            <select id="filtro-tipo-tabla">
+                                <option value="all">Todos</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: flex-end; padding-bottom: 2px;">
+                            <button class="btn btn-primary" onclick="aplicarFiltrosTabla()" style="padding: 8px 16px;">Aplicar filtros</button>
+                            <button class="btn btn-secondary" onclick="limpiarFiltrosTabla()" style="padding: 8px 16px;">Limpiar filtros</button>
+                        </div>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -960,9 +994,78 @@
         let currentPage = 1;
         const itemsPerPage = 10;
         let currentTableData = [];
+        let baseTableData = [];
 
         function updateTable(data) {
-            currentTableData = data;
+            baseTableData = data;
+            aplicarFiltrosTabla();
+        }
+
+        function toggleFiltrosTabla() {
+            const panel = document.getElementById('panel-filtros-tabla');
+            if (panel.style.display === 'none' || panel.style.display === '') {
+                panel.style.display = 'block';
+                poblarFiltrosTabla();
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
+        function poblarFiltrosTabla() {
+            if (!baseTableData || baseTableData.length === 0) return;
+            
+            const meses = [...new Set(baseTableData.map(d => d.month))];
+            const anios = [...new Set(baseTableData.map(d => d.year))].sort((a,b)=>b-a);
+            const fincas = [...new Set(baseTableData.map(d => d.finca))].sort();
+            const tipos = [...new Set(baseTableData.map(d => d.tipoBanano))].sort();
+            
+            const fillSelect = (id, options, labelFunc) => {
+                const select = document.getElementById(id);
+                if (!select) return;
+                const currentVal = select.value;
+                select.innerHTML = '<option value="all">Todos</option>';
+                options.forEach(opt => {
+                    const el = document.createElement('option');
+                    el.value = opt;
+                    el.textContent = labelFunc ? labelFunc(opt) : opt;
+                    select.appendChild(el);
+                });
+                const exists = Array.from(select.options).some(o => o.value == currentVal);
+                if (exists) select.value = currentVal;
+            };
+            
+            fillSelect('filtro-mes-tabla', meses);
+            fillSelect('filtro-anio-tabla', anios);
+            fillSelect('filtro-finca-tabla', fincas, f => f.charAt(0).toUpperCase() + f.slice(1));
+            fillSelect('filtro-tipo-tabla', tipos, t => getTipoBananoName(t));
+        }
+
+        function limpiarFiltrosTabla() {
+            document.getElementById('filtro-mes-tabla').value = 'all';
+            document.getElementById('filtro-anio-tabla').value = 'all';
+            document.getElementById('filtro-finca-tabla').value = 'all';
+            document.getElementById('filtro-tipo-tabla').value = 'all';
+            aplicarFiltrosTabla();
+        }
+
+        function aplicarFiltrosTabla() {
+            const mesSelect = document.getElementById('filtro-mes-tabla');
+            if (!mesSelect) {
+                currentTableData = [...baseTableData];
+            } else {
+                const mes = mesSelect.value;
+                const anio = document.getElementById('filtro-anio-tabla').value;
+                const finca = document.getElementById('filtro-finca-tabla').value;
+                const tipo = document.getElementById('filtro-tipo-tabla').value;
+
+                currentTableData = baseTableData.filter(item => {
+                    return (mes === 'all' || item.month === mes) &&
+                           (anio === 'all' || item.year.toString() === anio) &&
+                           (finca === 'all' || item.finca === finca) &&
+                           (tipo === 'all' || item.tipoBanano === tipo);
+                });
+            }
+
             currentPage = 1;
             renderTablePage();
         }
@@ -970,6 +1073,12 @@
         function renderTablePage() {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
+            
+            if (currentTableData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 24px; color: #64748b; font-size: 14px;">No se encontraron registros con los filtros seleccionados</td></tr>';
+                updatePaginationControls();
+                return;
+            }
 
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
