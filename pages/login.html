@@ -61,7 +61,9 @@
     }
 
     .logo {
-      font-size: 3rem;
+      height: 80px;
+      width: auto;
+      object-fit: contain;
       margin-bottom: 0.5rem;
       filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
       animation: bounce 1.2s ease-out forwards;
@@ -298,23 +300,39 @@
 <body>
   <div class="container">
     <div class="logo-section">
-      <div class="logo">🍌</div>
-      <h1 class="app-title">BananaPredict</h1>
+      <img src="../assets/img/logo/imagen.png" alt="Logo BananoSys" class="logo">
+      <h1 class="app-title">BananoSys</h1>
       <p class="app-subtitle">Predicción Inteligente de Cosecha</p>
     </div>
 
     <div class="form-group">
-      <div class="input-icon">📧</div>
+      <div class="input-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+      </div>
       <input type="email" id="email" placeholder="Correo electrónico" required />
     </div>
 
     <div class="form-group">
-      <div class="input-icon">🔒</div>
+      <div class="input-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
       <input type="password" id="password" placeholder="Contraseña" required />
     </div>
 
     <button id="loginBtn">
-      <span>🚀 Acceder al Dashboard</span>
+      <span style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+        Acceder al Dashboard
+      </span>
     </button>
 
     <div class="divider">
@@ -322,20 +340,29 @@
     </div>
 
     <button id="googleLoginBtn">
-      <span>🔍 Continuar con Google</span>
+      <span style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4"></circle><line x1="21.17" y1="8" x2="12" y2="8"></line><line x1="3.95" y1="6.06" x2="8.54" y2="14"></line><line x1="10.88" y1="21.94" x2="15.46" y2="14"></line></svg>
+        Continuar con Google
+      </span>
     </button>
 
     <div class="features">
       <div class="feature">
-        <div class="feature-icon">📊</div>
+        <div class="feature-icon" style="color: var(--primary);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 20 18 10 12 20 12 4 6 20 6 14"></polyline></svg>
+        </div>
         <div class="feature-text">Análisis de Datos</div>
       </div>
       <div class="feature">
-        <div class="feature-icon">🤖</div>
+        <div class="feature-icon" style="color: var(--primary);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+        </div>
         <div class="feature-text">IA Predictiva</div>
       </div>
       <div class="feature">
-        <div class="feature-icon">⚡</div>
+        <div class="feature-icon" style="color: var(--primary);">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
         <div class="feature-text">Tiempo Real</div>
       </div>
     </div>
@@ -412,7 +439,7 @@
       await signInWithEmailAndPassword(auth, email, password);
       Swal.fire({
         icon: 'success',
-        title: '¡Bienvenido a BananaPredict! 🍌',
+        title: '¡Bienvenido a BananoSys!',
         text: 'Inicio de sesión exitoso',
         timer: 2000,
         showConfirmButton: false,
@@ -458,7 +485,7 @@
       await signInWithPopup(auth, googleProvider);
       Swal.fire({
         icon: 'success',
-        title: '¡Bienvenido a BananaPredict! 🍌',
+        title: '¡Bienvenido a BananoSys!',
         text: 'Has iniciado sesión con Google',
         timer: 2000,
         showConfirmButton: false,
