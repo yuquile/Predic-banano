@@ -342,7 +342,7 @@
             const originalColor = element.style.color;
             const originalBackground = element.style.background;
             
-            element.style.color = '#10b981';
+            element.style.color = 'var(--success)';
             element.style.background = '#d1fae5';
             
             Swal.fire({
@@ -626,7 +626,7 @@
                 <div class="tracking-dark-content" onclick="event.stopPropagation()">
                     <div class="tracking-dark-header">
                         <div class="tracking-dark-title">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                             Seguimiento de Envío
                         </div>
                         <button class="tracking-dark-close" onclick="closeTrackingModal()">
@@ -660,19 +660,19 @@
                                     </div>
                                     <div>
                                         <div class="tracking-dark-label">Transportista</div>
-                                        <div class="tracking-dark-value" style="color: #fb923c;">${order.transporte || 'Por asignar'}</div>
+                                        <div class="tracking-dark-value" style="color: var(--warning);">${order.transporte || 'Por asignar'}</div>
                                     </div>
                                     <div>
                                         <div class="tracking-dark-label">Origen</div>
                                         <div class="tracking-dark-value" style="display:flex;align-items:center;gap:6px;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                             Puerto Marítimo, EC
                                         </div>
                                     </div>
                                     <div>
                                         <div class="tracking-dark-label">Destino</div>
                                         <div class="tracking-dark-value" style="display:flex;align-items:center;gap:6px;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                                             ${order.paisDestino}
                                         </div>
                                     </div>
@@ -687,31 +687,31 @@
                                 <div style="display: flex; gap: 16px;">
                                     <div class="tracking-dark-doc-card">
                                         <div style="display: flex; align-items: center; gap: 12px;">
-                                            <div style="background-color: #fee2e2; color: #dc2626; padding: 8px; border-radius: 8px;">
+                                            <div style="background-color: color-mix(in srgb, var(--error) 15%, transparent); color: var(--error); padding: 8px; border-radius: 8px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                                             </div>
                                             <span style="font-size: 14px; font-weight: 500;">Bill of Lading (BL)</span>
                                         </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                     </div>
                                     <div class="tracking-dark-doc-card">
                                         <div style="display: flex; align-items: center; gap: 12px;">
-                                            <div style="background-color: #dbeafe; color: #2563eb; padding: 8px; border-radius: 8px;">
+                                            <div style="background-color: color-mix(in srgb, var(--info) 15%, transparent); color: var(--info); padding: 8px; border-radius: 8px;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                                             </div>
                                             <span style="font-size: 14px; font-weight: 500;">Packing List</span>
                                         </div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tracking-dark-right">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <h3 style="font-size: 18px; font-weight: 700; color: #111827;">Estado: ${order.estado.charAt(0).toUpperCase() + order.estado.slice(1)}</h3>
-                                <span style="background-color: rgba(16, 185, 129, 0.15); color: #059669; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">${order.estado}</span>
+                                <h3 style="font-size: 18px; font-weight: 700; color: var(--text);">Estado: ${order.estado.charAt(0).toUpperCase() + order.estado.slice(1)}</h3>
+                                <span style="background-color: rgba(16, 185, 129, 0.15); color: var(--success); padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 600;">${order.estado}</span>
                             </div>
-                            <div style="font-size: 14px; color: #6b7280; margin-bottom: 32px;">Última actualización: hace unos momentos</div>
+                            <div style="font-size: 14px; color: var(--text-soft); margin-bottom: 32px;">Última actualización: hace unos momentos</div>
                             <div class="tracking-timeline-dark">
                                 ${timelineHtml}
                             </div>
@@ -788,7 +788,7 @@
     // Generar guía de exportación
     function generateExportGuide(order) {
         return `
-            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">GUÍA DE EXPORTACIÓN</h2>
+            <h2 style="text-align: center; color: var(--text); margin-bottom: 30px;">GUÍA DE EXPORTACIÓN</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
                     <h3>INFORMACIÓN DEL EXPORTADOR</h3>
@@ -806,7 +806,7 @@
             </div>
             <h3>DETALLES DE LA MERCANCÍA</h3>
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                <tr style="background: #f8f9fa;">
+                <tr style="background: var(--bg);">
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: left;">Producto</th>
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: left;">Variedad</th>
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: left;">Cantidad</th>
@@ -834,7 +834,7 @@
         const total = subtotal + tax;
         
         return `
-            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">FACTURA COMERCIAL</h2>
+            <h2 style="text-align: center; color: var(--text); margin-bottom: 30px;">FACTURA COMERCIAL</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
                     <h3>VENDEDOR</h3>
@@ -855,7 +855,7 @@
                 </div>
             </div>
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                <tr style="background: #f8f9fa;">
+                <tr style="background: var(--bg);">
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: left;">Descripción</th>
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: center;">Cantidad</th>
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: right;">Precio Unit.</th>
@@ -871,7 +871,7 @@
             <div style="text-align: right; margin-top: 20px;">
                 <p><strong>Subtotal: ${subtotal.toFixed(2)}</strong></p>
                 <p><strong>IVA (15%): ${tax.toFixed(2)}</strong></p>
-                <p style="font-size: 1.2em; color: #2c3e50;"><strong>TOTAL: ${total.toFixed(2)} USD</strong></p>
+                <p style="font-size: 1.2em; color: var(--text);"><strong>TOTAL: ${total.toFixed(2)} USD</strong></p>
             </div>
         `;
     }
@@ -883,7 +883,7 @@
         const netWeight = order.cantidad * 17.8; // Peso neto
         
         return `
-            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">LISTA DE EMPAQUE (PACKING LIST)</h2>
+            <h2 style="text-align: center; color: var(--text); margin-bottom: 30px;">LISTA DE EMPAQUE (PACKING LIST)</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
                     <h3>EXPORTADOR</h3>
@@ -902,7 +902,7 @@
             </div>
             <h3>INFORMACIÓN DEL ENVÍO</h3>
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
-                <tr style="background: #f8f9fa;">
+                <tr style="background: var(--bg);">
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: left;">Descripción</th>
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: center;">Cajas</th>
                     <th style="border: 1px solid #dee2e6; padding: 12px; text-align: center;">Unidades/Caja</th>
@@ -951,7 +951,7 @@
                         body { font-family: Arial, sans-serif; margin: 20px; }
                         table { border-collapse: collapse; width: 100%; }
                         th, td { border: 1px solid #000; padding: 8px; }
-                        h2, h3 { color: #2c3e50; }
+                        h2, h3 { color: var(--text); }
                         @media print { button { display: none; } }
                     </style>
                 </head>

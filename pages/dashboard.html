@@ -12,7 +12,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Custom Base Styles -->
-  <link rel="stylesheet" href="../css/pages/dashboard.css?v=6.0" />
+  <link rel="stylesheet" href="../css/pages/dashboard.css?v=6.91" />
 
   <!-- Tema Global -->
   <link rel="stylesheet" href="../css/theme-variables.css">
@@ -27,8 +27,8 @@
     <aside class="flex flex-col w-full md:w-[320px] shrink-0 md:h-[100dvh] md:overflow-y-auto transition-all duration-300 bg-primary">
       <!-- Logo -->
       <div class="flex items-center gap-2.5 px-6 py-5 border-b" style="border-color: var(--border-inverse);">
-        <div class="flex items-center justify-center w-8 h-8 rounded">
-          <i data-lucide="layers" class="icon-fixed" color="var(--accent)" stroke-width="2" style="width:16px; height:16px;"></i>
+        <div class="flex items-center justify-center w-16 h-16 rounded">
+          <img src="../assets/img/logo/imagen2.ico" alt="Logo BananoSys" class="icon-fixed" style="width:60px; height:60px; object-fit: contain;">
         </div>
         <div>
           <span style="color: var(--accent); font-size: 15px; font-weight: 600; letter-spacing: 0.04em;">BananoSys</span>
@@ -110,7 +110,7 @@
 
         <div class="flex items-center gap-3 shrink-0 flex-1 justify-end" style="min-width: auto;">
           <div class="relative">
-            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" aria-label="Notificaciones" class="relative flex items-center justify-center w-11 h-11 rounded" style="background-color: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all 0.2s;">
+            <button onclick="document.getElementById('notifDropdown').classList.toggle('active')" aria-label="Notificaciones" class="relative flex items-center justify-center w-11 h-11 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); cursor: pointer; transition: all 0.2s;">
               <i data-lucide="bell" class="icon-fixed" stroke-width="1.5" color="var(--text-soft)" style="width: 14px; height: 14px;"></i>
               <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full" style="background-color: var(--error); border: 1.5px solid var(--surface);"></span>
             </button>
@@ -145,7 +145,7 @@
         
         <!-- Indicadores Clave -->
         <section class="min-w-0">
-          <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 700; color: var(--text); margin-bottom: 12px;">
+          <div style="font-size: 1.25rem; text-transform: uppercase; font-weight: 700; color: var(--text); margin-bottom: 16px;">
             Indicadores Clave
           </div>
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -195,7 +195,7 @@
 
         <!-- Condiciones Operativas -->
         <section class="min-w-0">
-          <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 500; color: var(--text-soft); margin-bottom: 12px;">
+          <div style="font-size: 1.25rem; text-transform: uppercase; font-weight: 700; color: var(--text); margin-bottom: 16px;">
             Condiciones Operativas
           </div>
           
@@ -224,7 +224,7 @@
               </div>
 
               <div class="grid grid-cols-2 gap-2">
-                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <i data-lucide="droplets" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
                   <div class="flex flex-col">
                     <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">Humedad</span>
@@ -232,7 +232,7 @@
                   </div>
                 </div>
                 
-                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <i data-lucide="wind" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
                   <div class="flex flex-col">
                     <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">Viento</span>
@@ -240,7 +240,7 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <i data-lucide="eye" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
                   <div class="flex flex-col">
                     <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">UV</span>
@@ -248,7 +248,7 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                <div class="flex items-center gap-3 p-3 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <i data-lucide="thermometer" stroke-width="2" color="var(--primary)" style="width:18px; height:18px;"></i>
                   <div class="flex flex-col">
                     <span style="font-size: 12px; font-weight: 600; color: var(--text-soft); text-transform: uppercase;">Visibilidad</span>
@@ -277,12 +277,12 @@
               </div>
 
               <div class="grid grid-cols-2 gap-2 mb-3">
-                <div class="p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                <div class="p-3 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text); font-weight: 700;">Variación</div>
                   <div id="expectedGrowth" style="font-size: 20px; font-weight: 500; color: var(--primary);">--%</div>
                   <div style="font-size: 12px; color: var(--text-soft);">vs sem. anterior</div>
                 </div>
-                <div class="p-3 rounded" style="background-color: var(--surface); border: 1px solid var(--border);">
+                <div class="p-3 rounded" style="background-color: var(--surface); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text); font-weight: 700;">Confianza</div>
                   <div id="qualityScore" style="font-size: 20px; font-weight: 500; color: var(--text);">--%</div>
                   <div style="font-size: 12px; color: var(--text-soft);">modelo ML</div>
@@ -290,15 +290,15 @@
               </div>
 
               <div class="grid grid-cols-3 gap-2">
-                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid var(--border);">
+                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <div style="font-size: 11px; color: var(--text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Parcelas activas</div>
                   <div style="font-size: 15px; font-weight: 600; color: var(--text);">38</div>
                 </div>
-                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid var(--border);">
+                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <div style="font-size: 11px; color: var(--text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Riesgo climático</div>
                   <div id="riskLevel" style="font-size: 15px; font-weight: 600; color: var(--accent);">--</div>
                 </div>
-                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid var(--border);">
+                <div class="p-2 rounded text-center" style="background-color: var(--text-inverse); border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);">
                   <div style="font-size: 11px; color: var(--text); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Días cosecha</div>
                   <div id="harvestDays" style="font-size: 15px; font-weight: 600; color: var(--text);">--</div>
                 </div>
@@ -381,7 +381,7 @@
 
         <!-- Charts (Análisis y Visualización) -->
         <section class="min-w-0">
-          <div style="font-size: 0.875rem; text-transform: uppercase; font-weight: 500; color: var(--text-soft); margin-bottom: 12px;">
+          <div style="font-size: 1.25rem; text-transform: uppercase; font-weight: 700; color: var(--text); margin-bottom: 16px;">
             Análisis y Visualización
           </div>
           
@@ -395,7 +395,7 @@
               <div id="estadosChart" style="height: 220px; width: 100%; overflow: hidden; position: relative;"></div>
             </div>
 
-            <div style="background-color: #FFFFFF; border-radius: 18px; border: 1px solid #E5E7EB; box-shadow: 0 4px 20px -4px rgba(0,0,0,0.05); padding: 24px; font-family: 'Inter', sans-serif;">
+            <div style="background-color: #FFFFFF; border-radius: 18px; border: 1px solid color-mix(in srgb, var(--text) 25%, transparent); box-shadow: 0 4px 20px -4px rgba(0,0,0,0.05); padding: 24px; font-family: 'Inter', sans-serif;">
               <div style="margin-bottom: 6px;">
                 <h3 style="font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 700; color: #111827; margin: 0; line-height: 1.2;">Destinos Principales</h3>
               </div>

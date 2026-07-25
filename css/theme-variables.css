@@ -28,6 +28,8 @@
 /* Aplicar tipografía globalmente */
 body {
   font-family: var(--font-base);
+  background-color: var(--bg);
+  color: var(--text);
 }
 code, pre, kbd, samp, .font-mono {
   font-family: var(--font-mono);
@@ -61,10 +63,10 @@ code, pre, kbd, samp, .font-mono {
    1. PALETA "modern" (Modern Glass)
    -------------------------------------------------------------------------- */
 :root[data-theme="modern"] {
-  --bg: #f8fafc;
+  --bg: #eef2f7;
   --border-primary: rgba(22, 78, 59, 0.3);
   --surface: rgba(255, 255, 255, 0.75);
-  --border: rgba(255, 255, 255, 0.4);
+  --border: rgba(22, 78, 59, 0.15); /* Cambiado de blanco a verde oscuro sutil para que sea visible */
   --primary: #164e3b;
   --secondary: #0f766e;
   --accent: #5eead4;
@@ -79,28 +81,7 @@ code, pre, kbd, samp, .font-mono {
   --border-inverse: rgba(255, 255, 255, 0.15);
 }
 
-/* --------------------------------------------------------------------------
-   2. PALETA "banana" (Antigua Banana Harvest)
-   (Renombrada de "harvest" para que el fallback de JS caiga al nuevo :root)
-   -------------------------------------------------------------------------- */
-:root[data-theme="banana"] {
-  --bg: #fffdf5;
-  --border-primary: rgba(44, 85, 48, 0.3);
-  --surface: rgba(255, 255, 255, 0.78);
-  --border: rgba(180, 140, 20, 0.25);
-  --primary: #2c5530;
-  --secondary: #eab308;
-  --accent: #84cc16;
-  --success: #65a30d;
-  --warning: #d97706;
-  --error: #b91c1c;
-  --info: #0369a1;
-  --text: #1c1917;
-  --text-soft: #57534e;
-  --text-inverse: #ffffff;
-  --text-inverse-soft: rgba(255, 255, 255, 0.90);
-  --border-inverse: rgba(255, 255, 255, 0.15);
-}
+
 
 /* --------------------------------------------------------------------------
    3. PALETA "dark" (Dark Mode)

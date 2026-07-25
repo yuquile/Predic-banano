@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   justify-content: space-between;
   align-items: center;
   padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid #F5EFE6;
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
 }
 
@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
 /* Dropdown y Tarjetas Corporativas */
 .card {
   background-color: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -257,7 +257,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   right: 0;
   width: 300px;
   background: #ffffff;
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   border-radius: 0.5rem;
   box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
   opacity: 0;
@@ -277,7 +277,7 @@ h1, h2, h3, h4, h5, h6, p, a, li {
   align-items: flex-start;
   gap: 12px;
   padding: 12px 16px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.2s;
   cursor: pointer;
 }
@@ -375,7 +375,7 @@ body, .bg-base, main#contenido {
 main#contenido section > div.rounded.w-full.overflow-x-auto,
 main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"] {
   background-color: #ffffff !important;
-  border: 1px solid rgba(44, 85, 48, 0.15) !important;
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent) !important;
   border-radius: 0.75rem !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03) !important;
 }
@@ -384,7 +384,7 @@ main#contenido section .grid > div.p-4.rounded.border[style*="background-color: 
 .card:hover,
 main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"]:hover {
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03) !important;
-  border-color: rgba(44, 85, 48, 0.25) !important;
+  border-color: color-mix(in srgb, var(--text) 25%, transparent) !important;
 }
 
 /* 3. SeparaciÃ³n entre secciones */
@@ -436,7 +436,7 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
 /* Dropdown y Tarjetas Corporativas */
 .card {
   background-color: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.02);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -452,7 +452,7 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   right: 0;
   width: 300px;
   background: #ffffff;
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   border-radius: 0.5rem;
   box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
   opacity: 0;
@@ -472,7 +472,7 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   align-items: flex-start;
   gap: 12px;
   padding: 12px 16px;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.2s;
   cursor: pointer;
 }
@@ -570,7 +570,7 @@ body, .bg-base, main#contenido {
 main#contenido section > div.rounded.w-full.overflow-x-auto,
 main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"] {
   background-color: #ffffff !important;
-  border: 1px solid rgba(44, 85, 48, 0.15) !important;
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent) !important;
   border-radius: 0.75rem !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03) !important;
 }
@@ -579,7 +579,7 @@ main#contenido section .grid > div.p-4.rounded.border[style*="background-color: 
 .card:hover,
 main#contenido section .grid > div.p-4.rounded.border[style*="background-color: #ffffff"]:hover {
   box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03) !important;
-  border-color: rgba(44, 85, 48, 0.25) !important;
+  border-color: color-mix(in srgb, var(--text) 25%, transparent) !important;
 }
 
 /* 3. SeparaciÃ³n entre secciones */
@@ -588,14 +588,14 @@ main#contenido section {
 }
 
 /* 4. JerarquÃ­a TipogrÃ¡fica */
-main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
-  font-size: 0.85rem !important;
+main#contenido section > div:first-child {
+  font-size: 1.25rem !important; /* Retrocedido a 20px por petición del usuario */
   font-weight: 700 !important;
   color: var(--primary) !important;
   letter-spacing: 0.05em !important;
   margin-bottom: 1.25rem !important;
   padding-bottom: 0.5rem !important;
-  border-bottom: 2px solid rgba(44, 85, 48, 0.08) !important;
+  border-bottom: 2px solid var(--border) !important;
 }
 
 /* ==========================================================================
@@ -610,6 +610,8 @@ main#contenido section > div:first-child[style*="font-size: 0.6875rem"] {
   main#contenido div[style*="text-transform: uppercase"] {
     font-size: clamp(0.75rem, 0.9vw, 0.95rem) !important; /* Escala de 12px a ~15px */
   }
+
+
 
   /* Etiquetas de Acciones RÃ¡pidas */
   main#contenido .modules-grid div[style*="font-size: 13px"] {
@@ -742,8 +744,11 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
 
 .action-card.secondary {
   background-color: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   color: var(--text);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .action-card.secondary .icon-box {
@@ -791,7 +796,7 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
 .premium-exports-container {
   background: linear-gradient(180deg, #FAFAFA 0%, #F2F3F5 100%);
   border-radius: 18px;
-  border: 1px solid #D9DDE3;
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   box-shadow: 0 6px 18px rgba(0,0,0,0.05);
   padding: 28px;
   font-family: 'Inter', sans-serif;
@@ -820,7 +825,7 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
 
 .premium-exports-btn {
   background-color: #FFFFFF;
-  border: 1px solid #D9DDE3;
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   color: #111827;
   font-size: 13px;
   font-weight: 500;
@@ -835,13 +840,13 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
 
 .premium-exports-btn:hover {
   background-color: #F4F5F7;
-  border-color: #D9DDE3;
+  border-color: var(--border);
 }
 
 .premium-exports-table-header {
   display: flex;
   padding-bottom: 12px;
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid var(--border);
   margin-bottom: 16px;
   font-size: 12px;
   font-weight: 600;
@@ -871,7 +876,7 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
   background-color: #FFFFFF;
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(0,0,0,0.06);
-  border-color: #E5E7EB;
+  border-color: var(--border);
 }
 
 .indicator-line {
@@ -1016,7 +1021,7 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
    ========================================================================== */
 .kpi-card {
   background-color: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid color-mix(in srgb, var(--text) 25%, transparent);
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -1048,6 +1053,7 @@ main#contenido section > div.rounded.w-full.overflow-x-auto > div.w-full > div.f
   font-family: 'Inter', sans-serif;
   color: var(--text);
   line-height: 1;
+  align-self: center;
   transition: color 0.3s ease;
 }
 

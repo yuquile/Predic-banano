@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+  background-color: var(--bg);
   min-height: 100dvh;
   display: flex;
   justify-content: center;
@@ -191,6 +191,16 @@ body {
   font-weight: 600;
 }
 
+@keyframes phoneEntrance {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes phoneFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
 /* Mockup de Teléfono en CSS */
 .phone-mockup {
   position: relative;
@@ -205,6 +215,12 @@ body {
     inset 0 4px 10px rgba(255,255,255,0.2),
     inset 0 -4px 10px rgba(0,0,0,0.5);
   border: 4px solid #333;
+  
+  /* Animaciones combinadas: Entrada + Flotación continua */
+  opacity: 0; /* Oculto antes de la animación de entrada */
+  animation: 
+    phoneEntrance 0.8s ease-out forwards, /* 1. Aparece de abajo hacia arriba */
+    phoneFloat 4s ease-in-out 0.8s infinite; /* 2. Empieza a flotar cuando termina la entrada (delay 0.8s) */
 }
 
 .phone-notch {
