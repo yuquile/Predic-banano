@@ -15,6 +15,15 @@
         document.getElementById('search-orders').addEventListener('input', filterOrders);
         document.getElementById('filter-status').addEventListener('change', filterOrders);
         
+        // Live subtotal calculation for Nuevo Pedido
+        const calcSubtotal = () => {
+            const qty = parseFloat(document.getElementById('cantidad').value) || 0;
+            const price = parseFloat(document.getElementById('precio-unitario').value) || 0;
+            document.getElementById('np-subtotal-display').textContent = (qty * price).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        };
+        document.getElementById('cantidad').addEventListener('input', calcSubtotal);
+        document.getElementById('precio-unitario').addEventListener('input', calcSubtotal);
+        
         // Modal close
         document.querySelector('.close').addEventListener('click', closeModal);
         window.addEventListener('click', function(event) {
@@ -126,7 +135,9 @@
         updateDashboard();
         updateOrdersList();
         populateDocumentSelect();
-        renderRecentOrdersPanel();
+        
+        // Reset subtotal display
+        document.getElementById('np-subtotal-display').textContent = '$0.00';
         
         Swal.fire({
             title: '¡Pedido registrado!',
@@ -163,49 +174,6 @@
         const recentOrders = orders.slice(-3).reverse();
         const recentOrdersHtml = recentOrders.map(order => createOrderCard(order, true)).join('');
         document.getElementById('recent-orders').innerHTML = recentOrdersHtml;
-    }
-
-    // Actualizar panel de últimos pedidos (sección Nuevo Pedido)
-    function renderRecentOrdersPanel() {
-        const listContainer = document.getElementById('np-recent-orders-list');
-        if (!listContainer) return;
-
-        // Ordenar explícitamente por fechaCreacion (más reciente primero)
-        // En caso de empate, por ID descendente
-        const sortedOrders = [...orders].sort((a, b) => {
-            const dateA = new Date(a.fechaCreacion || a.fechaEnvio || 0);
-            const dateB = new Date(b.fechaCreacion || b.fechaEnvio || 0);
-            if (dateB.getTime() !== dateA.getTime()) {
-                return dateB - dateA;
-            }
-            return b.id.localeCompare(a.id);
-        });
-
-        // Tomar los primeros 10 (los más recientes debido al sort)
-        const top10 = sortedOrders.slice(0, 10);
-
-        listContainer.innerHTML = top10.map(order => {
-            const val = (order.cantidad * order.precioUnitario).toLocaleString('en-US', {
-                style: 'currency', currency: 'USD'
-            });
-            return `
-                <div class="compact-order-item">
-                    <div class="compact-order-info">
-                        <div class="compact-order-id">
-                            ${order.id} 
-                            <span class="badge-status-compact badge-${order.estado}">
-                                ${order.estado === 'procesa' ? 'proceso' : order.estado}
-                            </span>
-                        </div>
-                        <div class="compact-order-client">${order.cliente}</div>
-                    </div>
-                    <div class="compact-order-meta">
-                        <div class="compact-order-val">${val}</div>
-                        <div style="font-size: 0.7rem; color: var(--text-soft);">${order.fechaEnvio}</div>
-                    </div>
-                </div>
-            `;
-        }).join('');
     }
 
     // Crear tarjeta de pedido

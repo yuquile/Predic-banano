@@ -112,28 +112,29 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius-lg);
       box-shadow: var(--glass-shadow);
-      padding: 28px 30px;
+      padding: 24px 28px;
     }
 
     .np-section-title {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--color-accent);
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--glass-border);
+      color: var(--secondary); /* Teal / Green accent */
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(to right, var(--secondary), transparent) 1;
     }
 
     .np-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 18px;
-      margin-bottom: 24px;
+      gap: 16px;
+      margin-bottom: 12px;
     }
 
     .np-field { display: flex; flex-direction: column; gap: 6px; }
@@ -145,49 +146,143 @@
       letter-spacing: 0.02em;
     }
 
+    .np-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .np-input-icon {
+      position: absolute;
+      left: 12px;
+      color: var(--text-soft);
+      pointer-events: none;
+    }
+
     .np-field input,
     .np-field select,
     .np-field textarea {
       font-family: inherit;
       font-size: 0.9rem;
-      color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid var(--glass-border-bright);
-      border-radius: var(--radius-sm);
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm, 8px);
       padding: 10px 12px;
       transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
       outline: none;
       width: 100%;
     }
+    .np-input-wrapper input,
+    .np-input-wrapper select {
+      padding-left: 36px;
+    }
+    
     .np-field input:focus,
     .np-field select:focus,
     .np-field textarea:focus {
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 3px var(--color-accent-soft);
-      background: #fff;
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 20%, transparent);
+      background: var(--bg);
+    }
+    
+    .np-subtotal-card {
+      background: color-mix(in srgb, var(--secondary) 10%, transparent);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      border: 1px solid color-mix(in srgb, var(--secondary) 20%, transparent);
+    }
+    .np-subtotal-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    .np-subtotal-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
     }
 
-    .np-section-gap { margin-bottom: 28px; }
+    .np-section-gap { margin-bottom: 20px; }
+
+    .np-sticky-action {
+      position: sticky;
+      bottom: -30px; /* Offset for np-card padding */
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      margin-top: 20px;
+      z-index: 10;
+      display: flex;
+      justify-content: flex-end;
+    }
 
     .btn-np-primary {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 12px 22px;
-      border-radius: var(--radius-pill);
-      background: var(--color-accent);
-      color: var(--text-on-accent);
+      padding: 14px 28px;
+      border-radius: var(--radius-pill, 999px);
+      background: var(--secondary);
+      color: #fff;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       border: none;
       cursor: pointer;
-      box-shadow: 0 6px 18px var(--color-accent-glow);
-      transition: filter 0.2s, transform 0.2s;
-      margin-top: 8px;
+      box-shadow: 0 4px 6px -1px color-mix(in srgb, var(--secondary) 40%, transparent);
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    @media (min-width: 400px) {
+        .btn-np-primary {
+            width: auto;
+        }
     }
     .btn-np-primary:hover {
-      filter: brightness(1.06);
-      transform: translateY(-1px);
+      background: color-mix(in srgb, var(--secondary) 90%, black);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--secondary) 40%, transparent);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .np-card {
+            padding: 24px;
+        }
+    }
+    @media (max-width: 767px) {
+        .np-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .np-card {
+            padding: 20px;
+        }
+    }
+    @media (max-width: 480px) {
+        .np-subtotal-card {
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .np-input-wrapper select {
+            /* Prevent select truncation */
+            text-overflow: ellipsis;
+        }
+        .np-input-wrapper input[type="date"] {
+            /* Better rendering for date on small mobile */
+            min-height: 40px;
+        }
+        textarea#notas {
+            min-height: 80px;
+        }
     }
   </style>
 </head>
@@ -474,25 +569,31 @@
                             <!-- ── Sección 1: Información del cliente ── -->
                             <div class="np-section-gap">
                                 <div class="np-section-title">
-                                    <i data-lucide="user" style="width:14px;height:14px;"></i>
+                                    <i data-lucide="user" style="width:16px;height:16px;"></i>
                                     Información del cliente
                                 </div>
                                 <div class="np-grid">
                                     <div class="np-field">
                                         <label for="cliente">Cliente</label>
-                                        <input type="text" id="cliente" required placeholder="Nombre del cliente o empresa">
+                                        <div class="np-input-wrapper">
+                                            <i data-lucide="user" class="np-input-icon" style="width:16px;height:16px;"></i>
+                                            <input type="text" id="cliente" required placeholder="Nombre del cliente o empresa">
+                                        </div>
                                     </div>
                                     <div class="np-field">
                                         <label for="pais-destino">País de Destino</label>
-                                        <select id="pais-destino" required>
-                                            <option value="">Seleccionar país</option>
-                                            <option value="Estados Unidos">Estados Unidos</option>
-                                            <option value="México">México</option>
-                                            <option value="Colombia">Colombia</option>
-                                            <option value="España">España</option>
-                                            <option value="Japón">Japón</option>
-                                            <option value="China">China</option>
-                                        </select>
+                                        <div class="np-input-wrapper">
+                                            <i data-lucide="map-pin" class="np-input-icon" style="width:16px;height:16px;"></i>
+                                            <select id="pais-destino" required>
+                                                <option value="">Seleccionar país</option>
+                                                <option value="Estados Unidos">Estados Unidos</option>
+                                                <option value="México">México</option>
+                                                <option value="Colombia">Colombia</option>
+                                                <option value="España">España</option>
+                                                <option value="Japón">Japón</option>
+                                                <option value="China">China</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -500,65 +601,75 @@
                             <!-- ── Sección 2: Detalles del pedido ── -->
                             <div class="np-section-gap">
                                 <div class="np-section-title">
-                                    <i data-lucide="package" style="width:14px;height:14px;"></i>
+                                    <i data-lucide="package" style="width:16px;height:16px;"></i>
                                     Detalles del pedido
                                 </div>
                                 <div class="np-grid">
                                     <div class="np-field">
                                         <label for="variedad">Variedad del Producto</label>
-                                        <select id="variedad" required>
-                                            <option value="">Seleccionar variedad</option>
-                                            <option value="Banano Cavendish">Banano Cavendish</option>
-                                            <option value="Banano Orgánico">Banano Orgánico</option>
-                                            <option value="Plátano Verde">Plátano Verde</option>
-                                        </select>
+                                        <div class="np-input-wrapper">
+                                            <i data-lucide="package" class="np-input-icon" style="width:16px;height:16px;"></i>
+                                            <select id="variedad" required>
+                                                <option value="">Seleccionar variedad</option>
+                                                <option value="Banano Cavendish">Banano Cavendish</option>
+                                                <option value="Banano Orgánico">Banano Orgánico</option>
+                                                <option value="Plátano Verde">Plátano Verde</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="np-field">
                                         <label for="cantidad">Cantidad (cajas/kg)</label>
-                                        <input type="number" id="cantidad" required min="1" placeholder="Ej: 1000">
+                                        <div class="np-input-wrapper">
+                                            <i data-lucide="hash" class="np-input-icon" style="width:16px;height:16px;"></i>
+                                            <input type="number" id="cantidad" required min="1" placeholder="Ej: 1000">
+                                        </div>
                                     </div>
                                     <div class="np-field">
                                         <label for="precio-unitario">Precio Unitario (USD)</label>
-                                        <input type="number" id="precio-unitario" step="0.01" required min="0" placeholder="Ej: 15.50">
+                                        <div class="np-input-wrapper">
+                                            <i data-lucide="dollar-sign" class="np-input-icon" style="width:16px;height:16px;"></i>
+                                            <input type="number" id="precio-unitario" step="0.01" required min="0" placeholder="Ej: 15.50">
+                                        </div>
                                     </div>
                                     <div class="np-field">
                                         <label for="fecha-envio">Fecha Programada de Envío</label>
-                                        <input type="date" id="fecha-envio" required>
+                                        <div class="np-input-wrapper">
+                                            <i data-lucide="calendar" class="np-input-icon" style="width:16px;height:16px;"></i>
+                                            <input type="date" id="fecha-envio" required>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="np-subtotal-card">
+                                    <span class="np-subtotal-label">Subtotal Estimado:</span>
+                                    <span class="np-subtotal-value" id="np-subtotal-display">$0.00</span>
                                 </div>
                             </div>
 
                             <!-- ── Sección 3: Notas ── -->
                             <div class="np-section-gap">
                                 <div class="np-section-title">
-                                    <i data-lucide="file-text" style="width:14px;height:14px;"></i>
+                                    <i data-lucide="file-text" style="width:16px;height:16px;"></i>
                                     Notas
                                 </div>
                                 <div class="np-field">
                                     <label for="notas">Notas Adicionales</label>
-                                    <textarea id="notas" rows="3" placeholder="Información extra relevante..."></textarea>
+                                    <div class="np-input-wrapper">
+                                        <i data-lucide="file-text" class="np-input-icon" style="width:16px;height:16px; top:12px;"></i>
+                                        <textarea id="notas" rows="2" placeholder="Información extra relevante..."></textarea>
+                                    </div>
                                 </div>
                             </div>
 
+                            <div class="np-sticky-action">
                                 <button type="submit" class="btn-np-primary">
-                                    <i data-lucide="plus" style="width:18px;height:18px;"></i>
+                                    <i data-lucide="check" style="width:18px;height:18px;"></i>
                                     Registrar Pedido
                                 </button>
+                            </div>
                         </form>
                     </div>
-
-                    <!-- Right Column: Recent Orders -->
-                    <div class="np-recent-orders-card">
-                        <div class="np-recent-header">
-                            <i data-lucide="clock" style="width:14px;height:14px;"></i>
-                            Últimos Pedidos
-                        </div>
-                        <div id="np-recent-orders-list" class="np-recent-list">
-                            <!-- Inyectado por JS -->
-                        </div>
-                    </div>
-                    </div>
                 </div>
+            </div>
 
                 <!-- Pedidos Section -->
                 <div id="pedidos" class="section">

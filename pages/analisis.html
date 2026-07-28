@@ -55,6 +55,7 @@
         @media (min-width: 768px) {
             .header-content {
                 flex-direction: row;
+                flex-wrap: wrap;
                 align-items: center;
                 justify-content: space-between;
             }
@@ -97,6 +98,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            justify-content: center;
             gap: 24px;
         }
 
@@ -136,7 +138,9 @@
 
         .actions-section {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
+            justify-content: flex-end;
             gap: 12px;
         }
 
@@ -179,11 +183,11 @@
 
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: minmax(0, 1fr);
             gap: 24px;
         }
-        @media (min-width: 768px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .kpi-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 768px) { .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .kpi-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
         .card {
             background-color: var(--surface);
@@ -194,6 +198,7 @@
             display: flex;
             flex-direction: column;
             transition: transform 0.2s;
+            min-width: 0;
         }
 
         .kpi-card:hover { transform: translateY(-4px); }
@@ -223,11 +228,11 @@
 
         .charts-grid {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: minmax(0, 1fr);
             gap: 24px;
         }
-        @media (min-width: 1024px) { .charts-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1280px) { .charts-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1024px) { .charts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1280px) { .charts-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
         .chart-card {
             height: 400px;
@@ -513,7 +518,6 @@
                     <h3 class="table-title">Tabla de Datos Detallados</h3>
                     <div style="display: flex; gap: 8px;">
                         <button class="table-action-btn" onclick="toggleFiltrosTabla()">Filtrar</button>
-                        <button class="table-action-btn">Opciones</button>
                     </div>
                 </div>
                 
@@ -554,7 +558,6 @@
                     <table id="dataTable">
                         <thead>
                             <tr>
-                                <th style="width: 40px; text-align: center;"><input type="checkbox" class="table-checkbox"></th>
                                 <th>Mes <span class="sort-icon">⇅</span></th>
                                 <th>Año <span class="sort-icon">⇅</span></th>
                                 <th>Finca <span class="sort-icon">⇅</span></th>
@@ -1090,7 +1093,6 @@
                 const tipoName = getTipoBananoName(item.tipoBanano);
                 
                 row.innerHTML = `
-                    <td style="text-align: center;"><input type="checkbox" class="table-checkbox"></td>
                     <td style="font-weight: 500;">${item.month}</td>
                     <td style="color: #64748b;">${item.year}</td>
                     <td style="font-weight: 600; color: var(--primary);">${item.finca.charAt(0).toUpperCase() + item.finca.slice(1)}</td>
